@@ -1,4 +1,4 @@
-import BreadCrumbs from "@/components/breadCrumbs";
+import BreadCrumbs from "@/components/Others/BreadCrumbs";
 
 export default function GameDatails() {
   return (

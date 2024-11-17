@@ -7,7 +7,7 @@ import { useEffect, useState } from "react";
 export default function BreadCrumbs() {
   const [crumbs, setCrumbs] = useState<string[]>([]);
 
-  // Busca crumbs da url quando a pagina for montada
+  // Busca bread crumbs pela url quando a pagina for montada
   useEffect(() => {
     const fullUrl = window.location.href.split("/");
     setCrumbs(fullUrl.splice(3, fullUrl.length));
@@ -17,22 +17,18 @@ export default function BreadCrumbs() {
     <div className="flex gap-3">
       <Link
         href="/"
-        className="text-lootlab-font-highlight hover:text-lootlab-font-base transition-all"
+        className="text-lootlab-font-highlight transition-all hover:text-lootlab-font-base"
       >
         Home {">"}
       </Link>
       {crumbs.map((crumb, index) => (
         <Link
-          href={
-            index === crumbs.length - 1
-              ? window.location.href.split("/").slice(3, 3).join()
-              : `/${crumb.toLowerCase()}`
-          }
+          href={index === crumbs.length - 1 ? "" : `/${crumb.toLowerCase()}`}
           key={crumb + index}
           className={classNames(
-            "text-lootlab-font-highlight hover:text-lootlab-font-base transition-all",
+            "text-lootlab-font-highlight transition-all hover:text-lootlab-font-base",
             {
-              "text-lootlab-font-base": index === crumbs.length - 1,
+              "text-white hover:cursor-default": index === crumbs.length - 1,
             },
           )}
         >

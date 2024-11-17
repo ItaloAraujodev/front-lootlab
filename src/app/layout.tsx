@@ -1,6 +1,6 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { NavBar } from "@/components/navBar/Navbar";
+import { NavBar } from "@/components/NavBar/Navbar";
 
 export const metadata: Metadata = {
   title: "LootLab",
