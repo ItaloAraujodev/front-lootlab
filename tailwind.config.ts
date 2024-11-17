@@ -10,6 +10,11 @@ const config: Config = {
   theme: {
     extend: {
       colors: {
+        lootlab: {
+          "font-highlight": "#94a7c6",
+          "font-base": "#ffffff",
+          "bg-main": "#0E192A",
+        },
         background: "hsl(var(--background))",
         foreground: "hsl(var(--foreground))",
         card: {
