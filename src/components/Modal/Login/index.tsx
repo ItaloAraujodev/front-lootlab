@@ -13,27 +13,33 @@ import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { useState } from "react";
 import { signIn } from "next-auth/react";
+import Toast from "@/tools/toast.tool";
 
 export function Login() {
   const [email, setEmail] = useState<string>();
   const [password, setPassword] = useState<string>();
 
   async function handleLogin() {
+    if (!email || !password) {
+      Toast.error("Preencha todos os campos!", 2000);
+      return;
+    }
+
     try {
       const result = await signIn("credentials", {
         email,
         password,
         redirect: false,
       });
-      console.log(result);
+
       if (!result?.ok) {
-        console.error("Falha ao fazer login");
+        Toast.error("Erro ao fazer login!", 2000);
       } else {
-        window.location.href = "/";
-        console.error("Login feito com sucesso!");
+        Toast.success("Login efetuado com sucesso!", 2000);
       }
     } catch (err) {
       console.error(err);
+      Toast.error("Erro ao fazer login!", 2000);
     }
   }
 
