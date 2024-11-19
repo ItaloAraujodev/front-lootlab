@@ -1,4 +1,4 @@
-import { Common } from "@/components/Common";
+import { Common } from "../../Common";
 
 interface IProps {
   sectionTitle: string;

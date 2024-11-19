@@ -9,8 +9,10 @@ export default function BreadCrumbs() {
 
   // Busca bread crumbs pela url quando a pagina for montada
   useEffect(() => {
-    const fullUrl = window.location.href.split("/");
-    setCrumbs(fullUrl.splice(3, fullUrl.length));
+    if (typeof window !== "undefined") {
+      const fullUrl = window.location.href.split("/");
+      setCrumbs(fullUrl.splice(3, fullUrl.length));
+    }
   }, []);
 
   return (
