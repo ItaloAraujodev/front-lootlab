@@ -35,9 +35,9 @@ export default function CardGames({ game }: IProps) {
               )}
             </span>
           ))}
-          {game.genres.length > 1 && (
+          {game.genres.length > 2 && (
             <span className="h-2 w-2 rounded-sm bg-[#172a46] px-[2px] text-xs font-semibold">
-              +{game.genres.length - 1}
+              +{game.genres.length - 2}
             </span>
           )}
         </div>

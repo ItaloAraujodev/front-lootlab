@@ -1,7 +1,7 @@
-import BreadCrumbs from "../components/Others/BreadCrumbs";
-import PopularGenres from "../components/Others/PopularGenres";
-import SectionGames from "../components/Others/SectionGames";
-import SectionHeader from "../components/Others/SectionHeader";
+import BreadCrumbs from "@/components/Others/BreadCrumbs";
+import PopularGenres from "@/components/Others/PopularGenres";
+import SectionGames from "@/components/Others/SectionGames";
+import SectionHeader from "@/components/Others/SectionHeader";
 
 export default function games() {
   return (
