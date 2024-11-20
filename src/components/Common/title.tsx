@@ -10,7 +10,7 @@ export default function CommonTitle({ title, className, ...props }: IProps) {
     <h1
       className={classNames(
         className,
-        "text-7xl font-black text-lootlab-font-base",
+        "text-7xl font-black capitalize text-lootlab-font-base",
       )}
       {...props}
     >

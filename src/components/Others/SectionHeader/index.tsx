@@ -2,7 +2,7 @@ import { Common } from "../../Common";
 
 interface IProps {
   sectionTitle: string;
-  sectionDescription: string;
+  sectionDescription?: string;
 }
 
 export default function SectionHeader({

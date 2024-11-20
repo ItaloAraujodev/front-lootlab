@@ -14,28 +14,22 @@ export function NavBar() {
             Home
           </Link>
           <Link
-            href="/games"
+            href="/nft-Jogos"
             className="cursor-pointer rounded-sm px-2 py-1 text-lootlab-font-highlight transition-all hover:bg-[#242C3A] hover:text-white"
           >
-            Games
+            NFT Jogos
           </Link>
           <Link
-            href="/quests"
+            href="/nft-artes"
             className="cursor-pointer rounded-sm px-2 py-1 text-lootlab-font-highlight transition-all hover:bg-[#242C3A] hover:text-white"
           >
-            Quests
+            NTF Artes
           </Link>
           <Link
-            href="/news"
+            href="/crypto"
             className="cursor-pointer rounded-sm px-2 py-1 text-lootlab-font-highlight transition-all hover:bg-[#242C3A] hover:text-white"
           >
-            News
-          </Link>
-          <Link
-            href="/vault"
-            className="cursor-pointer rounded-sm px-2 py-1 text-lootlab-font-highlight transition-all hover:bg-[#242C3A] hover:text-white"
-          >
-            Vault
+            Crypto
           </Link>
         </ul>
         <Login />
