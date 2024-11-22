@@ -16,7 +16,7 @@ export default function CardGames({ game }: IProps) {
       href={`/details/${game.title}`}
       className="group cursor-pointer rounded-lg border-[0.5px] border-lootlab-font-highlight border-x-chart-3 border-b-chart-3 p-1 transition-transform hover:-translate-y-1"
     >
-      <div className="relative h-52 w-52 overflow-hidden">
+      <div className="relative h-56 w-56 overflow-hidden">
         <img
           src={game.image}
           alt={`image do jogo ${game.title}`}

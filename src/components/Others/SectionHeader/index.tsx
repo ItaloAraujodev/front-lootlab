@@ -10,9 +10,9 @@ export default function SectionHeader({
   sectionDescription,
 }: IProps) {
   return (
-    <div className="flex w-2/5 flex-col items-start gap-4">
+    <div className="flex flex-col items-start gap-4 xl:w-2/5">
       <Common.CommonTitle title={sectionTitle} />
-      <p className="text-left text-xl font-light text-lootlab-font-base">
+      <p className="w-full text-left text-xl font-light text-lootlab-font-base">
         {sectionDescription}
       </p>
     </div>
