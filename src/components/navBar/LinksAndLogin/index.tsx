@@ -14,7 +14,7 @@ function LinksAndLogin({ orientation = "horizontal", className }: IProps) {
         className,
         "h-full w-full items-center justify-between gap-4 sm:flex",
         {
-          "flex-col items-center justify-center": orientation === "vertical",
+          "flex flex-col justify-center": orientation === "vertical",
         },
       )}
     >

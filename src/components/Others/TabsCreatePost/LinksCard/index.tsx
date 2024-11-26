@@ -9,26 +9,18 @@ import {
 } from "@/components/ui/card";
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft, ArrowRight } from "lucide-react";
 import LayoutCard from "../LayoutCard";
 
-const basicInfos = [
-  "Nome do Jogo",
-  "CoinMarket Address",
-  "Analista",
-  "Nota",
-  "Rede",
-];
+const basicInfos = ["Links", "Parcerias"];
 
-function BasicCard() {
+function LinksCard() {
   return (
     <LayoutCard>
       <CardHeader>
-        <CardTitle className="text-lg sm:text-xl">
-          Informações Básicas
-        </CardTitle>
+        <CardTitle className="text-lg sm:text-xl">Links e Parcerias</CardTitle>
         <CardDescription className="text-base text-[#8d8d8d]">
-          Detalhes essenciais sobre o jogo.
+          Links importantes e parcerias do jogo.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
@@ -39,7 +31,14 @@ function BasicCard() {
           </FormField>
         ))}
       </CardContent>
-      <CardFooter className="flex w-full justify-end">
+      <CardFooter className="flex w-full justify-between">
+        <Button
+          variant="link"
+          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
+        >
+          <ArrowLeft />
+          Anterior
+        </Button>
         <Button
           variant="link"
           className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
@@ -52,4 +51,4 @@ function BasicCard() {
   );
 }
 
-export default BasicCard;
+export default LinksCard;

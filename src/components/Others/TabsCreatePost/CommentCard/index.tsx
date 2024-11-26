@@ -7,49 +7,47 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowRight } from "lucide-react";
+import { ArrowLeft } from "lucide-react";
 import LayoutCard from "../LayoutCard";
+import { Textarea } from "@/components/ui/textarea";
 
-const basicInfos = [
-  "Nome do Jogo",
-  "CoinMarket Address",
-  "Analista",
-  "Nota",
-  "Rede",
-];
+const basicInfos = ["Comentario"];
 
-function BasicCard() {
+function CommentCard() {
   return (
     <LayoutCard>
       <CardHeader>
-        <CardTitle className="text-lg sm:text-xl">
-          Informações Básicas
-        </CardTitle>
+        <CardTitle className="text-lg sm:text-xl">Links e Parcerias</CardTitle>
         <CardDescription className="text-base text-[#8d8d8d]">
-          Detalhes essenciais sobre o jogo.
+          Links importantes e parcerias do jogo.
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
         {basicInfos.map((info) => (
           <FormField key={info}>
             <Label htmlFor={info}>{info}</Label>
-            <Input id={info} />
+            <Textarea id={info} />
           </FormField>
         ))}
       </CardContent>
-      <CardFooter className="flex w-full justify-end">
+      <CardFooter className="flex w-full justify-between">
         <Button
           variant="link"
           className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
         >
-          Próximo
-          <ArrowRight />
+          <ArrowLeft />
+          Anterior
+        </Button>
+        <Button
+          variant="default"
+          className="bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
+        >
+          Publicar
         </Button>
       </CardFooter>
     </LayoutCard>
   );
 }
 
-export default BasicCard;
+export default CommentCard;
