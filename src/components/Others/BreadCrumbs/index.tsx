@@ -7,7 +7,7 @@ import Link from "next/link";
 export default function BreadCrumbs() {
   const { crumbs } = useBreadCrumbs();
   return (
-    <div className="flex gap-3">
+    <div className="flex w-full items-start gap-3">
       <Link
         href="/"
         className="text-lootlab-font-highlight transition-all hover:text-lootlab-font-base"
