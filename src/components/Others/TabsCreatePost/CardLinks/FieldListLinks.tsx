@@ -4,7 +4,6 @@ import type { FormData } from "../schemas";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, X } from "lucide-react";
 import { Form } from "@/components/Form";
-import { Common } from "@/components/Common";
 
 function FieldListLinks() {
   const {
@@ -37,7 +36,7 @@ function FieldListLinks() {
             className="flex w-full items-start justify-between gap-2"
           >
             <div className="flex w-full flex-col gap-2">
-              <Common.Input
+              <Form.Input
                 registerPath="links"
                 index={index}
                 error={errors.links?.[index]?.link?.message}

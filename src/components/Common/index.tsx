@@ -1,5 +1,4 @@
-import { Button } from "./button";
-import Input from "../Form/Input";
-import Title from "./title";
+import { Button } from "./Button";
+import Title from "./Title";
 
-export const Common = { Title, Button, Input };
+export const Common = { Title, Button };

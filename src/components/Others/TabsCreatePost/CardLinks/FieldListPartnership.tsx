@@ -4,7 +4,6 @@ import type { FormData } from "../schemas";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { Form } from "@/components/Form";
-import { Common } from "@/components/Common";
 import FieldListHeader from "./FieldListHeader";
 
 function FieldListPartnership() {
@@ -28,7 +27,7 @@ function FieldListPartnership() {
             className="flex w-full items-start justify-between gap-2"
           >
             <div className="flex w-full flex-col gap-2">
-              <Common.Input
+              <Form.Input
                 registerPath="partnerships"
                 index={index}
                 error={errors.partnerships?.[index]?.link?.message}
