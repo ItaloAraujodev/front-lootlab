@@ -1,4 +1,5 @@
-import FormField from "@/components/Form/FormFiel";
+"use client";
+import FormField from "@/components/Form/Field";
 import { Button } from "@/components/ui/button";
 import {
   CardContent,
@@ -7,14 +8,19 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
-import { ArrowLeft, ArrowRight } from "lucide-react";
-import LayoutCard from "../LayoutCard";
+import { ArrowLeft } from "lucide-react";
+import LayoutCard from "../CardLayout";
+import { Textarea } from "@/components/ui/textarea";
+import { useFormContext } from "react-hook-form";
+import type { FormData } from "../schemas";
 
-const basicInfos = ["Links", "Parcerias"];
+const basicInfos = ["Comentario"];
 
-function LinksCard() {
+function CommentCard() {
+  const { handleSubmit } = useFormContext<FormData>();
+
+  const onsubmit = () => {};
   return (
     <LayoutCard>
       <CardHeader>
@@ -27,7 +33,7 @@ function LinksCard() {
         {basicInfos.map((info) => (
           <FormField key={info}>
             <Label htmlFor={info}>{info}</Label>
-            <Input id={info} />
+            <Textarea id={info} />
           </FormField>
         ))}
       </CardContent>
@@ -39,16 +45,18 @@ function LinksCard() {
           <ArrowLeft />
           Anterior
         </Button>
-        <Button
-          variant="link"
-          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
-        >
-          Próximo
-          <ArrowRight />
-        </Button>
+        <form onSubmit={handleSubmit(onsubmit)}>
+          <Button
+            type="submit"
+            variant="default"
+            className="bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
+          >
+            Publicar
+          </Button>
+        </form>
       </CardFooter>
     </LayoutCard>
   );
 }
 
-export default LinksCard;
+export default CommentCard;

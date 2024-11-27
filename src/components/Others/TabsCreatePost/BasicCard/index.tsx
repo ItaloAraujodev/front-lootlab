@@ -1,4 +1,4 @@
-import FormField from "@/components/Form/FormFiel";
+import FormField from "@/components/Form/Field";
 import { Button } from "@/components/ui/button";
 import {
   CardContent,
@@ -10,7 +10,7 @@ import {
 import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowRight } from "lucide-react";
-import LayoutCard from "../LayoutCard";
+import LayoutCard from "../CardLayout";
 
 const basicInfos = [
   "Nome do Jogo",

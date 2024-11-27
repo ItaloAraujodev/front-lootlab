@@ -5,8 +5,8 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import LayoutCard from "../LayoutCard";
-import FormField from "@/components/Form/FormFiel";
+import LayoutCard from "../CardLayout";
+import FormField from "@/components/Form/Field";
 import { Label } from "@/components/ui/label";
 import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
