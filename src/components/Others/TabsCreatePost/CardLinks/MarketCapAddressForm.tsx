@@ -5,17 +5,13 @@ import { Form } from "@/components/Form";
 import { Input } from "@/components/ui/input";
 
 function MarketCapAddresForm() {
-  const {
-    register,
-    formState: { errors },
-  } = useFormContext<FormData>();
+  const { register } = useFormContext<FormData>();
 
   return (
     <div className="space-y-2 px-4">
       <div className="flex flex-col justify-between gap-2">
         <Form.Field>
-          <Input id="market-cap" {...register("marketCap")} />
-          <Form.ErrorMessage error={errors.marketCap?.message} />
+          <Input id="market-cap" {...register("cardLinks.links")} />
         </Form.Field>
       </div>
     </div>

@@ -14,7 +14,7 @@ function FieldListPartnership() {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "partnerships",
+    name: "cardLinks.partnerships",
   });
 
   return (
@@ -30,10 +30,10 @@ function FieldListPartnership() {
               <Form.Input
                 registerPath="partnerships"
                 index={index}
-                error={errors.partnerships?.[index]?.link?.message}
+                error={errors.cardLinks?.partnerships?.[index]?.link?.message}
               />
               <Form.ErrorMessage
-                error={errors.partnerships?.[index]?.link?.message}
+                error={errors.cardLinks?.partnerships?.[index]?.link?.message}
               />
             </div>
             <Button

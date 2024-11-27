@@ -13,7 +13,7 @@ function FieldListLinks() {
 
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "links",
+    name: "cardLinks.links",
   });
 
   return (
@@ -39,9 +39,11 @@ function FieldListLinks() {
               <Form.Input
                 registerPath="links"
                 index={index}
-                error={errors.links?.[index]?.link?.message}
+                error={errors.cardLinks?.links?.[index]?.link?.message}
               />
-              <Form.ErrorMessage error={errors.links?.[index]?.link?.message} />
+              <Form.ErrorMessage
+                error={errors.cardLinks?.links?.[index]?.link?.message}
+              />
             </div>
             <Button
               variant="outline"
