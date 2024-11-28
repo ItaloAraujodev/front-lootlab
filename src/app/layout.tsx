@@ -1,8 +1,9 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { NavBar } from "@/components/NavBar/Navbar";
+
 import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
+import { NavBar } from "@/components/navBar/Navbar";
 
 export const metadata: Metadata = {
   title: "LootLab",
