@@ -11,7 +11,7 @@ function MarketCapAddresForm() {
     <div className="space-y-2 px-4">
       <div className="flex flex-col justify-between gap-2">
         <Form.Field>
-          <Input id="market-cap" {...register("cardLinks.links")} />
+          <Input id="market-cap" {...register("cardLinks.marketCap")} />
         </Form.Field>
       </div>
     </div>

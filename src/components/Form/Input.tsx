@@ -5,7 +5,7 @@ import classNames from "classnames";
 import { Input as InputUi } from "@/components/ui/input";
 import type { FormData } from "../Others/TabsCreatePost/schemas";
 
-type RegisterPath = "links" | "partnerships" | "marketCap";
+type RegisterPath = "links" | "partnerships";
 interface InputProps extends React.InputHTMLAttributes<HTMLInputElement> {
   className?: string;
   registerPath: RegisterPath;
@@ -24,9 +24,9 @@ export default function Input({
   const { register } = useFormContext<FormData>();
 
   const path =
-    index !== undefined && registerPath !== "marketCap"
+    index !== undefined
       ? (`cardLinks.${registerPath}.${index}.link` as const) // Caminho com índice e ".link"
-      : (`cardLinks.${registerPath}` as const); // Caminho sem índice
+      : (`cardLinks.${registerPath}` as const);
 
   return (
     <InputUi
