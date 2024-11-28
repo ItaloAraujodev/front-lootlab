@@ -1,3 +1,4 @@
+import LinksAndLogin from "@/components/navBar/LinksAndLogin";
 import {
   Dialog,
   DialogContent,
@@ -7,7 +8,6 @@ import {
   DialogTrigger,
 } from "@/components/ui/dialog";
 import { Menu } from "lucide-react";
-import LinksAndLogin from "../../NavBar/LinksAndLogin";
 
 function DialogNavBar() {
   return (

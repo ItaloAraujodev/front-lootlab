@@ -22,10 +22,12 @@ export default function Input({
 }: InputProps) {
   const { register } = useFormContext<FormData>();
 
-  const path =
+  const path:
+    | `cardLinks.${"links" | "partnerships"}.${number}.link`
+    | `cardLinks.${"links" | "partnerships"}` =
     index !== undefined
-      ? (`${registerPath}.${index}.link` as const)
-      : registerPath;
+      ? `cardLinks.${registerPath}.${index}.link`
+      : `cardLinks.${registerPath}`;
 
   return (
     <InputUi
