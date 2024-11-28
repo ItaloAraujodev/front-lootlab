@@ -12,13 +12,7 @@ import { Label } from "@/components/ui/label";
 import { ArrowRight } from "lucide-react";
 import LayoutCard from "../CardLayout";
 
-const basicInfos = [
-  "Nome do Jogo",
-  "CoinMarket Address",
-  "Analista",
-  "Nota",
-  "Rede",
-];
+const basicInfos = ["Nome do Jogo", "Analista", "Nota", "Rede"];
 
 function BasicCard() {
   return (

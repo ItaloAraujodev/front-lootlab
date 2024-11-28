@@ -1,6 +1,6 @@
 "use client";
 import { Tabs, TabsContent, TabsList, TabsTrigger } from "@/components/ui/tabs";
-import BasicCard from "./BasicCard";
+import CardBasic from "./CardBasic";
 import FinancialCard from "./CardFinancial";
 import LinksCard from "./CardLinks";
 import CommentCard from "./CardComment";
@@ -47,7 +47,7 @@ function TabsCreatPost() {
           ))}
         </TabsList>
         <TabsContent value="basic">
-          <BasicCard />
+          <CardBasic />
         </TabsContent>
         <TabsContent value="financial">
           <FinancialCard />

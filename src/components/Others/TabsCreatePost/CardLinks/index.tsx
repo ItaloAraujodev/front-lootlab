@@ -32,25 +32,25 @@ function LinksCard() {
       </CardHeader>
       <CardContent className="space-y-2">
         <Form.Field>
-          <LinkManager error={errors.cardLinks?.links?.message}>
+          <LinkManager error={errors?.links?.message}>
             <AccordionTrigger className="px-4">Links</AccordionTrigger>
             <AccordionContent>
               <FieldListLinks />
             </AccordionContent>
           </LinkManager>
-          <Form.ErrorMessage error={errors.cardLinks?.links?.message} />
+          <Form.ErrorMessage error={errors?.links?.message} />
         </Form.Field>
         <Form.Field>
-          <LinkManager error={errors.cardLinks?.partnerships?.message}>
+          <LinkManager error={errors?.partnership?.message}>
             <AccordionTrigger className="px-4">Parcerias</AccordionTrigger>
             <AccordionContent>
               <FieldListPartnership />
             </AccordionContent>
           </LinkManager>
-          <Form.ErrorMessage error={errors.cardLinks?.partnerships?.message} />
+          <Form.ErrorMessage error={errors?.partnership?.message} />
         </Form.Field>
         <Form.Field>
-          <LinkManager error={errors.cardLinks?.marketCap?.message}>
+          <LinkManager error={errors?.marketLink?.message}>
             <AccordionTrigger className="px-4">
               MarketCap Adress
             </AccordionTrigger>
@@ -58,7 +58,7 @@ function LinksCard() {
               <MarketCapAddresForm />
             </AccordionContent>
           </LinkManager>
-          <Form.ErrorMessage error={errors.cardLinks?.marketCap?.message} />
+          <Form.ErrorMessage error={errors?.marketLink?.message} />
         </Form.Field>
       </CardContent>
       <CardFooter className="flex w-full justify-between">

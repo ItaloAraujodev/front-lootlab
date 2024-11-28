@@ -9,11 +9,12 @@ function FieldListLinks() {
   const {
     control,
     formState: { errors },
+    watch,
   } = useFormContext<FormData>();
-
+  console.log(watch("links"));
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "cardLinks.links",
+    name: "links",
   });
 
   return (
@@ -23,7 +24,7 @@ function FieldListLinks() {
           type="button"
           variant="outline"
           className="border-lootlab-font-highlight bg-inherit scrollbar-thin scrollbar-track-lootlab-color-highlight hover:bg-[#111f33] hover:text-lootlab-font-base"
-          onClick={() => append({ link: "" })}
+          onClick={() => append({ linkUrl: "" })}
         >
           Add Link
           <PlusIcon className="stroke-[4px] text-lootlab-font-base" />
@@ -37,12 +38,8 @@ function FieldListLinks() {
           >
             <div className="flex w-full flex-col gap-2">
               <Form.Input
-                registerPath="links"
-                index={index}
-                error={errors.cardLinks?.links?.[index]?.link?.message}
-              />
-              <Form.ErrorMessage
-                error={errors.cardLinks?.links?.[index]?.link?.message}
+                path={`links.${index}.linkUrl`}
+                error={errors?.links?.[index]?.linkUrl?.message}
               />
             </div>
             <Button
