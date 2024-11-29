@@ -1,5 +1,4 @@
 "use client";
-import FormField from "@/components/Form/Field";
 import { Button } from "@/components/ui/button";
 import {
   CardContent,
@@ -8,17 +7,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
 import { ArrowLeft } from "lucide-react";
 import LayoutCard from "../CardLayout";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormContext } from "react-hook-form";
 import type { FormData } from "../schemas";
-
-const basicInfos = ["Comentario"];
+import { Form } from "@/components/Form";
+import classNames from "classnames";
 
 function CommentCard() {
-  const { handleSubmit } = useFormContext<FormData>();
+  const {
+    handleSubmit,
+    register,
+    formState: { errors },
+  } = useFormContext<FormData>();
 
   const onsubmit = () => {};
   return (
@@ -30,12 +32,16 @@ function CommentCard() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
-        {basicInfos.map((info) => (
-          <FormField key={info}>
-            <Label htmlFor={info}>{info}</Label>
-            <Textarea id={info} />
-          </FormField>
-        ))}
+        <Form.Label htmlFor="comment" title="Comentário">
+          <Textarea
+            className={classNames({
+              "border-red-500": errors.comment_author?.message,
+            })}
+            id="comment"
+            {...register("comment_author")}
+          />
+          <Form.ErrorMessage error={errors.comment_author?.message} />
+        </Form.Label>
       </CardContent>
       <CardFooter className="flex w-full justify-between">
         <Button

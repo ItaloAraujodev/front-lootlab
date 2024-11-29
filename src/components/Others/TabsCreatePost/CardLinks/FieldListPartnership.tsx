@@ -11,6 +11,7 @@ function FieldListPartnership() {
     control,
     formState: { errors },
     watch,
+    register,
   } = useFormContext<FormData>();
   console.log(watch("partnership"));
   const { fields, append, remove } = useFieldArray({
@@ -27,8 +28,8 @@ function FieldListPartnership() {
             key={field.id}
             className="flex w-full items-start justify-between gap-2"
           >
-            <Form.Input
-              path={`partnership.${index}.linkUrl`}
+            <Form.Input.FormInputGeneric
+              register={register(`partnership.${index}.linkUrl`)}
               error={errors?.partnership?.[index]?.linkUrl?.message}
             />
             <Button

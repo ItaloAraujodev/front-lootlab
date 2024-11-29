@@ -9,9 +9,8 @@ function FieldListLinks() {
   const {
     control,
     formState: { errors },
-    watch,
+    register,
   } = useFormContext<FormData>();
-  console.log(watch("links"));
   const { fields, append, remove } = useFieldArray({
     control,
     name: "links",
@@ -36,12 +35,16 @@ function FieldListLinks() {
             key={field.id}
             className="flex w-full items-start justify-between gap-2"
           >
-            <div className="flex w-full flex-col gap-2">
-              <Form.Input
-                path={`links.${index}.linkUrl`}
+            <Form.Label htmlFor={field.id}>
+              <Form.Input.FormInputGeneric
+                id={field.id}
+                register={register(`links.${index}.linkUrl`)}
                 error={errors?.links?.[index]?.linkUrl?.message}
               />
-            </div>
+              <Form.ErrorMessage
+                error={errors?.links?.[index]?.linkUrl?.message}
+              />
+            </Form.Label>
             <Button
               variant="outline"
               className="border-lootlab-font-highlight bg-inherit hover:bg-[#1e365a]"
