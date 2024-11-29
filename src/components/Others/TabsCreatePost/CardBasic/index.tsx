@@ -1,24 +1,13 @@
-import FormField from "@/components/Form/Field";
 import { Button } from "@/components/ui/button";
 import {
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import { ArrowRight } from "lucide-react";
 import LayoutCard from "../CardLayout";
-
-const basicInfos = [
-  "Nome do Jogo",
-  "CoinMarket Address",
-  "Analista",
-  "Nota",
-  "Rede",
-];
+import BasicContent from "./BasicContent";
 
 function BasicCard() {
   return (
@@ -31,14 +20,7 @@ function BasicCard() {
           Detalhes essenciais sobre o jogo.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2">
-        {basicInfos.map((info) => (
-          <FormField key={info}>
-            <Label htmlFor={info}>{info}</Label>
-            <Input id={info} />
-          </FormField>
-        ))}
-      </CardContent>
+      <BasicContent />
       <CardFooter className="flex w-full justify-end">
         <Button
           variant="link"

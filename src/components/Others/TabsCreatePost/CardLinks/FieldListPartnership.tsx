@@ -10,32 +10,28 @@ function FieldListPartnership() {
   const {
     control,
     formState: { errors },
+    watch,
+    register,
   } = useFormContext<FormData>();
-
+  console.log(watch("partnership"));
   const { fields, append, remove } = useFieldArray({
     control,
-    name: "cardLinks.partnerships",
+    name: "partnership",
   });
 
   return (
     <div className="space-y-2 px-4">
-      <FieldListHeader onClick={() => append({ link: "" })} />
+      <FieldListHeader onClick={() => append({ linkUrl: "" })} />
       <div className="flex flex-col justify-between gap-2">
         {fields.map((field, index) => (
           <div
             key={field.id}
             className="flex w-full items-start justify-between gap-2"
           >
-            <div className="flex w-full flex-col gap-2">
-              <Form.Input
-                registerPath="partnerships"
-                index={index}
-                error={errors.cardLinks?.partnerships?.[index]?.link?.message}
-              />
-              <Form.ErrorMessage
-                error={errors.cardLinks?.partnerships?.[index]?.link?.message}
-              />
-            </div>
+            <Form.Input.FormInputGeneric
+              register={register(`partnership.${index}.linkUrl`)}
+              error={errors?.partnership?.[index]?.linkUrl?.message}
+            />
             <Button
               variant="outline"
               className="border-lootlab-font-highlight bg-inherit hover:bg-[#1e365a]"

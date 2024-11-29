@@ -1,26 +1,13 @@
 import {
-  CardContent,
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
 import LayoutCard from "../CardLayout";
-import FormField from "@/components/Form/Field";
-import { Label } from "@/components/ui/label";
-import { Input } from "@/components/ui/input";
 import { Button } from "@/components/ui/button";
 import { ArrowLeft, ArrowRight } from "lucide-react";
-
-const financialInfos = [
-  "Investimento",
-  "Token",
-  "Data de Lançamento",
-  "Supply",
-  "Venda Privada",
-  "Market Cap",
-  "Venda Pública",
-];
+import FinancialContent from "./FinancialContent";
 
 function FinancialCard() {
   return (
@@ -33,14 +20,7 @@ function FinancialCard() {
           Informações sobre investimento e tokens.
         </CardDescription>
       </CardHeader>
-      <CardContent className="space-y-2">
-        {financialInfos.map((info) => (
-          <FormField key={info}>
-            <Label htmlFor={info}>{info}</Label>
-            <Input id={info} />
-          </FormField>
-        ))}
-      </CardContent>
+      <FinancialContent />
       <CardFooter className="flex w-full justify-between">
         <Button
           variant="link"
