@@ -34,7 +34,6 @@ export const authOptions: NextAuthOptions = {
             credentials.email,
             credentials.password,
           );
-          console.log(response);
           const { token, user } = response.data;
 
           // Inclui o token como parte do retorno

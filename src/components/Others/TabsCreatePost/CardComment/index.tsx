@@ -13,12 +13,12 @@ import { ArrowLeft } from "lucide-react";
 import LayoutCard from "../CardLayout";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormContext } from "react-hook-form";
-import type { FormData } from "../schemas";
+import type { TFormData } from "../schemas";
 
 const basicInfos = ["Comentario"];
 
 function CommentCard() {
-  const { handleSubmit } = useFormContext<FormData>();
+  const { handleSubmit } = useFormContext<TFormData>();
 
   const onsubmit = () => {};
   return (

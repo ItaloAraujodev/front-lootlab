@@ -1,6 +1,6 @@
 "use client";
 import { useFormContext, useFieldArray } from "react-hook-form";
-import type { FormData } from "../schemas";
+import type { TFormData } from "../schemas";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, X } from "lucide-react";
 import { Form } from "@/components/Form";
@@ -9,9 +9,7 @@ function FieldListLinks() {
   const {
     control,
     formState: { errors },
-    watch,
-  } = useFormContext<FormData>();
-  console.log(watch("links"));
+  } = useFormContext<TFormData>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "links",

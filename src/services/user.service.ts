@@ -6,7 +6,6 @@ export default class UserService {
       email,
       password,
     });
-    console.log(response);
     return response;
   }
 }

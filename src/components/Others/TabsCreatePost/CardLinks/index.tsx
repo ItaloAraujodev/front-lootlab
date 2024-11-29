@@ -16,12 +16,12 @@ import FieldListPartnership from "./FieldListPartnership";
 import MarketCapAddresForm from "./MarketCapAddressForm";
 import { Form } from "@/components/Form";
 import { useFormContext } from "react-hook-form";
-import type { FormData } from "../schemas";
+import type { TFormData } from "../schemas";
 
 function LinksCard() {
   const {
     formState: { errors },
-  } = useFormContext<FormData>();
+  } = useFormContext<TFormData>();
   return (
     <LayoutCard>
       <CardHeader>

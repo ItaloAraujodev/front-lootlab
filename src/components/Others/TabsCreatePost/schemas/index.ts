@@ -55,7 +55,7 @@ const PartnershipSchema = z.object({
 });
 
 // Esquema principal para validação do Post
-export const FormSchema = z.object({
+const FormSchema = z.object({
   title: z.string().min(1, "O título é obrigatório"),
   marketLink: z
     .string()
@@ -83,4 +83,8 @@ export const FormSchema = z.object({
     .default([]),
 });
 
-export type FormData = z.infer<typeof FormSchema>;
+export type TFormData = z.infer<typeof FormSchema>;
+export type TLaunchInfo = z.infer<typeof LaunchInfoSchema>;
+export type TPartnership = z.infer<typeof PartnershipSchema>;
+export type TProjectFeature = z.infer<typeof ProjectFeatureSchema>;
+export type TLink = z.infer<typeof LinkSchema>;

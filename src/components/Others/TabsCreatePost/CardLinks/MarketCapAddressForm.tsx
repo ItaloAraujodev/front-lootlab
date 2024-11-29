@@ -1,10 +1,10 @@
 "use client";
 import { useFormContext } from "react-hook-form";
-import type { FormData } from "../schemas";
+import type { TFormData } from "../schemas";
 import { Input } from "@/components/ui/input";
 
 function MarketCapAddresForm() {
-  const { register } = useFormContext<FormData>();
+  const { register } = useFormContext<TFormData>();
 
   return (
     <div className="space-y-2 px-4">

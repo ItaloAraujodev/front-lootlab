@@ -5,5 +5,9 @@ export type TPathKeys<T> =
         ?
             | `${k}.${number}`
             | `${k}.${number}.${Extract<keyof U, "linkUrl" | "type">}`
-        : never;
+        : T[k] extends object // Se for um objeto, permite acessar suas chaves
+          ? `${k}.${Extract<TPathKeys<T[k]>, string | number>}` // Caminho para propriedades aninhadas
+          : never;
     }[Extract<keyof T, string | number>];
+
+export type TCardBasic<T> = keyof T;

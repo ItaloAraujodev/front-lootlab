@@ -5,7 +5,7 @@ import FinancialCard from "./CardFinancial";
 import LinksCard from "./CardLinks";
 import CommentCard from "./CardComment";
 import { FormProvider, useForm } from "react-hook-form";
-import { FormSchema, type FormData } from "./schemas";
+import { FormSchema, type TFormData } from "./schemas";
 
 import { zodResolver } from "@hookform/resolvers/zod";
 
@@ -29,7 +29,7 @@ const tabsTriggers = [
 ];
 
 function TabsCreatPost() {
-  const methods = useForm<FormData>({
+  const methods = useForm<TFormData>({
     resolver: zodResolver(FormSchema),
   });
   return (

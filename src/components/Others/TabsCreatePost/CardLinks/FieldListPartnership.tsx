@@ -1,6 +1,6 @@
 "use client";
 import { useFormContext, useFieldArray } from "react-hook-form";
-import type { FormData } from "../schemas";
+import type { TFormData } from "../schemas";
 import { Button } from "@/components/ui/button";
 import { X } from "lucide-react";
 import { Form } from "@/components/Form";
@@ -10,9 +10,7 @@ function FieldListPartnership() {
   const {
     control,
     formState: { errors },
-    watch,
-  } = useFormContext<FormData>();
-  console.log(watch("partnership"));
+  } = useFormContext<TFormData>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "partnership",

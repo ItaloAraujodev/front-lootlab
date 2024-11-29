@@ -1,3 +1,4 @@
+"use client";
 import FormField from "@/components/Form/Field";
 import { Button } from "@/components/ui/button";
 import {
@@ -7,14 +8,25 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Input } from "@/components/ui/input";
 import { Label } from "@/components/ui/label";
 import { ArrowRight } from "lucide-react";
 import LayoutCard from "../CardLayout";
+import { Form } from "@/components/Form";
+import { TFormData } from "../schemas";
+import type { IFieldInfos } from "@/interfaces/interfaces";
+import { useFormContext } from "react-hook-form";
 
-const basicInfos = ["Nome do Jogo", "Analista", "Nota", "Rede"];
+const basicInfos: IFieldInfos<TFormData>[] = [
+  { title: "Nome do Jogo", path: "title" },
+  { title: "Nota", path: "score" },
+  { title: "Rede", path: "network" },
+];
 
 function BasicCard() {
+  const {
+    formState: { errors },
+    register,
+  } = useFormContext<TFormData>();
   return (
     <LayoutCard>
       <CardHeader>
@@ -26,12 +38,17 @@ function BasicCard() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
-        {basicInfos.map((info) => (
-          <FormField key={info}>
-            <Label htmlFor={info}>{info}</Label>
-            <Input id={info} />
-          </FormField>
-        ))}
+        {basicInfos.map(({ title, path }) => {
+          return (
+            <FormField key={title}>
+              <Label htmlFor={title}>{title}</Label>
+              <Form.Input
+                register={register(path)}
+                error={errors?.[path]?.message}
+              />
+            </FormField>
+          );
+        })}
       </CardContent>
       <CardFooter className="flex w-full justify-end">
         <Button
