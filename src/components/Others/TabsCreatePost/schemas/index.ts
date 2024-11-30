@@ -39,7 +39,8 @@ const LaunchInfoSchema = z.object({
   privateSaleQty: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("A quantidade da venda privada deve ser positiva")
-    .refine((field) => new Intl.NumberFormat("pt-BR").format(field)),
+    .refine((field) => new Intl.NumberFormat("pt-BR").format(field))
+    .optional(),
   publicSale: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor da venda pública deve ser positivo")
@@ -48,7 +49,8 @@ const LaunchInfoSchema = z.object({
   publicSaleQty: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("A quantidade da venda pública deve ser positiva")
-    .refine((field) => new Intl.NumberFormat("pt-BR").format(field)),
+    .refine((field) => new Intl.NumberFormat("pt-BR").format(field))
+    .optional(),
 });
 
 // Esquema para validação de Partnership
@@ -78,9 +80,7 @@ export const FormSchema = z.object({
     .default(""),
   score: z.coerce.number({ message: "Digite um número válido" }).optional(),
   investment: z.string().optional(),
-  token: z.string().min(1, "O token é obrigatório"),
   network: z.string().min(1, "A rede é obrigatória"),
-  authorId: z.string().min(1, "O ID do autor é obrigatório"),
   comment_author: z.string().min(1, "O comentário do autor é obrigatório"),
   links: z
     .array(LinkSchema)

@@ -14,7 +14,5 @@ export default function useBreadCrumbs() {
     }
   }, []);
 
-  console.log(crumbs);
-
   return { crumbs };
 }

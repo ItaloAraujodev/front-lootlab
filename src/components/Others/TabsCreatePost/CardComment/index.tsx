@@ -17,12 +17,10 @@ import classNames from "classnames";
 
 function CommentCard() {
   const {
-    handleSubmit,
     register,
     formState: { errors },
   } = useFormContext<FormData>();
 
-  const onsubmit = () => {};
   return (
     <LayoutCard>
       <CardHeader>
@@ -51,15 +49,13 @@ function CommentCard() {
           <ArrowLeft />
           Anterior
         </Button>
-        <form onSubmit={handleSubmit(onsubmit)}>
-          <Button
-            type="submit"
-            variant="default"
-            className="bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
-          >
-            Publicar
-          </Button>
-        </form>
+        <Button
+          type="submit"
+          variant="default"
+          className="bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
+        >
+          Publicar
+        </Button>
       </CardFooter>
     </LayoutCard>
   );

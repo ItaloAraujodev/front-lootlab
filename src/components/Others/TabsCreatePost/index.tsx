@@ -8,6 +8,9 @@ import { FormProvider, useForm } from "react-hook-form";
 import { FormSchema, type FormData } from "./schemas";
 
 import { zodResolver } from "@hookform/resolvers/zod";
+import { useMutation } from "@tanstack/react-query";
+import { useSession } from "next-auth/react";
+import PostService from "@/services/post.service";
 
 const tabsTriggers = [
   {
@@ -29,9 +32,30 @@ const tabsTriggers = [
 ];
 
 function TabsCreatPost() {
+  const { data: session } = useSession();
   const methods = useForm<FormData>({
     resolver: zodResolver(FormSchema),
   });
+
+  const { mutateAsync: createPostFn } = useMutation({
+    mutationFn: PostService.createPost,
+    onSuccess() {},
+  });
+
+  const onSubmit = (data: FormData) => {
+    try {
+      if (session?.accessToken && session.user.id) {
+        createPostFn({
+          data: { ...data },
+          authorId: session?.user.id,
+          token: session?.accessToken,
+        });
+        methods.reset();
+      }
+    } catch (error) {}
+    // Handle form submission
+    console.log(data);
+  };
   return (
     <FormProvider {...methods}>
       <Tabs defaultValue="basic" className="w-[95%] max-w-[400px]">
@@ -46,18 +70,20 @@ function TabsCreatPost() {
             </TabsTrigger>
           ))}
         </TabsList>
-        <TabsContent value="basic">
-          <CardBasic />
-        </TabsContent>
-        <TabsContent value="financial">
-          <FinancialCard />
-        </TabsContent>
-        <TabsContent value="links">
-          <LinksCard />
-        </TabsContent>
-        <TabsContent value="comment">
-          <CommentCard />
-        </TabsContent>
+        <form onSubmit={methods.handleSubmit(onSubmit)}>
+          <TabsContent value="basic">
+            <CardBasic />
+          </TabsContent>
+          <TabsContent value="financial">
+            <FinancialCard />
+          </TabsContent>
+          <TabsContent value="links">
+            <LinksCard />
+          </TabsContent>
+          <TabsContent value="comment">
+            <CommentCard />
+          </TabsContent>
+        </form>
       </Tabs>
     </FormProvider>
   );

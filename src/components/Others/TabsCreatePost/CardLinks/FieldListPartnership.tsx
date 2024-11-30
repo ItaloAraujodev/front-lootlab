@@ -10,10 +10,8 @@ function FieldListPartnership() {
   const {
     control,
     formState: { errors },
-    watch,
     register,
   } = useFormContext<FormData>();
-  console.log(watch("partnership"));
   const { fields, append, remove } = useFieldArray({
     control,
     name: "partnership",

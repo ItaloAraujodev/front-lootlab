@@ -19,11 +19,8 @@ function FinancialContent() {
   const {
     register,
     formState: { errors },
-    watch,
     control,
   } = useFormContext<FormData>();
-
-  console.log(watch("launchInfo"));
   return (
     <CardContent className="flex flex-col space-y-4">
       <Form.Label htmlFor="Launch" title="Launch">

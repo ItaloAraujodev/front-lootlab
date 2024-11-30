@@ -12,14 +12,11 @@ function FieldListFeatures() {
     control,
     formState: { errors },
     register,
-    watch,
   } = useFormContext<FormData>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "projectFeatures",
   });
-
-  console.log(watch("projectFeatures"));
 
   return (
     <div className="space-y-3 px-4">
