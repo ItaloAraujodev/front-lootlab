@@ -11,6 +11,8 @@ import { zodResolver } from "@hookform/resolvers/zod";
 import { useMutation } from "@tanstack/react-query";
 import { useSession } from "next-auth/react";
 import PostService from "@/services/post.service";
+import Toast from "@/tools/toast.tool";
+import { queryClient } from "@/lib/react-query";
 
 const tabsTriggers = [
   {
@@ -39,7 +41,12 @@ function TabsCreatPost() {
 
   const { mutateAsync: createPostFn } = useMutation({
     mutationFn: PostService.createPost,
-    onSuccess() {},
+    onSuccess(_, variables) {
+      queryClient.setQueryData([], (data: Array<keyof FormData>) => [
+        variables.data,
+        ...data,
+      ]);
+    },
   });
 
   const onSubmit = (data: FormData) => {
@@ -51,9 +58,13 @@ function TabsCreatPost() {
           token: session?.accessToken,
         });
         methods.reset();
+        return;
       }
-    } catch (error) {}
-    // Handle form submission
+      Toast.error("Você precisa estar logado para publicar um post.");
+    } catch (error) {
+      console.error(error);
+      Toast.error("Erro ao publicar o post.");
+    }
     console.log(data);
   };
   return (
