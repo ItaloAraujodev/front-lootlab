@@ -14,6 +14,7 @@ const basicInfos: IInfosCard<FormData>[] = [
   { title: "Nota", pathRegister: "score", type: "number" },
   { title: "Investimento", pathRegister: "investment" },
   { title: "Rede", pathRegister: "network" },
+  { title: "Token", pathRegister: "token" },
 ];
 function BasicContent() {
   const {

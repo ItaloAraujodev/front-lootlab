@@ -1,13 +1,13 @@
-import { Button } from "@/components/ui/button";
 import {
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import LayoutCard from "../CardLayout";
 import LinksContent from "./LinksContent";
+import ButtonNextTab from "../ButtonTab/buttonNextTab";
+import ButtonPrevTab from "../ButtonTab/buttonPrevTab";
 
 function LinksCard() {
   return (
@@ -18,22 +18,12 @@ function LinksCard() {
           Links importantes e parcerias do jogo.
         </CardDescription>
       </CardHeader>
+
       <LinksContent />
+
       <CardFooter className="flex w-full justify-between">
-        <Button
-          variant="link"
-          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
-        >
-          <ArrowLeft />
-          Anterior
-        </Button>
-        <Button
-          variant="link"
-          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
-        >
-          Próximo
-          <ArrowRight />
-        </Button>
+        <ButtonPrevTab />
+        <ButtonNextTab />
       </CardFooter>
     </LayoutCard>
   );

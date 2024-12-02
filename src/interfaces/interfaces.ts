@@ -1,3 +1,5 @@
+import type { FormData } from "@/components/Others/TabsCreatePost/schemas";
+
 /**
  * Interface genérica utilizada para definir a estrutura de informações de um card.
  *
@@ -31,4 +33,10 @@ export interface IInfosCard<T> {
   type?: "text" | "number";
   title: string;
   pathRegister: keyof T;
+}
+
+export interface IDataCreatePost {
+  data: FormData;
+  authorizationToken: string;
+  authorId: string;
 }

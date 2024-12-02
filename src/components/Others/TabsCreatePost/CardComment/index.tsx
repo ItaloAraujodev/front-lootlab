@@ -7,22 +7,20 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowLeft } from "lucide-react";
 import LayoutCard from "../CardLayout";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormContext } from "react-hook-form";
 import type { FormData } from "../schemas";
 import { Form } from "@/components/Form";
 import classNames from "classnames";
+import ButtonPrevTab from "../ButtonTab/buttonPrevTab";
 
 function CommentCard() {
   const {
-    handleSubmit,
     register,
     formState: { errors },
   } = useFormContext<FormData>();
 
-  const onsubmit = () => {};
   return (
     <LayoutCard>
       <CardHeader>
@@ -44,22 +42,14 @@ function CommentCard() {
         </Form.Label>
       </CardContent>
       <CardFooter className="flex w-full justify-between">
+        <ButtonPrevTab />
         <Button
-          variant="link"
-          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
+          type="submit"
+          variant="default"
+          className="bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
         >
-          <ArrowLeft />
-          Anterior
+          Publicar
         </Button>
-        <form onSubmit={handleSubmit(onsubmit)}>
-          <Button
-            type="submit"
-            variant="default"
-            className="bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
-          >
-            Publicar
-          </Button>
-        </form>
       </CardFooter>
     </LayoutCard>
   );
