@@ -7,13 +7,13 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowLeft } from "lucide-react";
 import LayoutCard from "../CardLayout";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormContext } from "react-hook-form";
 import type { FormData } from "../schemas";
 import { Form } from "@/components/Form";
 import classNames from "classnames";
+import ButtonPrevTab from "../ButtonTab/buttonPrevTab";
 
 function CommentCard() {
   const {
@@ -42,13 +42,7 @@ function CommentCard() {
         </Form.Label>
       </CardContent>
       <CardFooter className="flex w-full justify-between">
-        <Button
-          variant="link"
-          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
-        >
-          <ArrowLeft />
-          Anterior
-        </Button>
+        <ButtonPrevTab />
         <Button
           type="submit"
           variant="default"

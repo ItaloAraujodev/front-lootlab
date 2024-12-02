@@ -2,7 +2,7 @@ import { z } from "zod";
 
 // Esquema para validação de um Link
 const LinkSchema = z.object({
-  linkUrl: z
+  url: z
     .string()
     .url("URL inválida")
     .refine(
@@ -36,28 +36,18 @@ const LaunchInfoSchema = z.object({
     .nonnegative("O valor da venda privada deve ser positivo")
     .min(1, "O Private Sale é obrigatório")
     .refine((field) => new Intl.NumberFormat("pt-BR").format(field)),
-  privateSaleQty: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("A quantidade da venda privada deve ser positiva")
-    .refine((field) => new Intl.NumberFormat("pt-BR").format(field))
-    .optional(),
   publicSale: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor da venda pública deve ser positivo")
     .min(1, "O Public Sale é obrigatório")
     .refine((field) => new Intl.NumberFormat("pt-BR").format(field)),
-  publicSaleQty: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("A quantidade da venda pública deve ser positiva")
-    .refine((field) => new Intl.NumberFormat("pt-BR").format(field))
-    .optional(),
 });
 
 // Esquema para validação de Partnership
 const PartnershipSchema = z.object({
   // name: z.string().min(1, "O nome da parceria é obrigatório"),
   // type: z.string().min(1, "O tipo da parceria é obrigatório"),
-  linkUrl: z
+  link_url: z
     .string()
     .url("URL da parceria inválida")
     .refine(
@@ -70,17 +60,17 @@ const PartnershipSchema = z.object({
 // Esquema principal para validação do Post
 export const FormSchema = z.object({
   title: z.string().min(1, "O Nome do Jogo é obrigatório"),
-  marketLink: z
+  market_link: z
     .string()
     .url("URL de mercado inválida")
     .refine(
       (link) => link.startsWith("https"),
       "Por segurança, o link deve iniciar com https",
-    )
-    .default(""),
+    ),
   score: z.coerce.number({ message: "Digite um número válido" }).optional(),
   investment: z.string().optional(),
   network: z.string().min(1, "A rede é obrigatória"),
+  token: z.string().min(1, "O token é obrigatório"),
   comment_author: z.string().min(1, "O comentário do autor é obrigatório"),
   links: z
     .array(LinkSchema)

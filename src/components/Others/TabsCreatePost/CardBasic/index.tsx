@@ -1,13 +1,12 @@
-import { Button } from "@/components/ui/button";
 import {
   CardDescription,
   CardFooter,
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { ArrowRight } from "lucide-react";
 import LayoutCard from "../CardLayout";
 import BasicContent from "./BasicContent";
+import ButtonNextTab from "../ButtonTab/buttonNextTab";
 
 function BasicCard() {
   return (
@@ -20,15 +19,11 @@ function BasicCard() {
           Detalhes essenciais sobre o jogo.
         </CardDescription>
       </CardHeader>
+
       <BasicContent />
+
       <CardFooter className="flex w-full justify-end">
-        <Button
-          variant="link"
-          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
-        >
-          Próximo
-          <ArrowRight />
-        </Button>
+        <ButtonNextTab />
       </CardFooter>
     </LayoutCard>
   );

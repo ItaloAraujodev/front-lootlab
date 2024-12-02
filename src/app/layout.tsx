@@ -1,10 +1,7 @@
 import type { Metadata } from "next";
 import "./globals.css";
-import { ToastContainer } from "react-toastify";
 import "react-toastify/dist/ReactToastify.css";
-import { NavBar } from "@/components/navBar/Navbar";
-import { QueryClientProvider } from "@tanstack/react-query";
-import { queryClient } from "@/lib/react-query";
+import LayoutQueryClient from "@/components/Layout/LayoutQueryClient";
 
 export const metadata: Metadata = {
   title: "LootLab",
@@ -19,11 +16,7 @@ export default function RootLayout({
   return (
     <html lang="pt-br">
       <body>
-        <QueryClientProvider client={queryClient}>
-          <NavBar />
-          {children}
-          <ToastContainer />
-        </QueryClientProvider>
+        <LayoutQueryClient>{children}</LayoutQueryClient>
       </body>
     </html>
   );

@@ -5,9 +5,9 @@ import {
   CardTitle,
 } from "@/components/ui/card";
 import LayoutCard from "../CardLayout";
-import { Button } from "@/components/ui/button";
-import { ArrowLeft, ArrowRight } from "lucide-react";
 import FinancialContent from "./FinancialContent";
+import ButtonNextTab from "../ButtonTab/buttonNextTab";
+import ButtonPrevTab from "../ButtonTab/buttonPrevTab";
 
 function FinancialCard() {
   return (
@@ -20,22 +20,12 @@ function FinancialCard() {
           Informações sobre investimento e tokens.
         </CardDescription>
       </CardHeader>
+
       <FinancialContent />
+
       <CardFooter className="flex w-full justify-between">
-        <Button
-          variant="link"
-          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
-        >
-          <ArrowLeft />
-          Anterior
-        </Button>
-        <Button
-          variant="link"
-          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
-        >
-          Próximo
-          <ArrowRight />
-        </Button>
+        <ButtonPrevTab />
+        <ButtonNextTab />
       </CardFooter>
     </LayoutCard>
   );

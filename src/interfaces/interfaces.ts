@@ -37,6 +37,6 @@ export interface IInfosCard<T> {
 
 export interface IDataCreatePost {
   data: FormData;
-  token: string;
+  authorizationToken: string;
   authorId: string;
 }

@@ -23,7 +23,7 @@ function FieldListLinks() {
           type="button"
           variant="outline"
           className="border-lootlab-font-highlight bg-inherit scrollbar-thin scrollbar-track-lootlab-color-highlight hover:bg-[#111f33] hover:text-lootlab-font-base"
-          onClick={() => append({ linkUrl: "" })}
+          onClick={() => append({ url: "" })}
         >
           Add Link
           <PlusIcon className="stroke-[4px] text-lootlab-font-base" />
@@ -38,12 +38,10 @@ function FieldListLinks() {
             <Form.Label htmlFor={field.id}>
               <Form.Input.FormInputGeneric
                 id={field.id}
-                register={register(`links.${index}.linkUrl`)}
-                error={errors?.links?.[index]?.linkUrl?.message}
+                register={register(`links.${index}.url`)}
+                error={errors?.links?.[index]?.url?.message}
               />
-              <Form.ErrorMessage
-                error={errors?.links?.[index]?.linkUrl?.message}
-              />
+              <Form.ErrorMessage error={errors?.links?.[index]?.url?.message} />
             </Form.Label>
             <Button
               variant="outline"

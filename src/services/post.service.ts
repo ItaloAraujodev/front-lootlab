@@ -7,12 +7,29 @@ export default class PostService {
     return response;
   }
 
-  public static async createPost({ data, token, authorId }: IDataCreatePost) {
-    const response = await Api.post(`/post`, {
-      ...data,
-      token,
-      authorId,
-    });
-    return response;
+  public static async createPost({
+    data,
+    authorizationToken,
+    authorId,
+  }: IDataCreatePost) {
+    try {
+      const response = await Api.post(
+        `/post`,
+        {
+          ...data,
+          authorId,
+        },
+        {
+          headers: {
+            Authorization: `Bearer ${authorizationToken}`,
+          },
+        },
+      );
+      return response;
+    } catch (error) {
+      throw new Error(
+        "Ocorreu um erro ao tentar publicar o post. Tente novamente.",
+      );
+    }
   }
 }
