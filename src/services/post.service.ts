@@ -3,8 +3,12 @@ import { Api } from "@/providers/Api";
 
 export default class PostService {
   public static async getPosts() {
-    const response = await Api.get(`/post`);
-    return response;
+    try {
+      const response = await Api.get(`/post`);
+      return response;
+    } catch (error) {
+      throw new Error("Erro ao busgar os posts.");
+    }
   }
 
   public static async createPost({

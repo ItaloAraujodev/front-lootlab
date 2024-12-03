@@ -39,7 +39,7 @@ function useCreatePost() {
         authorId: session?.user.id,
         authorizationToken: session?.accessToken,
       });
-      Toast.success("Post creado com sucesso", 4000);
+      Toast.success("Post criado com sucesso", 4000);
       methods.reset();
     } catch (error) {
       console.error(error);
