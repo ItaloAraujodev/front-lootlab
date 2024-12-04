@@ -1,10 +1,14 @@
-import type { IDataCreatePost } from "@/interfaces/interfaces";
+import type { IDataCreatePost, IGame } from "@/interfaces/interfaces";
 import { Api } from "@/providers/Api";
 
 export default class PostService {
   public static async getPosts() {
-    const response = await Api.get(`/post`);
-    return response;
+    try {
+      const response = await Api.get<IGame[]>(`/post`);
+      return response.data;
+    } catch (error) {
+      throw new Error("Erro ao busgar os posts.");
+    }
   }
 
   public static async createPost({

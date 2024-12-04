@@ -44,6 +44,7 @@ function FieldListLinks() {
               <Form.ErrorMessage error={errors?.links?.[index]?.url?.message} />
             </Form.Label>
             <Button
+              type="button"
               variant="outline"
               className="border-lootlab-font-highlight bg-inherit hover:bg-[#1e365a]"
               onClick={() => remove(index)}

@@ -1,5 +1,4 @@
-import games from "@/mocks/games";
-import CardGames from "../CardGames";
+import GameList from "./GameList";
 
 export default function SectionGames() {
   return (
@@ -7,11 +6,7 @@ export default function SectionGames() {
       {/* <h1 className="text-xl font-bold text-lootlab-font-base">
         // {/* Explorador de Jogos */}
       {/* </h1> */}
-      <div className="flex flex-wrap justify-center gap-4">
-        {games.map((game) => (
-          <CardGames key={game.id} game={game} />
-        ))}
-      </div>
+      <GameList />
     </div>
   );
 }

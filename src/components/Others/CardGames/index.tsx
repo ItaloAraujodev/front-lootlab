@@ -1,14 +1,22 @@
+import type { IGame } from "@/interfaces/interfaces";
 import Link from "next/link";
 
 interface IProps {
-  game: {
-    id: number;
-    title: string;
-    image: string;
-    genres: string[];
-    platforms: string[];
-  };
+  game: IGame;
 }
+
+const colorArray: string[] = [
+  "000000/FFF", // Preto / Branco
+  "FF5733/FFF", // Laranja / Branco
+  "33FF57/FFF", // Verde claro / Branco
+  "8E44AD/FFF", // Roxo / Branco
+  "3498DB/FFF", // Azul / Branco
+  "F1C40F/FFF", // Amarelo / Branco
+  "E74C3C/FFF", // Vermelho / Branco
+  "1ABC9C/FFF", // Verde água / Branco
+  "9B59B6/FFF", // Roxo claro / Branco
+  "34495E/FFF", // Cinza escuro / Branco
+];
 
 export default function CardGames({ game }: IProps) {
   return (
@@ -18,7 +26,7 @@ export default function CardGames({ game }: IProps) {
     >
       <div className="relative h-56 w-56 overflow-hidden">
         <img
-          src={game.image}
+          src={`https://placehold.co/600x400/${colorArray[Math.floor(Math.random() * colorArray.length)]}.png?text=Imagem+do+Jogo+${game.title}`}
           alt={`image do jogo ${game.title}`}
           className="h-full w-full transform rounded-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
         />
@@ -27,7 +35,7 @@ export default function CardGames({ game }: IProps) {
         <h1 className="text-center text-lg font-bold text-lootlab-font-base">
           {game.title}
         </h1>
-        <div>
+        {/* <div>
           {game.genres.map((genre, index) => (
             <span
               className="text-nowrap text-xs font-medium text-lootlab-font-highlight"
@@ -45,12 +53,12 @@ export default function CardGames({ game }: IProps) {
               +{game.genres.length - 2}
             </span>
           )}
-        </div>
-        <div className="flex gap-2 text-base font-normal text-lootlab-font-highlight">
+        </div> */}
+        {/* <div className="flex gap-2 text-base font-normal text-lootlab-font-highlight">
           {game.platforms.map((plataform, index) => (
             <span key={index}>{plataform}</span>
           ))}
-        </div>
+        </div> */}
       </div>
     </Link>
   );

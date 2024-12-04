@@ -40,3 +40,65 @@ export interface IDataCreatePost {
   authorizationToken: string;
   authorId: string;
 }
+
+interface Link {
+  id: string;
+  postId: string;
+  url: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
+interface ProjectFeature {
+  id: string;
+  title: string;
+  isFeature: boolean;
+  createdAt: string;
+  updatedAt: string;
+  postId: string;
+}
+
+interface LaunchInfo {
+  id: string;
+  launchDate: string;
+  marketCap: number;
+  currentSupply: string;
+  totalSupply: number;
+  privateSale: number;
+  publicSale: number;
+  postId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+interface Partnership {
+  id: string;
+  name: string | null;
+  type: string | null;
+  link_url: string;
+  postId: string;
+  createdAt: string;
+  updatedAt: string;
+}
+
+export interface IGame {
+  id: string;
+  title: string;
+  market_link: string;
+  score: number;
+  investment: string;
+  token: string;
+  network: string;
+  comment_author: string;
+  authorId: string;
+  launchInfoId: string | null;
+  projectFeaturesId: string | null;
+  linkId: string | null;
+  createdAt: string;
+  updatedAt: string;
+  links: Link[];
+  ProjectFeatures: ProjectFeature[];
+  LaunchInfo: LaunchInfo[];
+  partnerships: Partnership[];
+}

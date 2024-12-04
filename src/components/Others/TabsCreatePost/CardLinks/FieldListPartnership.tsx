@@ -31,6 +31,7 @@ function FieldListPartnership() {
               error={errors?.partnership?.[index]?.link_url?.message}
             />
             <Button
+              type="button"
               variant="outline"
               className="border-lootlab-font-highlight bg-inherit hover:bg-[#1e365a]"
               onClick={() => remove(index)}

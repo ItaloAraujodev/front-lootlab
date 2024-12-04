@@ -1,18 +1,19 @@
 "use client";
 
-import { queryClient } from "@/lib/react-query";
 import PostService from "@/services/post.service";
 import Toast from "@/tools/toast.tool";
 import { useSession } from "next-auth/react";
-import { useMutation } from "@tanstack/react-query";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
 import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import {
   FormSchema,
   type FormData,
 } from "@/components/Others/TabsCreatePost/schemas";
+import type { IGame } from "@/interfaces/interfaces";
 
 function useCreatePost() {
+  const queryClient = useQueryClient();
   const { data: session } = useSession();
   const methods = useForm<FormData>({
     resolver: zodResolver(FormSchema),
@@ -21,10 +22,9 @@ function useCreatePost() {
   const { mutateAsync: createPostFn } = useMutation({
     mutationFn: PostService.createPost,
     onSuccess(_, variables) {
-      queryClient.setQueryData(["posts"], (data: Array<keyof FormData>) => [
-        variables.data,
-        ...data,
-      ]);
+      queryClient.setQueryData(["getPosts"], (oldData: IGame[]) => {
+        return [...oldData, variables.data];
+      });
     },
   });
 
@@ -39,6 +39,7 @@ function useCreatePost() {
         authorId: session?.user.id,
         authorizationToken: session?.accessToken,
       });
+      Toast.success("Post creado com sucesso", 4000);
       methods.reset();
     } catch (error) {
       console.error(error);
