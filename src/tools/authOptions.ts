@@ -34,7 +34,6 @@ export const authOptions: NextAuthOptions = {
             credentials.email,
             credentials.password,
           );
-          console.log(response);
           const { token, user } = response.data;
 
           // Inclui o token como parte do retorno
@@ -79,6 +78,6 @@ export const authOptions: NextAuthOptions = {
   secret: process.env.NEXTAUTH_SECRET,
   session: {
     strategy: "jwt",
-    maxAge: 24 * 60, //
+    maxAge: 24 * 60 * 60, //
   },
 };

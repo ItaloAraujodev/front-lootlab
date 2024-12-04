@@ -74,7 +74,7 @@ export const FormSchema = z.object({
   comment_author: z.string().min(1, "O comentário do autor é obrigatório"),
   links: z
     .array(LinkSchema)
-    .min(6, "Você deve cadastrar 6 links no mínimo")
+    .min(1, "Você deve cadastrar 1 link no mínimo")
     .default([]),
   projectFeatures: z.array(ProjectFeatureSchema).optional(),
   launchInfo: LaunchInfoSchema,
