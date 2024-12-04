@@ -6,15 +6,18 @@ import { useForm } from "react-hook-form";
 import { zodResolver } from "@hookform/resolvers/zod";
 import { signIn } from "next-auth/react";
 import { useMutation } from "@tanstack/react-query";
+import URLQuery from "@/tools/urlQuery";
+import { useRouter } from "next/navigation";
 
 function useLogin() {
-  const { register, handleSubmit } = useForm<FormLoginData>({
+  const form = useForm<FormLoginData>({
     resolver: zodResolver(FormLoginSchema),
     defaultValues: {
       email: "",
       password: "",
     },
   });
+  const router = useRouter();
 
   const mutation = useMutation({
     mutationFn: async (data: FormLoginData) => {
@@ -27,6 +30,13 @@ function useLogin() {
     onSuccess(data) {
       if (data?.status !== 401) {
         Toast.success("Login efetuado com sucesso!", 2000);
+        setTimeout(
+          () =>
+            router.push(
+              URLQuery.addQuery([{ key: "openModalLogin", value: false }]),
+            ),
+          500,
+        );
       }
     },
     onError(error) {
@@ -35,7 +45,7 @@ function useLogin() {
     },
   });
 
-  return { mutation, register, handleSubmit };
+  return { mutation, form };
 }
 
 export default useLogin;

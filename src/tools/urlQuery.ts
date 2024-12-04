@@ -20,7 +20,7 @@ export default class URLQuery {
     return "/?" + queryString.stringify(query);
   }
 
-  public static removeQuery(key: string[], path: boolean = true) {
+  public removeQuery(key: string[], path: boolean = true) {
     const query = queryString.parse(location.search);
 
     key.forEach((item) => {

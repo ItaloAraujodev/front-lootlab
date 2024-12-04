@@ -6,8 +6,8 @@ import {
 } from "@/components/ui/card";
 import LayoutCard from "../CardLayout";
 import FinancialContent from "./FinancialContent";
-import ButtonNextTab from "../ButtonTab/buttonNextTab";
-import ButtonPrevTab from "../ButtonTab/buttonPrevTab";
+import ButtonNextTab from "../Buttons/ButtonTab/buttonNextTab";
+import ButtonPrevTab from "../Buttons/ButtonTab/buttonPrevTab";
 
 function FinancialCard() {
   return (

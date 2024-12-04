@@ -6,7 +6,7 @@ import {
 } from "@/components/ui/card";
 import LayoutCard from "../CardLayout";
 import BasicContent from "./BasicContent";
-import ButtonNextTab from "../ButtonTab/buttonNextTab";
+import ButtonNextTab from "../Buttons/ButtonTab/buttonNextTab";
 
 function BasicCard() {
   return (
