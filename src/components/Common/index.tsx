@@ -1,4 +1,5 @@
-import { Button } from "../ui/button";
-import Title from "./title";
+import CommonButton from "./CommonButton";
+import CommonLoading from "./CommonLoading";
+import CommonTitle from "./CommonTitle";
 
-export const Common = { Title, Button };
+export const Common = { CommonTitle, CommonButton, CommonLoading };

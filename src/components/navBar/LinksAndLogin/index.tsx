@@ -2,6 +2,7 @@ import { Login } from "@/components/Modal/Login";
 import NavLinks from "../NavLinks";
 import classNames from "classnames";
 import Link from "next/link";
+import { Suspense } from "react";
 
 interface IProps {
   orientation?: "vertical" | "horizontal";
@@ -22,7 +23,9 @@ function LinksAndLogin({ orientation = "horizontal", className }: IProps) {
       <NavLinks orientation={orientation} />
       <div className="space-x-3">
         <Link href="/create-post?activatedTab=basic">Create Post</Link>
-        <Login />
+        <Suspense>
+          <Login />
+        </Suspense>
       </div>
     </div>
   );

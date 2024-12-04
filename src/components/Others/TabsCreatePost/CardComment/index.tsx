@@ -1,5 +1,4 @@
 "use client";
-import { Button } from "@/components/ui/button";
 import {
   CardContent,
   CardDescription,
@@ -13,7 +12,8 @@ import { useFormContext } from "react-hook-form";
 import type { FormData } from "../schemas";
 import { Form } from "@/components/Form";
 import classNames from "classnames";
-import ButtonPrevTab from "../ButtonTab/buttonPrevTab";
+import ButtonPrevTab from "../Buttons/ButtonTab/buttonPrevTab";
+import PublicButton from "../Buttons/PublicButton";
 
 function CommentCard() {
   const {
@@ -43,13 +43,7 @@ function CommentCard() {
       </CardContent>
       <CardFooter className="flex w-full justify-between">
         <ButtonPrevTab />
-        <Button
-          type="submit"
-          variant="default"
-          className="bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
-        >
-          Publicar
-        </Button>
+        <PublicButton>Publicar</PublicButton>
       </CardFooter>
     </LayoutCard>
   );

@@ -24,15 +24,15 @@ export default function CardGames({ game }: IProps) {
       href={`/details/${game.title}`}
       className="group cursor-pointer rounded-lg border-[0.5px] border-lootlab-font-highlight border-x-chart-3 border-b-chart-3 p-1 transition-transform hover:-translate-y-1"
     >
-      <div className="relative h-56 w-56 overflow-hidden">
+      <div className="relative h-56 max-w-56 overflow-hidden">
         <img
           src={`https://placehold.co/600x400/${colorArray[Math.floor(Math.random() * colorArray.length)]}.png?text=Imagem+do+Jogo+${game.title}`}
           alt={`image do jogo ${game.title}`}
-          className="h-full w-full transform rounded-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
+          className="h-full w-full transform break-all rounded-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
         />
       </div>
-      <div className="flex w-full flex-col items-center gap-3">
-        <h1 className="text-center text-lg font-bold text-lootlab-font-base">
+      <div className="flex w-56 flex-col items-center gap-3">
+        <h1 className="break-all text-lg font-bold text-lootlab-font-base">
           {game.title}
         </h1>
         {/* <div>

@@ -1,4 +1,6 @@
 "use client";
+import { Common } from "@/components/Common";
+import { Form } from "@/components/Form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,18 +11,39 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
 import useLogin from "@/hooks/useLogin/useLogin";
+import URLQuery from "@/tools/urlQuery";
+
+import { useRouter, useSearchParams } from "next/navigation";
 
 export function Login() {
   const {
-    mutation: { mutate, status },
-    register,
-    handleSubmit,
+    mutation: { mutate, status, data },
+    form: {
+      register,
+      handleSubmit,
+      formState: { errors },
+    },
   } = useLogin();
+
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const openModalLogin = searchParams.get("openModalLogin");
+
   return (
-    <Dialog>
+    <Dialog
+      open={status === "pending" ? true : openModalLogin === "true"}
+      onOpenChange={() => {
+        router.push(
+          URLQuery.addQuery([
+            {
+              key: "openModalLogin",
+              value: openModalLogin !== "true",
+            },
+          ]),
+        );
+      }}
+    >
       <DialogTrigger asChild>
         <Button className="bg-[#283563] font-bold text-white transition-all hover:bg-[#283563]/60">
           Login
@@ -35,45 +58,47 @@ export function Login() {
         </DialogHeader>
         <form
           onSubmit={handleSubmit((data) => mutate(data))}
-          className="space-y-4"
+          className="flex flex-col gap-4 text-white"
         >
-          <div className="flex flex-col gap-4 text-white">
-            <div className="flex flex-col items-start gap-2">
-              <Label htmlFor="name" className="text-right text-base">
-                E-mail
-              </Label>
-              <Input
-                id="email"
-                type="email"
-                className="h-11 placeholder:text-white/60"
-                placeholder="Digite seu e-mail"
-                {...register("email")}
-              />
-            </div>
-            <div className="flex flex-col items-start gap-2">
-              <Label htmlFor="username" className="text-right text-base">
-                Senha
-              </Label>
-              <Input
-                type="password"
-                id="password"
-                className="h-11 placeholder:text-white/60"
-                placeholder="Digite sua senha"
-                {...register("password")}
-              />
-            </div>
-          </div>
+          {data?.status === 401 && status !== "pending" && (
+            <span className="text-xs text-red-500">
+              E-mail ou senha incorretos.
+            </span>
+          )}
+          <Form.Label title="E-mail">
+            <Form.Input.FormInputGeneric
+              register={register("email")}
+              id="email"
+              type="email"
+              className="h-11 placeholder:text-white/60"
+              placeholder="Digite seu e-mail"
+              error={errors.email?.message}
+            />
+            <Form.ErrorMessage error={errors.email?.message} />
+          </Form.Label>
+
+          <Form.Label title="Password">
+            <Form.Input.FormInputGeneric
+              register={register("password")}
+              type="password"
+              id="password"
+              className="h-11 placeholder:text-white/60"
+              placeholder="Digite sua senha"
+              error={errors.password?.message}
+            />
+            <Form.ErrorMessage error={errors.password?.message} />
+          </Form.Label>
+
           <DialogFooter>
             <Button
               disabled={status === "pending"}
               type="submit"
-              className="w-full bg-[#283563] hover:bg-[#283563]/60"
+              className="w-full bg-lootlab-color-highlight hover:bg-lootlab-hover-highlight"
             >
-              {status === "pending" ? (
-                <span className="h-4 w-4 animate-spin rounded-full border-4 border-lootlab-color-highlight border-b-transparent" />
-              ) : (
-                "Acessar"
-              )}
+              <Common.CommonLoading
+                isLoading={status === "pending"}
+                title="Acessar"
+              />
             </Button>
           </DialogFooter>
         </form>

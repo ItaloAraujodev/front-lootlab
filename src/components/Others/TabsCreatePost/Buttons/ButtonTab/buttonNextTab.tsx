@@ -17,13 +17,13 @@ function ButtonNextTab() {
   return (
     <Button
       type="button"
-      onClick={() =>
+      onClick={() => {
         router.push(
           URLQuery.addQuery([
             { key: "activatedTab", value: getNextTab(activatedTab) },
           ]),
-        )
-      }
+        );
+      }}
       variant="link"
       className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
     >
