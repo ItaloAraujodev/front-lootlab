@@ -15,6 +15,7 @@ function useLogin() {
       password: "",
     },
   });
+
   const mutation = useMutation({
     mutationFn: async (data: FormLoginData) => {
       return signIn("credentials", {
@@ -23,8 +24,10 @@ function useLogin() {
         redirect: false,
       });
     },
-    onSuccess() {
-      Toast.success("Login efetuado com sucesso!", 2000);
+    onSuccess(data) {
+      if (data?.status !== 401) {
+        Toast.success("Login efetuado com sucesso!", 2000);
+      }
     },
     onError(error) {
       console.error(error);

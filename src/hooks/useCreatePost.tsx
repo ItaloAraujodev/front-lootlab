@@ -26,25 +26,24 @@ function useCreatePost() {
         return [...oldData, variables.data];
       });
     },
+    onError(error) {
+      console.log(error);
+      Toast.error("Erro ao publicar o post.", 2000);
+    },
   });
 
   const onSubmit = (data: FormData) => {
-    try {
-      if (!session?.accessToken && !session?.user.id) {
-        Toast.error("Você precisa estar logado para publicar um post.");
-        return;
-      }
-      createPostFn({
-        data: { ...data },
-        authorId: session?.user.id,
-        authorizationToken: session?.accessToken,
-      });
-      Toast.success("Post creado com sucesso", 4000);
-      methods.reset();
-    } catch (error) {
-      console.error(error);
-      Toast.error("Erro ao publicar o post.", 4000);
+    if (!session?.accessToken && !session?.user.id) {
+      Toast.error("Você precisa estar logado para publicar um post.");
+      return;
     }
+    createPostFn({
+      data: { ...data },
+      authorId: session?.user.id,
+      authorizationToken: session?.accessToken,
+    });
+    Toast.success("Post criado com sucesso", 2000);
+    methods.reset();
   };
   return { onSubmit, methods };
 }
