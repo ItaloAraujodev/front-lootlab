@@ -32,7 +32,7 @@ export function Login() {
 
   return (
     <Dialog
-      open={openModalLogin === "true"}
+      open={status === "pending" ? true : openModalLogin === "true"}
       onOpenChange={() => {
         router.push(
           URLQuery.addQuery([
