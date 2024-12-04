@@ -19,7 +19,7 @@ function useCreatePost() {
     resolver: zodResolver(FormSchema),
   });
 
-  const { mutateAsync: createPostFn } = useMutation({
+  const { mutateAsync: createPostFn, data: dataCreatePost } = useMutation({
     mutationFn: PostService.createPost,
     onSuccess(_, variables) {
       queryClient.setQueryData(["getPosts"], (oldData: IGame[]) => {
@@ -31,6 +31,8 @@ function useCreatePost() {
       Toast.error("Erro ao publicar o post.", 2000);
     },
   });
+
+  console.log(dataCreatePost)
 
   const onSubmit = (data: FormData) => {
     if (!session?.accessToken && !session?.user.id) {
