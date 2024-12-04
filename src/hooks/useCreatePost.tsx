@@ -19,7 +19,8 @@ function useCreatePost() {
     resolver: zodResolver(FormSchema),
   });
 
-  const { mutateAsync: createPostFn, data: dataPosts } = useMutation({
+
+  const { mutateAsync: createPostFn, data: dataCreatePost } = useMutation({
     mutationFn: PostService.createPost,
     onSuccess(_, variables) {
       queryClient.setQueryData(["getPosts"], (oldData: IGame[]) => {
@@ -32,6 +33,8 @@ function useCreatePost() {
     },
   });
 
+  console.log(dataCreatePost)
+
   const onSubmit = (data: FormData) => {
     if (!session?.accessToken && !session?.user.id) {
       Toast.error("Você precisa estar logado para publicar um post.");
@@ -42,7 +45,8 @@ function useCreatePost() {
       authorId: session?.user.id,
       authorizationToken: session?.accessToken,
     });
-    if (dataPosts?.status === 201) {
+
+    if (dataCreatePost?.status === 201) {
       Toast.success("Post criado com sucesso", 2000);
       methods.reset();
     }
