@@ -19,7 +19,7 @@ function useCreatePost() {
     resolver: zodResolver(FormSchema),
   });
 
-  const { mutateAsync: createPostFn } = useMutation({
+  const { mutateAsync: createPostFn, data: dataPosts } = useMutation({
     mutationFn: PostService.createPost,
     onSuccess(_, variables) {
       queryClient.setQueryData(["getPosts"], (oldData: IGame[]) => {
@@ -42,8 +42,10 @@ function useCreatePost() {
       authorId: session?.user.id,
       authorizationToken: session?.accessToken,
     });
-    Toast.success("Post criado com sucesso", 2000);
-    methods.reset();
+    if (dataPosts?.status === 201) {
+      Toast.success("Post criado com sucesso", 2000);
+      methods.reset();
+    }
   };
   return { onSubmit, methods };
 }
