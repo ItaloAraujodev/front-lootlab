@@ -19,6 +19,7 @@ function useCreatePost() {
     resolver: zodResolver(FormSchema),
   });
 
+
   const { mutateAsync: createPostFn, data: dataCreatePost } = useMutation({
     mutationFn: PostService.createPost,
     onSuccess(_, variables) {
@@ -44,6 +45,7 @@ function useCreatePost() {
       authorId: session?.user.id,
       authorizationToken: session?.accessToken,
     });
+
     if (dataCreatePost?.status === 201) {
       Toast.success("Post criado com sucesso", 2000);
       methods.reset();
