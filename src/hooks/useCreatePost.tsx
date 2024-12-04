@@ -44,8 +44,10 @@ function useCreatePost() {
       authorId: session?.user.id,
       authorizationToken: session?.accessToken,
     });
-    Toast.success("Post criado com sucesso", 2000);
-    methods.reset();
+    if (dataCreatePost?.status === 201) {
+      Toast.success("Post criado com sucesso", 2000);
+      methods.reset();
+    }
   };
   return { onSubmit, methods };
 }
