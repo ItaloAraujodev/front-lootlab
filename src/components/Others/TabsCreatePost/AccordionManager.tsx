@@ -6,7 +6,7 @@ interface IProps {
   error?: string;
 }
 
-function LinkManager({ children, error }: IProps) {
+function AccordionManager({ children, error }: IProps) {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       <AccordionItem
@@ -24,4 +24,4 @@ function LinkManager({ children, error }: IProps) {
   );
 }
 
-export default LinkManager;
+export default AccordionManager;

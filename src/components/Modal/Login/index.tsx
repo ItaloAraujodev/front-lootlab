@@ -1,4 +1,6 @@
 "use client";
+import { Common } from "@/components/Common";
+import { Form } from "@/components/Form";
 import { Button } from "@/components/ui/button";
 import {
   Dialog,
@@ -9,42 +11,39 @@ import {
   DialogTitle,
   DialogTrigger,
 } from "@/components/ui/dialog";
-import { Input } from "@/components/ui/input";
-import { Label } from "@/components/ui/label";
-import { useState } from "react";
-import { signIn } from "next-auth/react";
-import Toast from "@/tools/toast.tool";
+import useLogin from "@/hooks/useLogin/useLogin";
+import URLQuery from "@/tools/urlQuery";
+
+import { useRouter, useSearchParams } from "next/navigation";
 
 export function Login() {
-  const [email, setEmail] = useState<string>();
-  const [password, setPassword] = useState<string>();
+  const {
+    mutation: { mutate, status, data },
+    form: {
+      register,
+      handleSubmit,
+      formState: { errors },
+    },
+  } = useLogin();
 
-  async function handleLogin() {
-    if (!email || !password) {
-      Toast.error("Preencha todos os campos!", 2000);
-      return;
-    }
-
-    try {
-      const result = await signIn("credentials", {
-        email,
-        password,
-        redirect: false,
-      });
-
-      if (!result?.ok) {
-        Toast.error("Erro ao fazer login!", 2000);
-      } else {
-        Toast.success("Login efetuado com sucesso!", 2000);
-      }
-    } catch (err) {
-      console.error(err);
-      Toast.error("Erro ao fazer login!", 2000);
-    }
-  }
+  const searchParams = useSearchParams();
+  const router = useRouter();
+  const openModalLogin = searchParams.get("openModalLogin");
 
   return (
-    <Dialog>
+    <Dialog
+      open={status === "pending" ? true : openModalLogin === "true"}
+      onOpenChange={() => {
+        router.push(
+          URLQuery.addQuery([
+            {
+              key: "openModalLogin",
+              value: openModalLogin !== "true",
+            },
+          ]),
+        );
+      }}
+    >
       <DialogTrigger asChild>
         <Button className="bg-[#283563] font-bold text-white transition-all hover:bg-[#283563]/60">
           Login
@@ -57,41 +56,52 @@ export function Login() {
             Digite os seus dados de acesso no campo abaixo.
           </DialogDescription>
         </DialogHeader>
-        <div className="flex flex-col gap-4 text-white">
-          <div className="flex flex-col items-start gap-2">
-            <Label htmlFor="name" className="text-right text-base">
-              E-mail
-            </Label>
-            <Input
+        <form
+          onSubmit={handleSubmit((data) => mutate(data))}
+          className="flex flex-col gap-4 text-white"
+        >
+          {data?.status === 401 && status !== "pending" && (
+            <span className="text-xs text-red-500">
+              E-mail ou senha incorretos.
+            </span>
+          )}
+          <Form.Label title="E-mail">
+            <Form.Input.FormInputGeneric
+              register={register("email")}
               id="email"
               type="email"
               className="h-11 placeholder:text-white/60"
               placeholder="Digite seu e-mail"
-              onChange={(e) => setEmail(e.target.value)}
+              error={errors.email?.message}
             />
-          </div>
-          <div className="flex flex-col items-start gap-2">
-            <Label htmlFor="username" className="text-right text-base">
-              Senha
-            </Label>
-            <Input
+            <Form.ErrorMessage error={errors.email?.message} />
+          </Form.Label>
+
+          <Form.Label title="Password">
+            <Form.Input.FormInputGeneric
+              register={register("password")}
               type="password"
               id="password"
               className="h-11 placeholder:text-white/60"
               placeholder="Digite sua senha"
-              onChange={(e) => setPassword(e.target.value)}
+              error={errors.password?.message}
             />
-          </div>
-        </div>
-        <DialogFooter>
-          <Button
-            type="submit"
-            className="w-full bg-[#283563] hover:bg-[#283563]/60"
-            onClick={handleLogin}
-          >
-            Acessar
-          </Button>
-        </DialogFooter>
+            <Form.ErrorMessage error={errors.password?.message} />
+          </Form.Label>
+
+          <DialogFooter>
+            <Button
+              disabled={status === "pending"}
+              type="submit"
+              className="w-full bg-lootlab-color-highlight hover:bg-lootlab-hover-highlight"
+            >
+              <Common.CommonLoading
+                isLoading={status === "pending"}
+                title="Acessar"
+              />
+            </Button>
+          </DialogFooter>
+        </form>
       </DialogContent>
     </Dialog>
   );

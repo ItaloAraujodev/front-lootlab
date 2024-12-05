@@ -5,7 +5,7 @@ interface IProps {
   className?: string;
 }
 
-export default function Title({ title, className, ...props }: IProps) {
+export default function CommonTitle({ title, className, ...props }: IProps) {
   return (
     <h1
       className={classNames(

@@ -1,6 +1,6 @@
 "use client";
 import { useFormContext, useFieldArray } from "react-hook-form";
-import type { TFormData } from "../schemas";
+import type { FormData } from "../schemas";
 import { Button } from "@/components/ui/button";
 import { PlusIcon, X } from "lucide-react";
 import { Form } from "@/components/Form";
@@ -9,7 +9,8 @@ function FieldListLinks() {
   const {
     control,
     formState: { errors },
-  } = useFormContext<TFormData>();
+    register,
+  } = useFormContext<FormData>();
   const { fields, append, remove } = useFieldArray({
     control,
     name: "links",
@@ -22,7 +23,7 @@ function FieldListLinks() {
           type="button"
           variant="outline"
           className="border-lootlab-font-highlight bg-inherit scrollbar-thin scrollbar-track-lootlab-color-highlight hover:bg-[#111f33] hover:text-lootlab-font-base"
-          onClick={() => append({ linkUrl: "" })}
+          onClick={() => append({ url: "" })}
         >
           Add Link
           <PlusIcon className="stroke-[4px] text-lootlab-font-base" />
@@ -34,13 +35,16 @@ function FieldListLinks() {
             key={field.id}
             className="flex w-full items-start justify-between gap-2"
           >
-            <div className="flex w-full flex-col gap-2">
-              <Form.Input
-                path={`links.${index}.linkUrl`}
-                error={errors?.links?.[index]?.linkUrl?.message}
+            <Form.Label htmlFor={field.id}>
+              <Form.Input.FormInputGeneric
+                id={field.id}
+                register={register(`links.${index}.url`)}
+                error={errors?.links?.[index]?.url?.message}
               />
-            </div>
+              <Form.ErrorMessage error={errors?.links?.[index]?.url?.message} />
+            </Form.Label>
             <Button
+              type="button"
               variant="outline"
               className="border-lootlab-font-highlight bg-inherit hover:bg-[#1e365a]"
               onClick={() => remove(index)}

@@ -1,6 +1,4 @@
 "use client";
-import FormField from "@/components/Form/Field";
-import { Button } from "@/components/ui/button";
 import {
   CardContent,
   CardDescription,
@@ -8,19 +6,21 @@ import {
   CardHeader,
   CardTitle,
 } from "@/components/ui/card";
-import { Label } from "@/components/ui/label";
-import { ArrowLeft } from "lucide-react";
 import LayoutCard from "../CardLayout";
 import { Textarea } from "@/components/ui/textarea";
 import { useFormContext } from "react-hook-form";
-import type { TFormData } from "../schemas";
-
-const basicInfos = ["Comentario"];
+import type { FormData } from "../schemas";
+import { Form } from "@/components/Form";
+import classNames from "classnames";
+import ButtonPrevTab from "../Buttons/ButtonTab/buttonPrevTab";
+import PublicButton from "../Buttons/PublicButton";
 
 function CommentCard() {
-  const { handleSubmit } = useFormContext<TFormData>();
+  const {
+    register,
+    formState: { errors },
+  } = useFormContext<FormData>();
 
-  const onsubmit = () => {};
   return (
     <LayoutCard>
       <CardHeader>
@@ -30,30 +30,20 @@ function CommentCard() {
         </CardDescription>
       </CardHeader>
       <CardContent className="space-y-2">
-        {basicInfos.map((info) => (
-          <FormField key={info}>
-            <Label htmlFor={info}>{info}</Label>
-            <Textarea id={info} />
-          </FormField>
-        ))}
+        <Form.Label htmlFor="comment" title="Comentário">
+          <Textarea
+            className={classNames({
+              "border-red-500": errors.comment_author?.message,
+            })}
+            id="comment"
+            {...register("comment_author")}
+          />
+          <Form.ErrorMessage error={errors.comment_author?.message} />
+        </Form.Label>
       </CardContent>
       <CardFooter className="flex w-full justify-between">
-        <Button
-          variant="link"
-          className="text-lootlab-font-base hover:bg-slate-700 hover:no-underline"
-        >
-          <ArrowLeft />
-          Anterior
-        </Button>
-        <form onSubmit={handleSubmit(onsubmit)}>
-          <Button
-            type="submit"
-            variant="default"
-            className="bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
-          >
-            Publicar
-          </Button>
-        </form>
+        <ButtonPrevTab />
+        <PublicButton>Publicar</PublicButton>
       </CardFooter>
     </LayoutCard>
   );
