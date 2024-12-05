@@ -17,7 +17,7 @@ export default function Input({
   ...props
 }: InputProps) {
   return (
-    <Form.Field>
+    <Form.Label>
       <InputUi
         id={name}
         {...props}
@@ -31,7 +31,6 @@ export default function Input({
         {...register}
       />
       <Form.ErrorMessage error={error} />
-    </Form.Field>
+    </Form.Label>
   );
 }
-
