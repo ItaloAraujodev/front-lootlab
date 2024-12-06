@@ -1,5 +1,3 @@
-import type { FormData } from "@/components/Others/TabsCreatePost/schemas";
-
 /**
  * Interface genérica utilizada para definir a estrutura de informações de um card.
  *
@@ -36,7 +34,10 @@ export interface IInfosCard<T> {
 }
 
 export interface IDataCreatePost {
-  data: FormData;
+  data: {
+    postData: string; // JSON.stringify dos dados do post
+    file: File; // O arquivo a ser enviado
+  };
   authorizationToken: string;
   authorId: string;
 }
@@ -82,6 +83,15 @@ interface Partnership {
   updatedAt: string;
 }
 
+export interface Image {
+  id: string;
+  url: string;
+  postId: string;
+  createdAt: string;
+  updatedAt: string;
+  deletedAt: string | null;
+}
+
 export interface IGame {
   id: string;
   title: string;
@@ -97,6 +107,7 @@ export interface IGame {
   linkId: string | null;
   createdAt: string;
   updatedAt: string;
+  Image: Image[];
   links: Link[];
   ProjectFeatures: ProjectFeature[];
   LaunchInfo: LaunchInfo[];

@@ -6,8 +6,9 @@ export default class PostService {
     try {
       const response = await Api.get<IGame[]>(`/post`);
       return response.data;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
-      throw new Error("Erro ao busgar os posts.");
+      throw new Error("Erro ao buscar os posts.");
     }
   }
 
@@ -17,20 +18,27 @@ export default class PostService {
     authorId,
   }: IDataCreatePost) {
     try {
-      const response = await Api.post(
-        `/post`,
-        {
-          ...data,
+      const formData = new FormData();
+      formData.append("file", data.file);
+
+      formData.append(
+        "postData",
+        JSON.stringify({
+          ...JSON.parse(data.postData),
           authorId,
-        },
-        {
-          headers: {
-            Authorization: `Bearer ${authorizationToken}`,
-          },
-        },
+        }),
       );
+      console.log("formData", formData);
+      const response = await Api.post(`/post`, formData, {
+        headers: {
+          Authorization: `Bearer ${authorizationToken}`,
+          "Content-Type": "multipart/form-data",
+        },
+      });
+
       return response;
     } catch (error) {
+      console.error("Erro ao enviar o post:", error);
       throw new Error(
         "Ocorreu um erro ao tentar publicar o post. Tente novamente.",
       );

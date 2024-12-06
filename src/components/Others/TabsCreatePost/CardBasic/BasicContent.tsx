@@ -16,11 +16,24 @@ const basicInfos: IInfosCard<FormData>[] = [
   { title: "Rede", pathRegister: "network" },
   { title: "Token", pathRegister: "token" },
 ];
-function BasicContent() {
+
+interface IProps {
+  setFile: (file: File) => void;
+}
+
+function BasicContent({ setFile }: IProps) {
   const {
     register,
     formState: { errors },
   } = useFormContext<FormData>();
+
+  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
+    const file = event.target.files?.[0];
+    if (file) {
+      setFile(file);
+    }
+  };
+
   return (
     <CardContent className="space-y-2">
       <AccordionManager>
@@ -40,6 +53,10 @@ function BasicContent() {
           <Form.ErrorMessage error={errors?.[pathRegister]?.message} />
         </Form.Label>
       ))}
+
+      <Form.Label title="Arquivo" htmlFor="file">
+        <input type="file" id="file" onChange={handleFileChange} />
+      </Form.Label>
     </CardContent>
   );
 }
