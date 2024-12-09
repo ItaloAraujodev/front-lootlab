@@ -8,6 +8,7 @@ import FieldListFeatures from "./FieldListFeatures";
 import AccordionManager from "../AccordionManager";
 import { AccordionTrigger } from "@/components/ui/accordion";
 import { AccordionContent } from "@radix-ui/react-accordion";
+import classNames from "classnames";
 
 const basicInfos: IInfosCard<FormData>[] = [
   { title: "Nome do Jogo", pathRegister: "title" },
@@ -17,31 +18,30 @@ const basicInfos: IInfosCard<FormData>[] = [
   { title: "Token", pathRegister: "token" },
 ];
 
-interface IProps {
-  setFile: (file: File) => void;
-}
-
-function BasicContent({ setFile }: IProps) {
+function BasicContent() {
   const {
     register,
     formState: { errors },
+    watch,
   } = useFormContext<FormData>();
-
-  const handleFileChange = (event: React.ChangeEvent<HTMLInputElement>) => {
-    const file = event.target.files?.[0];
-    if (file) {
-      setFile(file);
-    }
-  };
-
+  console.log(watch("file"));
   return (
     <CardContent className="space-y-2">
-      <AccordionManager>
-        <AccordionTrigger className="px-4">Features</AccordionTrigger>
-        <AccordionContent className="pb-3">
-          <FieldListFeatures />
-        </AccordionContent>
-      </AccordionManager>
+      <Form.Label>
+        <AccordionManager>
+          <AccordionTrigger
+            className={classNames("px-4", {
+              "border-red-500": errors.projectFeatures?.root?.message,
+            })}
+          >
+            Features
+          </AccordionTrigger>
+          <AccordionContent className="pb-3">
+            <FieldListFeatures />
+          </AccordionContent>
+        </AccordionManager>
+        <Form.ErrorMessage error={errors.projectFeatures?.root?.message} />
+      </Form.Label>
       {basicInfos.map(({ pathRegister, title, type }) => (
         <Form.Label title={title} htmlFor={title} key={title}>
           <Form.Input.FormInputGeneric
@@ -54,8 +54,17 @@ function BasicContent({ setFile }: IProps) {
         </Form.Label>
       ))}
 
-      <Form.Label title="Arquivo" htmlFor="file">
-        <input type="file" id="file" onChange={handleFileChange} />
+      <Form.Label title="Imagem" htmlFor="file">
+        <Form.Input.FormInputImage
+          register={register("file")}
+          id="file"
+          error={errors?.file?.message}
+          imageName={
+            (watch("file") && watch("file").length && watch("file")[0].name) ||
+            ""
+          }
+        />
+        <Form.ErrorMessage error={errors?.file?.message} />
       </Form.Label>
     </CardContent>
   );

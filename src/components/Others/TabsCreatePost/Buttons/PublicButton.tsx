@@ -8,7 +8,7 @@ function PublicButton({ children, ...props }: IPublicButton) {
       {...props}
       type="submit"
       variant="default"
-      className="bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
+      className="min-w-20 max-w-20 bg-lootlab-color-highlight text-lootlab-font-base hover:bg-lootlab-hover-highlight hover:no-underline"
     >
       {children}
     </Button>

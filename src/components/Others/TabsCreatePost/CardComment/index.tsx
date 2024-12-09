@@ -14,8 +14,9 @@ import { Form } from "@/components/Form";
 import classNames from "classnames";
 import ButtonPrevTab from "../Buttons/ButtonTab/buttonPrevTab";
 import PublicButton from "../Buttons/PublicButton";
+import { Common } from "@/components/Common";
 
-function CommentCard() {
+function CommentCard({ status }: { status: boolean }) {
   const {
     register,
     formState: { errors },
@@ -43,7 +44,9 @@ function CommentCard() {
       </CardContent>
       <CardFooter className="flex w-full justify-between">
         <ButtonPrevTab />
-        <PublicButton>Publicar</PublicButton>
+        <PublicButton disabled={status}>
+          <Common.CommonLoading title="Publicar" isLoading={status} />
+        </PublicButton>
       </CardFooter>
     </LayoutCard>
   );

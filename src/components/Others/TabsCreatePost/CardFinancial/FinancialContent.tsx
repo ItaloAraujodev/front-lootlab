@@ -8,11 +8,11 @@ import { DatePicker } from "@/components/ui/datePicker";
 import classNames from "classnames";
 
 const financialInfos: IInfosCard<LaunchInfo>[] = [
-  { title: "Current Supply", pathRegister: "currentSupply" },
-  { title: "Total Supply", pathRegister: "totalSupply" },
-  { title: "Private Sale", pathRegister: "privateSale" },
-  { title: "Public Sale", pathRegister: "publicSale" },
-  { title: "Market Cap", pathRegister: "marketCap" },
+  { title: "Current Supply", pathRegister: "currentSupply", type: "number" },
+  { title: "Total Supply", pathRegister: "totalSupply", type: "number" },
+  { title: "Private Sale", pathRegister: "privateSale", type: "number" },
+  { title: "Public Sale", pathRegister: "publicSale", type: "number" },
+  { title: "Market Cap", pathRegister: "marketCap", type: "number" },
 ];
 
 function FinancialContent() {
@@ -39,11 +39,11 @@ function FinancialContent() {
         />
         <Form.ErrorMessage error={errors.launchInfo?.launchDate?.message} />
       </Form.Label>
-      {financialInfos.map(({ pathRegister, title }) => (
+      {financialInfos.map(({ pathRegister, title, type }) => (
         <Form.Label key={title} htmlFor={title} title={title}>
           <Form.Input.FormInputGeneric
-            type={pathRegister === "currentSupply" ? "text" : "number"}
             id={title}
+            type={type || "text"}
             register={register(`launchInfo.${pathRegister}`)}
             error={errors.launchInfo?.[pathRegister]?.message}
           />

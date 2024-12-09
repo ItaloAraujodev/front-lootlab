@@ -6,7 +6,7 @@ function CommonLoading({
   isLoading: boolean;
 }) {
   return isLoading ? (
-    <span className="h-4 w-4 animate-spin rounded-full border-4 border-lootlab-bg-main border-b-transparent" />
+    <span className="h-4 w-4 animate-spin rounded-full border-4 border-transparent border-b-lootlab-bg-main" />
   ) : (
     title
   );

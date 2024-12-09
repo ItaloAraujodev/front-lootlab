@@ -1,3 +1,4 @@
+"use client";
 import { z } from "zod";
 
 // Esquema para validação de um Link
@@ -21,26 +22,24 @@ const ProjectFeatureSchema = z.object({
 // Esquema para validação de LaunchInfo
 const LaunchInfoSchema = z.object({
   launchDate: z.date({ message: "A data do Launch é obrigatória" }),
-  marketCap: z.coerce
-    .number()
-    .nonnegative("O market cap deve ser um número positivo")
-    .min(1, "O Market Cap é obrigatório"),
-  currentSupply: z.string().min(1, "O current Supply é obrigatório"),
-  totalSupply: z.coerce
-    .number({ message: "Digite um número válido" })
-    .positive("O total supply deve ser um número positivo")
-    .refine((field) => Number(field), "Por favor digite um numero")
-    .refine((field) => new Intl.NumberFormat("pt-BR").format(field)),
-  privateSale: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor da venda privada deve ser positivo")
-    .min(1, "O Private Sale é obrigatório")
-    .refine((field) => new Intl.NumberFormat("pt-BR").format(field)),
-  publicSale: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor da venda pública deve ser positivo")
-    .min(1, "O Public Sale é obrigatório")
-    .refine((field) => new Intl.NumberFormat("pt-BR").format(field)),
+  marketCap: z.string().refine((info) => /^[0-9]+$/.test(info), {
+    message: "Digite um número válido.",
+  }),
+  currentSupply: z
+    .string()
+    .min(1, "A oferta atual é obrigatória")
+    .refine((info) => /^[0-9]+$/.test(info), {
+      message: "Digite um número válido.",
+    }),
+  totalSupply: z.string().refine((info) => /^[0-9]+$/.test(info), {
+    message: "Digite um número válido.",
+  }),
+  privateSale: z.string().refine((info) => /^[0-9]+$/.test(info), {
+    message: "Digite um número válido.",
+  }),
+  publicSale: z.string().refine((info) => /^[0-9]+$/.test(info), {
+    message: "Digite um número válido.",
+  }),
 });
 
 // Esquema para validação de Partnership
@@ -67,16 +66,42 @@ export const FormSchema = z.object({
       (link) => link.startsWith("https"),
       "Por segurança, o link deve iniciar com https",
     ),
-  score: z.coerce.number({ message: "Digite um número válido" }).optional(),
+  score: z
+    .string()
+    .refine((info) => /^[0-9]+$/.test(info), {
+      message: "Digite um número válido.",
+    })
+    .optional(),
   investment: z.string().optional(),
   network: z.string().min(1, "A rede é obrigatória"),
   token: z.string().min(1, "O token é obrigatório"),
   comment_author: z.string().min(1, "O comentário do autor é obrigatório"),
+  file: z
+    .instanceof(globalThis.FileList, { message: "Escolha um arquivo valido" })
+    .refine((file) => file.length, {
+      message: "Escolha um arquivo.",
+    })
+    .refine((file) => file.length && file[0].size <= 5 * 1024 * 1024, {
+      message: "O arquivo deve ter no máximo 5MB.",
+    })
+    .refine(
+      (file) =>
+        file.length &&
+        ["image/jpeg", "image/png", "image/gif", "image/webp"].includes(
+          file[0].type,
+        ),
+      {
+        message:
+          "Apenas imagens nos formatos JPEG, PNG, GIF ou WEBP são permitidas",
+      },
+    ),
   links: z
     .array(LinkSchema)
     .min(1, "Você deve cadastrar 1 link no mínimo")
     .default([]),
-  projectFeatures: z.array(ProjectFeatureSchema).optional(),
+  projectFeatures: z
+    .array(ProjectFeatureSchema)
+    .min(1, "Você deve cadastrar pelo menos uma feature."),
   launchInfo: LaunchInfoSchema,
   partnership: z
     .array(PartnershipSchema)

@@ -8,11 +8,7 @@ import LayoutCard from "../CardLayout";
 import BasicContent from "./BasicContent";
 import ButtonNextTab from "../Buttons/ButtonTab/buttonNextTab";
 
-interface IProps {
-  setFile: any;
-}
-
-function BasicCard({ setFile }: IProps) {
+function BasicCard() {
   return (
     <LayoutCard>
       <CardHeader>
@@ -24,7 +20,7 @@ function BasicCard({ setFile }: IProps) {
         </CardDescription>
       </CardHeader>
 
-      <BasicContent setFile={setFile} />
+      <BasicContent />
 
       <CardFooter className="flex w-full justify-end">
         <ButtonNextTab />

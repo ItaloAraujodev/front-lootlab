@@ -28,7 +28,7 @@ export default class PostService {
           authorId,
         }),
       );
-      console.log("formData", formData);
+
       const response = await Api.post(`/post`, formData, {
         headers: {
           Authorization: `Bearer ${authorizationToken}`,
@@ -38,7 +38,7 @@ export default class PostService {
 
       return response;
     } catch (error) {
-      console.error("Erro ao enviar o post:", error);
+      console.log("Erro ao enviar o post:", error);
       throw new Error(
         "Ocorreu um erro ao tentar publicar o post. Tente novamente.",
       );
