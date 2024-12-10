@@ -8,7 +8,7 @@ import { DatePicker } from "@/components/ui/datePicker";
 import classNames from "classnames";
 
 const financialInfos: IInfosCard<LaunchInfo>[] = [
-  { title: "Current Supply", pathRegister: "currentSupply", type: "number" },
+  { title: "Current Supply", pathRegister: "currentSupply" },
   { title: "Total Supply", pathRegister: "totalSupply", type: "number" },
   { title: "Private Sale", pathRegister: "privateSale", type: "number" },
   { title: "Public Sale", pathRegister: "publicSale", type: "number" },

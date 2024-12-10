@@ -7,7 +7,7 @@ import classNames from "classnames";
 import { useFormContext } from "react-hook-form";
 import type { FormData } from "../schemas";
 
-type TValue = "basic" | "financial" | "links" | "comment";
+type TValue = "basic" | "financial" | "links" | "details";
 
 const triggers: { value: TValue; text: string }[] = [
   {
@@ -23,8 +23,8 @@ const triggers: { value: TValue; text: string }[] = [
     text: "Links",
   },
   {
-    value: "comment",
-    text: "Comentário",
+    value: "details",
+    text: "Detalhes",
   },
 ];
 
@@ -33,6 +33,7 @@ function TabsTriggers() {
     formState: { errors },
   } = useFormContext<FormData>();
   const router = useRouter();
+  console.log(errors);
   return (
     <TabsList className="grid w-full grid-cols-4 bg-[#172944]">
       {triggers.map(({ value, text }) => {

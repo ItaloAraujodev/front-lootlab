@@ -1,7 +1,7 @@
 "use client";
 import { Form } from "@/components/Form";
 import { CardContent } from "@/components/ui/card";
-import { AccordionContent, AccordionTrigger } from "@/components/ui/accordion";
+import { AccordionContent } from "@/components/ui/accordion";
 import FieldListLinks from "./FieldListLinks";
 import FieldListPartnership from "./FieldListPartnership";
 import MarketCapAddresForm from "./MarketCapAddressForm";
@@ -16,8 +16,7 @@ function LinksContent() {
   return (
     <CardContent className="space-y-2">
       <Form.Label>
-        <AccordionManager error={errors?.links?.message}>
-          <AccordionTrigger className="px-4">Links</AccordionTrigger>
+        <AccordionManager titleTrigger="Links" error={errors?.links?.message}>
           <AccordionContent>
             <FieldListLinks />
           </AccordionContent>
@@ -25,8 +24,10 @@ function LinksContent() {
         <Form.ErrorMessage error={errors?.links?.message} />
       </Form.Label>
       <Form.Label>
-        <AccordionManager error={errors?.partnership?.message}>
-          <AccordionTrigger className="px-4">Parcerias</AccordionTrigger>
+        <AccordionManager
+          titleTrigger="Parcerias"
+          error={errors?.partnership?.message}
+        >
           <AccordionContent>
             <FieldListPartnership />
           </AccordionContent>
@@ -34,8 +35,10 @@ function LinksContent() {
         <Form.ErrorMessage error={errors?.partnership?.message} />
       </Form.Label>
       <Form.Label>
-        <AccordionManager error={errors?.market_link?.message}>
-          <AccordionTrigger className="px-4">MarketCap Adress</AccordionTrigger>
+        <AccordionManager
+          titleTrigger="MarketCap Adress"
+          error={errors?.market_link?.message}
+        >
           <AccordionContent>
             <MarketCapAddresForm />
           </AccordionContent>

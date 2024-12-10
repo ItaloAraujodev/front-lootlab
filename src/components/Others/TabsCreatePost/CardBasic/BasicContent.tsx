@@ -6,9 +6,7 @@ import { useFormContext } from "react-hook-form";
 import { Form } from "@/components/Form";
 import FieldListFeatures from "./FieldListFeatures";
 import AccordionManager from "../AccordionManager";
-import { AccordionTrigger } from "@/components/ui/accordion";
 import { AccordionContent } from "@radix-ui/react-accordion";
-import classNames from "classnames";
 
 const basicInfos: IInfosCard<FormData>[] = [
   { title: "Nome do Jogo", pathRegister: "title" },
@@ -28,19 +26,15 @@ function BasicContent() {
   return (
     <CardContent className="space-y-2">
       <Form.Label>
-        <AccordionManager>
-          <AccordionTrigger
-            className={classNames("px-4", {
-              "border-red-500": errors.projectFeatures?.root?.message,
-            })}
-          >
-            Features
-          </AccordionTrigger>
+        <AccordionManager
+          titleTrigger="Features"
+          error={errors.projectFeatures?.message}
+        >
           <AccordionContent className="pb-3">
             <FieldListFeatures />
           </AccordionContent>
         </AccordionManager>
-        <Form.ErrorMessage error={errors.projectFeatures?.root?.message} />
+        <Form.ErrorMessage error={errors.projectFeatures?.message} />
       </Form.Label>
       {basicInfos.map(({ pathRegister, title, type }) => (
         <Form.Label title={title} htmlFor={title} key={title}>

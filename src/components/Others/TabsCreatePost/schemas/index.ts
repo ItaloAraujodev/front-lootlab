@@ -22,24 +22,26 @@ const ProjectFeatureSchema = z.object({
 // Esquema para validação de LaunchInfo
 const LaunchInfoSchema = z.object({
   launchDate: z.date({ message: "A data do Launch é obrigatória" }),
-  marketCap: z.string().refine((info) => /^[0-9]+$/.test(info), {
-    message: "Digite um número válido.",
-  }),
+  marketCap: z.coerce
+    .number({ message: "Digite um número válido" })
+    .nonnegative("O valor do Marekt Cap deve ser positivo"),
   currentSupply: z
     .string()
-    .min(1, "A oferta atual é obrigatória")
-    .refine((info) => /^[0-9]+$/.test(info), {
-      message: "Digite um número válido.",
-    }),
-  totalSupply: z.string().refine((info) => /^[0-9]+$/.test(info), {
-    message: "Digite um número válido.",
-  }),
-  privateSale: z.string().refine((info) => /^[0-9]+$/.test(info), {
-    message: "Digite um número válido.",
-  }),
-  publicSale: z.string().refine((info) => /^[0-9]+$/.test(info), {
-    message: "Digite um número válido.",
-  }),
+    .min(1, { message: "O current supply é alto, médio ou baixo?" }),
+  totalSupply: z.coerce
+    .number({ message: "Digite um número válido" })
+    .nonnegative("O valor do Total Supply deve ser positivo"),
+  privateSale: z.coerce
+    .number({ message: "Digite um número válido" })
+    .nonnegative("O valor do Private Sale deve ser positivo"),
+  publicSale: z.coerce
+    .number({ message: "Digite um número válido" })
+    .nonnegative("O valor do Public Sale deve ser positivo"),
+});
+
+// Esquema para validação de Genero
+const Genre = z.object({
+  name: z.string(),
 });
 
 // Esquema para validação de Partnership
@@ -66,11 +68,9 @@ export const FormSchema = z.object({
       (link) => link.startsWith("https"),
       "Por segurança, o link deve iniciar com https",
     ),
-  score: z
-    .string()
-    .refine((info) => /^[0-9]+$/.test(info), {
-      message: "Digite um número válido.",
-    })
+  score: z.coerce
+    .number({ message: "Digite um número válido" })
+    .nonnegative("O valor do Public Sale deve ser positivo")
     .optional(),
   investment: z.string().optional(),
   network: z.string().min(1, "A rede é obrigatória"),
@@ -103,6 +103,7 @@ export const FormSchema = z.object({
     .array(ProjectFeatureSchema)
     .min(1, "Você deve cadastrar pelo menos uma feature."),
   launchInfo: LaunchInfoSchema,
+  genres: z.array(Genre).min(1, "Você deve adicionar pelo menos 1 gênero"),
   partnership: z
     .array(PartnershipSchema)
     .min(1, "Você deve cadastrar 1 link no mínimo")

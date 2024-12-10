@@ -13,7 +13,7 @@ function ButtonNextTab() {
     | "basic"
     | "financial"
     | "links"
-    | "comment";
+    | "details";
   return (
     <Button
       type="button"

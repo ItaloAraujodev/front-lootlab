@@ -1,12 +1,17 @@
-import { Accordion, AccordionItem } from "@/components/ui/accordion";
+import {
+  Accordion,
+  AccordionItem,
+  AccordionTrigger,
+} from "@/components/ui/accordion";
 import classNames from "classnames";
 
 interface IProps {
   children: React.ReactNode;
   error?: string;
+  titleTrigger: string;
 }
 
-function AccordionManager({ children, error }: IProps) {
+function AccordionManager({ children, error, titleTrigger }: IProps) {
   return (
     <Accordion type="single" collapsible className="space-y-4">
       <AccordionItem
@@ -18,6 +23,7 @@ function AccordionManager({ children, error }: IProps) {
           },
         )}
       >
+        <AccordionTrigger className="px-4">{titleTrigger}</AccordionTrigger>
         {children}
       </AccordionItem>
     </Accordion>

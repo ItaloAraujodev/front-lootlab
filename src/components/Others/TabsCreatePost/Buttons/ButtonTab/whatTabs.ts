@@ -1,4 +1,4 @@
-const tabs = ["basic", "financial", "links", "comment"];
+const tabs = ["basic", "financial", "links", "details"];
 
 export function getNextTab(currentTab: string): string {
   const currentIndex = tabs.indexOf(currentTab);
