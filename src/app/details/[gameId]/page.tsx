@@ -4,7 +4,7 @@ import InfoDetails from "@/components/Others/InfoDetails";
 
 export default function GameDatails() {
   return (
-    <LayoutPage>
+    <LayoutPage className="px-[5%] pt-10">
       <BreadCrumbs />
       <InfoDetails />
     </LayoutPage>

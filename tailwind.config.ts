@@ -14,7 +14,7 @@ const config: Config = {
         lootlab: {
           "font-highlight": "#94a7c6",
           "font-base": "#ffffff",
-          "bg-main": "#0E192A",
+          "bg-main": "#0F1421",
           "color-highlight": "#4A90E2",
           "hover-highlight": "#357ABD",
         },
@@ -77,6 +77,7 @@ const config: Config = {
       fontFamily: {
         "russo-one": ["Russo One", "sans-serif"],
         raleway: ["Raleway", "sans-serif"],
+        segoe: ['"Segoe UI"', "sans-serif"],
       },
       keyframes: {
         "accordion-down": {
@@ -99,6 +100,9 @@ const config: Config = {
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+      },
+      boxShadow: {
+        custom: "0 0 25px 2px rgba(0, 0, 0, 0.2)", // Sombra ao redor
       },
     },
   },

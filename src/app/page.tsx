@@ -1,23 +1,17 @@
 import { LayoutPage } from "@/components/Layout";
-import BreadCrumbs from "@/components/Others/BreadCrumbs";
+import Carousel from "@/components/Others/Carousel";
 // import PopularGenres from "@/components/Others/PopularGenres";
 import SectionGames from "@/components/Others/SectionGames";
-import SectionHeader from "@/components/Others/SectionHeader";
 
 export default function Home() {
   return (
-    <LayoutPage>
-      <div className="w-full">
-        <BreadCrumbs />
-        <SectionHeader
-          sectionDescription="Explore os principais blockchain e NFT play-to-earn jogos em Lootlab.com!"
-          sectionTitle="Games"
-        />
+    <LayoutPage className="gap-16">
+      <div className="relative flex h-[100vh] w-full justify-between sm:h-[75vh]">
+        <Carousel />
+        <hr className="absolute bottom-0 left-0 h-[1px] w-full border-0 bg-lootlab-font-highlight opacity-40" />
       </div>
-      <div className="flex flex-col gap-20">
-        {/* <PopularGenres /> */}
-        <SectionGames />
-      </div>
+
+      <SectionGames />
     </LayoutPage>
   );
 }

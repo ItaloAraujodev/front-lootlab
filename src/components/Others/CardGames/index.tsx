@@ -1,30 +1,22 @@
 import type { IGame } from "@/interfaces/interfaces";
+import classNames from "classnames";
 import Link from "next/link";
 
 interface IProps {
   game: IGame;
+  className?: string;
 }
 
-// const colorArray: string[] = [
-//   "000000/FFF", // Preto / Branco
-//   "FF5733/FFF", // Laranja / Branco
-//   "33FF57/FFF", // Verde claro / Branco
-//   "8E44AD/FFF", // Roxo / Branco
-//   "3498DB/FFF", // Azul / Branco
-//   "F1C40F/FFF", // Amarelo / Branco
-//   "E74C3C/FFF", // Vermelho / Branco
-//   "1ABC9C/FFF", // Verde água / Branco
-//   "9B59B6/FFF", // Roxo claro / Branco
-//   "34495E/FFF", // Cinza escuro / Branco
-// ];
-
-export default function CardGames({ game }: IProps) {
+export default function CardGames({ game, className }: IProps) {
   return (
     <Link
       href={`/details/${game.title}`}
-      className="group cursor-pointer rounded-lg border-[0.5px] border-lootlab-font-highlight border-x-chart-3 border-b-chart-3 p-1 transition-transform hover:-translate-y-1"
+      className={classNames(
+        className,
+        "group cursor-pointer rounded-lg border-[0.5px] border-lootlab-font-highlight border-x-chart-3 border-b-chart-3 p-1 transition-transform hover:-translate-y-1",
+      )}
     >
-      <div className="relative h-56 max-w-56 overflow-hidden">
+      <div className="relative h-64 max-w-64 overflow-hidden">
         <img
           src={game.Image[0].url}
           alt={`image do jogo ${game.title}`}
