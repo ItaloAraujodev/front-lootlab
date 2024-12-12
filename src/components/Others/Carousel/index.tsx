@@ -59,7 +59,7 @@ function Carousel() {
             onClick={() => setCurrIndex(index)}
             className={`cursor-pointer ${
               currIndex === index
-                ? "shadow-custom border-2 shadow-lootlab-font-highlight"
+                ? "border-2 shadow-custom shadow-lootlab-font-highlight"
                 : ""
             } flex h-16 w-28 rounded-md border-lootlab-font-base transition-transform duration-200 ease-in-out hover:border-2`}
           >
