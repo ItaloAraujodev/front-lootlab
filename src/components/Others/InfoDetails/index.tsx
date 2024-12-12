@@ -1,6 +1,6 @@
 "use client";
 import { useQuery } from "@tanstack/react-query";
-import AnalysisAndCommentary from "./AnalysisAndCommentary";
+import AnalysisAndNews from "./AnalysisAndNews";
 import GameHeader from "./GameHeader";
 import LinksAndResources from "./LinksAndResources";
 import MarketInfoGrid from "./MarketInfoGrid";
@@ -11,7 +11,7 @@ import { useParams } from "next/navigation";
 export default function InfoDetails() {
   const params = useParams();
   const id = params.postId;
-  const { data: post, isLoading } = useQuery({
+  const { data: post } = useQuery({
     queryKey: ["post", id],
     queryFn: () => (id ? PostService.getPost(id as string) : {}),
   });
@@ -20,7 +20,7 @@ export default function InfoDetails() {
   return (
     <div className="mx-auto max-w-6xl space-y-8 text-lootlab-font-base">
       <GameHeader />
-      <AnalysisAndCommentary />
+      <AnalysisAndNews />
       <LinksAndResources />
       <MarketInfoGrid />
       <ProjectFeaturies />

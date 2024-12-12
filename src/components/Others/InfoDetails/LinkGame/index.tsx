@@ -1,51 +1,54 @@
 import Link from "next/link";
 import {
-  Check,
-  Facebook,
-  FileText,
-  Globe,
-  MapPin,
-  MessageCircle,
-  Send,
-  Twitter,
-  X,
-} from "lucide-react";
+  FaXTwitter,
+  FaInstagram,
+  FaDiscord,
+  FaTelegram,
+  FaSquareFacebook,
+  FaReddit,
+  FaMedium,
+  FaYoutube,
+  FaGlobe,
+} from "react-icons/fa6";
 
 type TIcon =
-  | "Check"
-  | "Facebook"
-  | "FileText"
-  | "Globe"
-  | "MapPin"
-  | "MessageCircle"
-  | "Send"
-  | "Twitter"
-  | "X";
+  | "twitter"
+  | "x"
+  | "instagram"
+  | "discord"
+  | "telegram"
+  | "facebook"
+  | "reddit"
+  | "medium"
+  | "youtube"
+  | "globe";
 
 interface IProps {
-  link?: string;
-  icon: TIcon;
+  link: string;
+  plataform: TIcon;
 }
 
-const iconChoice = {
-  Check: <Check />,
-  Facebook: <Facebook />,
-  FileText: <FileText />,
-  Globe: <Globe />,
-  MapPin: <MapPin />,
-  MessageCircle: <MessageCircle />,
-  Send: <Send />,
-  Twitter: <Twitter />,
-  X: <X />,
+const plataformChoice = {
+  instagram: { icon: <FaInstagram />, label: "Instagram" },
+  discord: { icon: <FaDiscord />, label: "Discord" },
+  telegram: { icon: <FaTelegram />, label: "Telagram" },
+  facebook: { icon: <FaSquareFacebook />, label: "Facebook" },
+  reddit: { icon: <FaReddit />, label: "Reddit" },
+  medium: { icon: <FaMedium />, label: "Medium" },
+  youtube: { icon: <FaYoutube />, label: "Youtube" },
+  twitter: { icon: <FaXTwitter />, label: "Twitter" },
+  x: { icon: <FaXTwitter />, label: "XTwitter" },
+  globe: { icon: <FaGlobe />, label: "Site" },
 };
-function LinkGame({ icon }: IProps) {
+function LinkGame({ plataform, link }: IProps) {
   return (
     <Link
-      href={"https://outerringmmo.com/whitepaper/"}
+      href={link}
+      target="_blank"
       className="flex items-center gap-2 text-lg text-[#94a7c6] hover:text-[#ffffff]"
     >
-      {iconChoice[icon]}
-      Whitepaper
+      {plataformChoice[plataform].icon}
+      {plataformChoice[plataform].label}
     </Link>
   );
 }

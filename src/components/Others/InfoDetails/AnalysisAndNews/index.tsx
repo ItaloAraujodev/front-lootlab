@@ -1,13 +1,13 @@
 import BasicInfoGrid from "../BasicInfoGrid";
-import Commentary from "../Commentary";
+import News from "../News";
 
-function AnalysisAndCommentary() {
+function AnalysisAndNews() {
   return (
     <div className="grid gap-6 md:grid-cols-3">
       <BasicInfoGrid />
-      <Commentary />
+      <News />
     </div>
   );
 }
 
-export default AnalysisAndCommentary;
+export default AnalysisAndNews;
