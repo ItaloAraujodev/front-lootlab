@@ -31,9 +31,10 @@ const triggers: { value: TValue; text: string }[] = [
 function TabsTriggers() {
   const {
     formState: { errors },
+    watch,
   } = useFormContext<FormData>();
   const router = useRouter();
-  console.log(errors);
+  console.log(watch("launchInfo"));
   return (
     <TabsList className="grid w-full grid-cols-4 bg-[#172944]">
       {triggers.map(({ value, text }) => {

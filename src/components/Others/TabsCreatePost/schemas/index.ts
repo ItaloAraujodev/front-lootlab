@@ -27,7 +27,8 @@ const LaunchInfoSchema = z.object({
     .nonnegative("O valor do Marekt Cap deve ser positivo"),
   currentSupply: z
     .string()
-    .min(1, { message: "O current supply é alto, médio ou baixo?" }),
+    .min(1, { message: "O current supply é alto, médio ou baixo" })
+    .default(" "),
   totalSupply: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor do Total Supply deve ser positivo"),
