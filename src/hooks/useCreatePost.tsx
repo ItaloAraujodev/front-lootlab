@@ -10,7 +10,7 @@ import {
   FormSchema,
   type FormData,
 } from "@/components/Others/TabsCreatePost/schemas";
-import type { IGame } from "@/interfaces/interfaces";
+import type { IPost } from "@/interfaces/interfaces";
 
 function useCreatePost() {
   const queryClient = useQueryClient();
@@ -28,7 +28,7 @@ function useCreatePost() {
       }
 
       // seta o novo post no cache para nao precisar buscar novamente no banco
-      queryClient.setQueryData(["getPosts"], (oldData: IGame[]) => {
+      queryClient.setQueryData(["getPosts"], (oldData: IPost[]) => {
         const newPost = {
           ...JSON.parse(variables.data.postData),
           Image: [{ url: URL.createObjectURL(variables.data.file) }],

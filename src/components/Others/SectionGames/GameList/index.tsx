@@ -10,7 +10,7 @@ function GameList() {
   });
 
   return (
-    <div className="flex flex-wrap justify-center gap-5">
+    <div className="flex flex-wrap justify-center gap-5 md:justify-start">
       {posts &&
         posts.map((game, index) => (
           <CardGames key={game.title + index} game={game} />

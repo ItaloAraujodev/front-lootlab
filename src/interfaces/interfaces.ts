@@ -92,7 +92,7 @@ export interface Image {
   deletedAt: string | null;
 }
 
-export interface IGame {
+export interface IPost {
   id: string;
   title: string;
   market_link: string;

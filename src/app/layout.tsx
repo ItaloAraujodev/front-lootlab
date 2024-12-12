@@ -15,7 +15,7 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
-      <body>
+      <body monica-locale="pt_BR" className="vsc-initialized">
         <LayoutQueryClient>{children}</LayoutQueryClient>
       </body>
     </html>

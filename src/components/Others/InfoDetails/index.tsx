@@ -1,19 +1,29 @@
-import AnalysisAndCommentary from "./AnalysisAndCommentary";
+"use client";
+import { useQuery } from "@tanstack/react-query";
+import AnalysisAndNews from "./AnalysisAndNews";
 import GameHeader from "./GameHeader";
 import LinksAndResources from "./LinksAndResources";
 import MarketInfoGrid from "./MarketInfoGrid";
 import ProjectFeaturies from "./ProjectFeaturies";
+import PostService from "@/services/post.service";
+import { useParams } from "next/navigation";
 
 export default function InfoDetails() {
+  const params = useParams();
+  const id = params.postId;
+  const { data: post } = useQuery({
+    queryKey: ["post", id],
+    queryFn: () => (id ? PostService.getPost(id as string) : {}),
+  });
+  console.log(post);
+
   return (
-    <div className="min-h-screen p-4 text-[#ffffff] md:p-8">
-      <div className="mx-auto max-w-6xl space-y-8">
-        <GameHeader />
-        <AnalysisAndCommentary />
-        <LinksAndResources />
-        <MarketInfoGrid />
-        <ProjectFeaturies />
-      </div>
+    <div className="mx-auto max-w-6xl space-y-8 text-lootlab-font-base">
+      <GameHeader />
+      <AnalysisAndNews />
+      <LinksAndResources />
+      <MarketInfoGrid />
+      <ProjectFeaturies />
     </div>
   );
 }

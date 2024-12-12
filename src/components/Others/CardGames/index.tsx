@@ -1,16 +1,16 @@
-import type { IGame } from "@/interfaces/interfaces";
+import type { IPost } from "@/interfaces/interfaces";
 import classNames from "classnames";
 import Link from "next/link";
 
 interface IProps {
-  game: IGame;
+  game: IPost;
   className?: string;
 }
 
 export default function CardGames({ game, className }: IProps) {
   return (
     <Link
-      href={`/details/${game.title}`}
+      href={`/details/${game.id}`}
       className={classNames(
         className,
         "group cursor-pointer rounded-lg border-[0.5px] border-lootlab-font-highlight border-x-chart-3 border-b-chart-3 p-1 transition-transform hover:-translate-y-1",
