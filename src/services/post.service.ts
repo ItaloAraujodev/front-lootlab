@@ -1,14 +1,24 @@
-import type { IDataCreatePost, IGame } from "@/interfaces/interfaces";
+import type { IDataCreatePost, IPost } from "@/interfaces/interfaces";
 import { Api } from "@/providers/Api";
 
 export default class PostService {
   public static async getPosts() {
     try {
-      const response = await Api.get<IGame[]>(`/post`);
+      const response = await Api.get<IPost[]>(`/post`);
       return response.data;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       throw new Error("Erro ao buscar os posts.");
+    }
+  }
+
+  public static async getPost(id: string) {
+    try {
+      const response = await Api.get<IPost>(`/post/${id}`);
+      return response.data;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      throw new Error("Erro ao buscar o post.");
     }
   }
 
