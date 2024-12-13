@@ -25,7 +25,6 @@ const platformIcons: { [key: string]: TIcon } = {
 
 function getPlataformByUrl(url: string): TIcon {
   let choicePlataform: TIcon = "globe";
-  console.log("URL ", url);
   Object.keys(platformIcons).forEach((platformIcon) => {
     if (url.includes(platformIcon)) {
       choicePlataform = platformIcons[platformIcon] as TIcon;

@@ -22,7 +22,6 @@ function BasicContent() {
     formState: { errors },
     watch,
   } = useFormContext<FormData>();
-  console.log(watch("file"));
   return (
     <CardContent className="space-y-2">
       <Form.Label>

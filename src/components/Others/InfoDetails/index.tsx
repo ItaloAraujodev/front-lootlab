@@ -11,11 +11,10 @@ import { useParams } from "next/navigation";
 export default function InfoDetails() {
   const params = useParams();
   const id = params.postId;
-  const { data: post } = useQuery({
+  useQuery({
     queryKey: ["post", id],
     queryFn: () => (id ? PostService.getPost(id as string) : {}),
   });
-  console.log(post);
 
   return (
     <div className="mx-auto max-w-6xl space-y-8 text-lootlab-font-base">

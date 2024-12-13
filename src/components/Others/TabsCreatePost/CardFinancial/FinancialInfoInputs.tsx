@@ -21,7 +21,7 @@ function FinancialInfoInputs() {
 
   return (
     <>
-      <Form.Label>
+      <Form.Label title="Current Supply">
         <Form.Input.FormInputGeneric
           register={register("launchInfo.currentSupply")}
           error={errors.launchInfo?.currentSupply?.message}
