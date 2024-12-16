@@ -11,6 +11,7 @@ import {
   type FormData,
 } from "@/components/Others/TabsCreatePost/schemas";
 import type { IPost } from "@/interfaces/interfaces";
+import { generateSlug } from "@/tools/generateSlug";
 
 function useCreatePost() {
   const queryClient = useQueryClient();
@@ -32,6 +33,7 @@ function useCreatePost() {
         const newPost = {
           ...JSON.parse(variables.data.postData),
           Image: [{ url: URL.createObjectURL(variables.data.file) }],
+          slug: generateSlug(JSON.parse(variables.data.postData).title),
         };
         return [newPost, ...(oldData || [])];
       });
