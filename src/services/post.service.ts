@@ -12,9 +12,9 @@ export default class PostService {
     }
   }
 
-  public static async getPost(id: string) {
+  public static async getPostBySlug(slug: string) {
     try {
-      const response = await Api.get<IPost>(`/post/${id}`);
+      const response = await Api.get<IPost>(`/post/slug/${slug}`);
       return response.data;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {

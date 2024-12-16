@@ -13,7 +13,7 @@ export default function InfoDetails() {
   const id = params.postId;
   useQuery({
     queryKey: ["post", id],
-    queryFn: () => (id ? PostService.getPost(id as string) : {}),
+    queryFn: () => (id ? PostService.getPostBySlug(id as string) : {}),
   });
 
   return (

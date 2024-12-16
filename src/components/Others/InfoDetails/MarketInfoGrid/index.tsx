@@ -5,7 +5,9 @@ import MarketInfo from "../MarketInfo";
 
 function MarketInfoGrid() {
   const { post } = useCurrentPost();
-  const launchInfo = post?.LaunchInfo[0];
+  const launchInfo = post?.launchInfo;
+
+  console.log(launchInfo);
 
   return (
     <div className="grid gap-6 md:grid-cols-2">

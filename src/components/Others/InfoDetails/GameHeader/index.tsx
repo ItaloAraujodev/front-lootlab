@@ -7,6 +7,8 @@ import Commentary from "../Commentary";
 export default function GameHeader() {
   const { post } = useCurrentPost();
 
+  console.log(post);
+
   return (
     <div className="grid gap-6 md:grid-cols-3">
       <div className="relative flex h-[23rem] w-full items-center md:col-span-1 md:h-full md:max-w-[23rem]">

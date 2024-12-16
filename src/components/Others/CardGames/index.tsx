@@ -10,7 +10,7 @@ interface IProps {
 export default function CardGames({ game, className }: IProps) {
   return (
     <Link
-      href={`/details/${game.id}`}
+      href={`/details/${game.slug}`}
       className={classNames(
         className,
         "group cursor-pointer rounded-lg border-[0.5px] border-lootlab-font-highlight border-x-chart-3 border-b-chart-3 p-1 transition-transform hover:-translate-y-1",

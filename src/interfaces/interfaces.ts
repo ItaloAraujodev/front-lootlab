@@ -42,16 +42,16 @@ export interface IDataCreatePost {
   authorId: string;
 }
 
-interface Link {
+export interface ILink {
   id: string;
   postId: string;
   url: string;
   createdAt: string;
   updatedAt: string;
-  deletedAt: string | null;
+  deletedAt?: string;
 }
 
-interface ProjectFeature {
+export interface IProjectFeature {
   id: string;
   title: string;
   isFeature: boolean;
@@ -60,36 +60,39 @@ interface ProjectFeature {
   postId: string;
 }
 
-interface LaunchInfo {
+export interface ILaunchInfo {
   id: string;
   launchDate: string;
   marketCap: number;
   currentSupply: string;
-  totalSupply: number;
+  totalSupply: string;
   privateSale: number;
   publicSale: number;
-  postId: string;
   createdAt: string;
   updatedAt: string;
+  postId: string;
 }
 
-interface Partnership {
+export interface IPartnership {
   id: string;
-  name: string | null;
-  type: string | null;
+  type?: string;
   link_url: string;
   postId: string;
   createdAt: string;
   updatedAt: string;
 }
 
-export interface Image {
+export interface IImage {
   id: string;
   url: string;
-  postId: string;
   createdAt: string;
   updatedAt: string;
-  deletedAt: string | null;
+  postId: string;
+}
+
+export interface IGenre {
+  id: string;
+  name: string;
 }
 
 export interface IPost {
@@ -101,15 +104,17 @@ export interface IPost {
   token: string;
   network: string;
   comment_author: string;
-  authorId: string;
-  launchInfoId: string | null;
-  projectFeaturesId: string | null;
-  linkId: string | null;
+  slug: string;
   createdAt: string;
   updatedAt: string;
-  Image: Image[];
-  links: Link[];
-  ProjectFeatures: ProjectFeature[];
-  LaunchInfo: LaunchInfo[];
-  partnerships: Partnership[];
+  authorId: string;
+  launchInfoId?: string;
+  projectFeaturesId?: string;
+  linkId?: string;
+  links: ILink[];
+  ProjectFeatures: IProjectFeature[];
+  launchInfo?: ILaunchInfo;
+  partnerships: IPartnership[];
+  Image: IImage[];
+  genres: IGenre[];
 }

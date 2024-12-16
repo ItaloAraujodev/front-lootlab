@@ -36,6 +36,7 @@ const LaunchInfoSchema = z.object({
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor do Private Sale deve ser positivo"),
   publicSale: z.coerce
+
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor do Public Sale deve ser positivo"),
 });
