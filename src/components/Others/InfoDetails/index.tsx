@@ -10,10 +10,10 @@ import { useParams } from "next/navigation";
 
 export default function InfoDetails() {
   const params = useParams();
-  const id = params.postId;
+  const slug = params.postSlug;
   useQuery({
-    queryKey: ["post", id],
-    queryFn: () => (id ? PostService.getPostBySlug(id as string) : {}),
+    queryKey: ["post", slug],
+    queryFn: () => (slug ? PostService.getPostBySlug(slug as string) : {}),
   });
 
   return (

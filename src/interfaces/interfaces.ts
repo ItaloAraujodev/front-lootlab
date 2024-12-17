@@ -95,6 +95,16 @@ export interface IGenre {
   name: string;
 }
 
+interface Author {
+  id: string;
+  name: string;
+  email: string;
+  password: string; // Hash string
+  createdAt: string; // DateTime ISO String
+  updatedAt: string; // DateTime ISO String
+  role: "ADMIN" | "WRITER" | "USER";
+}
+
 export interface IPost {
   id: string;
   title: string;
@@ -117,4 +127,5 @@ export interface IPost {
   partnerships: IPartnership[];
   Image: IImage[];
   genres: IGenre[];
+  author: Author;
 }

@@ -7,7 +7,7 @@ function useCurrentPost() {
   const params = useParams();
   const post: IPost | undefined = queryClient.getQueryData([
     "post",
-    params.postId,
+    params.postSlug,
   ]);
   return { post };
 }

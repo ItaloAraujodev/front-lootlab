@@ -6,7 +6,7 @@ export default function BasicInfoGrid() {
   const { post } = useCurrentPost();
   return (
     <div className="space-y-6 md:col-span-1">
-      <BasicInfo info="Adão e trainees" title="ANALISTA" />
+      <BasicInfo info={post?.author.name || ""} title="ANALISTA" />
       <div className="grid grid-cols-2 gap-4">
         <BasicInfo title="NOTA" info={String(post?.score) || ""} />
         <BasicInfo title="REDE" info={post?.network || ""} />

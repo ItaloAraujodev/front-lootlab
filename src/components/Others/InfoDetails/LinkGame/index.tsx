@@ -9,6 +9,7 @@ import {
   FaMedium,
   FaYoutube,
   FaGlobe,
+  FaFileLines,
 } from "react-icons/fa6";
 
 type TIcon =
@@ -20,6 +21,7 @@ type TIcon =
   | "facebook"
   | "reddit"
   | "medium"
+  | "whitepaper"
   | "youtube"
   | "globe";
 
@@ -39,6 +41,7 @@ const plataformChoice = {
   twitter: { icon: <FaXTwitter />, label: "Twitter" },
   x: { icon: <FaXTwitter />, label: "XTwitter" },
   globe: { icon: <FaGlobe />, label: "Site" },
+  whitepaper: { icon: <FaFileLines />, label: "Whitepaper" },
 };
 function LinkGame({ plataform, link }: IProps) {
   return (

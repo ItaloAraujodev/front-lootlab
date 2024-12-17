@@ -8,6 +8,7 @@ type TIcon =
   | "reddit"
   | "medium"
   | "youtube"
+  | "whitepaper"
   | "globe";
 
 const platformIcons: { [key: string]: TIcon } = {
@@ -21,6 +22,7 @@ const platformIcons: { [key: string]: TIcon } = {
   "reddit.com": "reddit",
   "medium.com": "medium",
   "youtube.com": "youtube",
+  whitepaper: "whitepaper",
 };
 
 function getPlataformByUrl(url: string): TIcon {
