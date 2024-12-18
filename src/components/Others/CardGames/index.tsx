@@ -25,13 +25,6 @@ export default function CardGames({ game, className }: IProps) {
             alt={`image do jogo ${game.title}`}
             className="h-64 w-full rounded-t-lg object-cover"
           />
-          <div className="absolute bottom-4 right-4">
-            <div className="flex h-10 w-10 rotate-45 items-center justify-center bg-[#FFD700]">
-              <span className="-rotate-45 text-xs font-bold text-black">
-                GAME
-              </span>
-            </div>
-          </div>
         </div>
         <div className="rounded-b-lg bg-[#1a1b1e] p-4">
           <h3 className="mb-2 truncate text-lg font-semibold text-white">
