@@ -37,8 +37,8 @@ function CarouselPosts({ children }: { children: React.ReactNode }) {
 
   return (
     <div className="relative mx-auto w-full">
-      <div className="peer w-full overflow-hidden px-4" ref={emblaRef}>
-        <div className="flex w-full gap-5 px-2">{children}</div>
+      <div className="peer w-full overflow-hidden" ref={emblaRef}>
+        <div className="flex w-full gap-5">{children}</div>
       </div>
 
       <Button
