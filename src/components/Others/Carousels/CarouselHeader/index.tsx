@@ -1,11 +1,11 @@
 "use client";
 import Image from "next/image";
-import bannerIlluvium from "../../../images/Banner-illuvium.png";
-import bannerAxieInfinity from "../../../images/Banner-AxieInfinity.png";
+import bannerIlluvium from "../../../../images/Banner-illuvium.png";
+import bannerAxieInfinity from "../../../../images/Banner-AxieInfinity.png";
 import { useEffect, useState } from "react";
-import illuviumLogo from "../../../images/Illuvium-logo.svg";
-import axieLogo from "../../../images/Axie-logo.svg";
-import SectionHeader from "../SectionHeader";
+import illuviumLogo from "../../../../images/Illuvium-logo.svg";
+import axieLogo from "../../../../images/Axie-logo.svg";
+import SectionHeader from "../../SectionHeader";
 
 const banners = [
   {
@@ -24,7 +24,7 @@ const banners = [
   },
 ];
 
-function Carousel() {
+function CarouselHeader() {
   const [currIndex, setCurrIndex] = useState<number>(0);
   useEffect(() => {
     const interval = setInterval(() => {
@@ -75,4 +75,4 @@ function Carousel() {
   );
 }
 
-export default Carousel;
+export default CarouselHeader;

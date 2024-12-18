@@ -9,49 +9,46 @@ interface IProps {
 
 export default function CardGames({ game, className }: IProps) {
   return (
-    <Link
-      href={`/details/${game.slug}`}
+    <div
       className={classNames(
         className,
-        "group cursor-pointer rounded-lg border-[0.5px] border-lootlab-font-highlight border-x-chart-3 border-b-chart-3 p-1 transition-transform hover:-translate-y-1",
+        "embla__slide min-w-0 max-w-64 flex-[0_0_auto] py-4",
       )}
     >
-      <div className="relative h-64 max-w-64 overflow-hidden">
-        <img
-          src={game.Image[0].url}
-          alt={`image do jogo ${game.title}`}
-          className="h-full w-full transform break-all rounded-md object-cover transition-transform duration-500 ease-in-out group-hover:scale-105"
-        />
-      </div>
-      <div className="flex w-56 flex-col items-center gap-3">
-        <h1 className="break-all text-lg font-bold text-lootlab-font-base">
-          {game.title}
-        </h1>
-        {/* <div>
-          {game.genres.map((genre, index) => (
-            <span
-              className="text-nowrap text-xs font-medium text-lootlab-font-highlight"
-              key={index}
-            >
-              {index > 1 ? null : (
-                <span>
-                  {genre} {index === game.genres.length - 1 ? "" : ", "}
-                </span>
-              )}
-            </span>
-          ))}
-          {game.genres.length > 2 && (
-            <span className="h-2 w-2 rounded-sm bg-[#172a46] px-[2px] text-xs font-semibold">
-              +{game.genres.length - 2}
-            </span>
-          )}
-        </div> */}
-        {/* <div className="flex gap-2 text-base font-normal text-lootlab-font-highlight">
-          {game.platforms.map((plataform, index) => (
-            <span key={index}>{plataform}</span>
-          ))}
-        </div> */}
-      </div>
-    </Link>
+      <Link
+        href={`/details/${game.slug}`}
+        className="flex flex-col justify-center overflow-hidden rounded-lg bg-lootlab-font-highlight bg-gradient-to-b p-[1px] transition-all duration-300 ease-out md:hover:scale-[1.02]"
+      >
+        <div className="relative aspect-square">
+          <img
+            src={game.Image[0].url}
+            alt={`image do jogo ${game.title}`}
+            className="h-64 w-full rounded-t-lg object-cover"
+          />
+          <div className="absolute bottom-4 right-4">
+            <div className="flex h-10 w-10 rotate-45 items-center justify-center bg-[#FFD700]">
+              <span className="-rotate-45 text-xs font-bold text-black">
+                GAME
+              </span>
+            </div>
+          </div>
+        </div>
+        <div className="rounded-b-lg bg-[#1a1b1e] p-4">
+          <h3 className="mb-2 truncate text-lg font-semibold text-white">
+            {game.title}
+          </h3>
+          <div className="flex flex-wrap gap-2 overflow-auto">
+            {game.genres.map((category) => (
+              <span
+                key={category.id}
+                className="rounded-full bg-white/10 px-2 py-1 text-xs text-white/80"
+              >
+                {category.name}
+              </span>
+            ))}
+          </div>
+        </div>
+      </Link>
+    </div>
   );
 }

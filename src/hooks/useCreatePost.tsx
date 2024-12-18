@@ -25,7 +25,7 @@ function useCreatePost() {
     onSuccess(data, variables) {
       if (data?.status === 201) {
         Toast.success("Post criado com sucesso", 2000);
-        methods.reset();
+        // methods.reset();
       }
 
       // seta o novo post no cache para nao precisar buscar novamente no banco
