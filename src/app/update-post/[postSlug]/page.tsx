@@ -1,13 +1,10 @@
 import { LayoutPage } from "@/components/Layout";
-import TabsCreatePost from "@/components/Others/TabsCreatePost";
-import { Suspense } from "react";
+import TabsUpdatePost from "@/components/Others/TabsUpdatePost";
 
 export default function CreatePost() {
   return (
     <LayoutPage className="px-[5%] pt-10">
-      <Suspense>
-        <TabsCreatePost />
-      </Suspense>
+      <TabsUpdatePost />
     </LayoutPage>
   );
 }

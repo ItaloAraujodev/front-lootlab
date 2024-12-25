@@ -36,8 +36,8 @@ function TabsTriggers() {
   return (
     <TabsList className="grid w-full grid-cols-4 bg-[#172944]">
       {triggers.map(({ value, text }) => {
-        const IsErrorInCard = formFields[value].some((field) =>
-          Object.keys(errors).includes(field),
+        const IsErrorInCard = formFields[value].some(
+          (field) => field in errors,
         );
         return (
           <TabsTrigger

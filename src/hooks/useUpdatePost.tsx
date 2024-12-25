@@ -1,0 +1,90 @@
+"use client";
+
+import PostService from "@/services/post.service";
+import Toast from "@/tools/toast.tool";
+import { useSession } from "next-auth/react";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+import type { IPost } from "@/interfaces/interfaces";
+import { generateSlug } from "@/tools/generateSlug";
+import {
+  FormSchemaToUpdate,
+  type FormDataToUpdate,
+} from "@/components/Others/TabsUpdatePost/Schema";
+import { useForm, type UseFormReturn } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
+import { transformPostToSchema } from "@/tools/tranformPostToSchema";
+import usePostStore from "@/stores/post.store";
+
+interface UseUpdatePostReturn {
+  onSubmit: (data: FormDataToUpdate) => Promise<void>;
+  status: "idle" | "success" | "error" | "pending";
+  methods: UseFormReturn<FormDataToUpdate>;
+}
+
+function useUpdatePost(): UseUpdatePostReturn {
+  const { postToUpdate } = usePostStore();
+  const methods = useForm<FormDataToUpdate>({
+    resolver: zodResolver(FormSchemaToUpdate),
+    defaultValues: {
+      ...(postToUpdate ? transformPostToSchema(postToUpdate) : {}),
+    },
+  });
+  const queryClient = useQueryClient();
+  const { data: session } = useSession();
+
+  const { mutateAsync: updatePostFn, status } = useMutation({
+    mutationFn: PostService.updatePost,
+    onSuccess(data, variables) {
+      if (data?.status === 200) {
+        Toast.success("Post criado com sucesso", 2000);
+        methods.reset();
+      }
+
+      // seta o novo post no cache para nao precisar buscar novamente no banco
+      queryClient.setQueryData(["getPosts"], (oldData: IPost[]) => {
+        const newPost = {
+          ...JSON.parse(variables.data.postData || ""),
+          Image: [
+            {
+              url: variables.data.file
+                ? URL.createObjectURL(variables.data.file)
+                : variables.imageUrl,
+            },
+          ],
+          slug: generateSlug(
+            JSON.parse(variables.data.postData || "{ title: '' }").title,
+          ),
+        };
+        return [newPost, ...(oldData || [])];
+      });
+    },
+    onError(error) {
+      console.log("Erro ao publicar o post.", error.message);
+      Toast.error("Erro ao publicar o post.", 2000);
+    },
+  });
+
+  const onSubmit = async (data: FormDataToUpdate) => {
+    if (!session?.accessToken && !session?.user.id) {
+      Toast.error("Você precisa estar logado para publicar um post.");
+      return;
+    }
+
+    // Remove file de data antes para enviar separadamente para a API.
+    const { file, oldImageUrl, postId, ...postData } = data;
+
+    await updatePostFn({
+      data: {
+        postData: JSON.stringify(postData),
+        file: file ? file[0] : new DataTransfer().files[0],
+      },
+      imageUrl: oldImageUrl,
+      postId,
+      authorId: session?.user.id,
+      authorizationToken: session?.accessToken,
+    });
+  };
+  return { onSubmit, status, methods };
+}
+
+export default useUpdatePost;

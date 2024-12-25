@@ -1,7 +1,8 @@
-import useCurrentPost from "@/hooks/useCurrentPost";
+"use client";
+import usePostStore from "@/stores/post.store";
 
 function Commentary() {
-  const { post } = useCurrentPost();
+  const { post } = usePostStore();
   return (
     <div className="h-[23rem] overflow-y-auto rounded-lg border-[#1c2f4a] bg-[#132238] p-6 md:col-span-2">
       <div className="h-full">

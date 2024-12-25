@@ -1,50 +1,19 @@
 "use client";
-import { Tabs, TabsContent } from "@/components/ui/tabs";
-import CardBasic from "./CardBasic";
-import FinancialCard from "./CardFinancial";
-import LinksCard from "./CardLinks";
-import { FormProvider } from "react-hook-form";
-import TabsTriggers from "./TabsTriggers";
-import { useSearchParams } from "next/navigation";
+
+import TabsPost from "../TabsPost";
 import useCreatePost from "@/hooks/useCreatePost";
-import DetailsCard from "./CardDetails";
+import type { FormData } from "../TabsPost/schemas";
 
 function TabsCreatePost() {
-  const { methods, onSubmit, status } = useCreatePost();
-  const searchParams = useSearchParams();
-
-  // Define a aba inicial com base nos parâmetros de busca ou padrão
-  const activatedTab =
-    (searchParams.get("activatedTab") as
-      | "basic"
-      | "financial"
-      | "links"
-      | "details") || "basic";
+  const { onSubmit, status, methods } = useCreatePost();
 
   return (
-    <FormProvider {...methods}>
-      <Tabs value={activatedTab} className="w-[95%] max-w-[400px]">
-        <TabsTriggers />
-
-        <form onSubmit={methods.handleSubmit(onSubmit)}>
-          <TabsContent value="basic">
-            <CardBasic />
-          </TabsContent>
-
-          <TabsContent value="financial">
-            <FinancialCard />
-          </TabsContent>
-
-          <TabsContent value="links">
-            <LinksCard />
-          </TabsContent>
-
-          <TabsContent value="details">
-            <DetailsCard status={status === "pending"} />
-          </TabsContent>
-        </form>
-      </Tabs>
-    </FormProvider>
+    <TabsPost<FormData>
+      action="Publicar"
+      methods={methods}
+      onSubmit={onSubmit}
+      status={status}
+    />
   );
 }
 

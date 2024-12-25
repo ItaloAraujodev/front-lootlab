@@ -1,10 +1,11 @@
 "use client";
-import useCurrentPost from "@/hooks/useCurrentPost";
+
 import LinkGame from "../LinkGame";
 import getPlataformByUrl from "@/tools/getPlataformByUrl";
+import usePostStore from "@/stores/post.store";
 
 function LinksAndResources() {
-  const { post } = useCurrentPost();
+  const { post } = usePostStore();
   return (
     <div className="rounded-lg border-[#1c2f4a] bg-[#132238] p-6">
       <h2 className="mb-6 font-semibold">DOCUMENTAÇÃO E LINKS</h2>

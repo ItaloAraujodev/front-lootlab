@@ -2,10 +2,10 @@
 import Link from "next/link";
 import CardInfo from "../CardInfo";
 import FeatureItem from "../FeatureItem";
-import useCurrentPost from "@/hooks/useCurrentPost";
+import usePostStore from "@/stores/post.store";
 
 function ProjectFeaturies() {
-  const { post } = useCurrentPost();
+  const { post } = usePostStore();
   const midIdx = Math.ceil((post?.ProjectFeatures || [""]).length / 2);
   const firstColumnFeatures = post?.ProjectFeatures.slice(0, midIdx);
   const secondColumnFeatures = post?.ProjectFeatures.slice(midIdx);

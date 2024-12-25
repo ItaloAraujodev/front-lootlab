@@ -7,17 +7,24 @@ import MarketInfoGrid from "./MarketInfoGrid";
 import ProjectFeaturies from "./ProjectFeaturies";
 import PostService from "@/services/post.service";
 import { useParams } from "next/navigation";
+import usePostStore from "@/stores/post.store";
 
 export default function InfoDetails() {
   const params = useParams();
+  const { setPost } = usePostStore();
   const slug = params.postSlug;
   useQuery({
     queryKey: ["post", slug],
-    queryFn: () => (slug ? PostService.getPostBySlug(slug as string) : {}),
+    queryFn: async () => {
+      if (!slug) return;
+      const post = await PostService.getPostBySlug(slug as string);
+      setPost(post);
+      return post;
+    },
   });
 
   return (
-    <div className="mx-auto max-w-6xl space-y-8 text-lootlab-font-base">
+    <div className="mx-auto mt-4 max-w-6xl space-y-8 text-lootlab-font-base">
       <GameHeader />
       <AnalysisAndNews />
       <LinksAndResources />

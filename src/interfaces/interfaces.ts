@@ -42,6 +42,17 @@ export interface IDataCreatePost {
   authorId: string;
 }
 
+export interface IDataUpdatePost {
+  data: {
+    postData?: string; // JSON.stringify dos dados do post
+    file?: File; // O arquivo a ser enviado
+  };
+  authorizationToken: string;
+  imageUrl: string;
+  authorId: string;
+  postId: string;
+}
+
 export interface ILink {
   id: string;
   postId: string;
@@ -123,7 +134,7 @@ export interface IPost {
   linkId?: string;
   links: ILink[];
   ProjectFeatures: IProjectFeature[];
-  launchInfo?: ILaunchInfo;
+  launchInfo: ILaunchInfo;
   partnerships: IPartnership[];
   Image: IImage[];
   genres: IGenre[];

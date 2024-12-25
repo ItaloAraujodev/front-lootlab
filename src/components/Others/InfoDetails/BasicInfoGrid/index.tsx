@@ -1,9 +1,10 @@
 "use client";
-import useCurrentPost from "@/hooks/useCurrentPost";
+
 import BasicInfo from "../BasicInfo";
+import usePostStore from "@/stores/post.store";
 
 export default function BasicInfoGrid() {
-  const { post } = useCurrentPost();
+  const { post } = usePostStore();
   return (
     <div className="space-y-6 md:col-span-1">
       <BasicInfo info={post?.author.name || ""} title="ANALISTA" />

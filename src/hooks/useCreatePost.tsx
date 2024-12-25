@@ -4,28 +4,28 @@ import PostService from "@/services/post.service";
 import Toast from "@/tools/toast.tool";
 import { useSession } from "next-auth/react";
 import { useMutation, useQueryClient } from "@tanstack/react-query";
-import { useForm } from "react-hook-form";
-import { zodResolver } from "@hookform/resolvers/zod";
 import {
   FormSchema,
   type FormData,
-} from "@/components/Others/TabsCreatePost/schemas";
+} from "@/components/Others/TabsPost/schemas";
 import type { IPost } from "@/interfaces/interfaces";
 import { generateSlug } from "@/tools/generateSlug";
+import { useForm } from "react-hook-form";
+import { zodResolver } from "@hookform/resolvers/zod";
 
 function useCreatePost() {
-  const queryClient = useQueryClient();
-  const { data: session } = useSession();
   const methods = useForm<FormData>({
     resolver: zodResolver(FormSchema),
   });
+  const queryClient = useQueryClient();
+  const { data: session } = useSession();
 
   const { mutateAsync: createPostFn, status } = useMutation({
     mutationFn: PostService.createPost,
     onSuccess(data, variables) {
       if (data?.status === 201) {
         Toast.success("Post criado com sucesso", 2000);
-        // methods.reset();
+        methods.reset();
       }
 
       // seta o novo post no cache para nao precisar buscar novamente no banco
@@ -62,7 +62,7 @@ function useCreatePost() {
       authorizationToken: session?.accessToken,
     });
   };
-  return { onSubmit, methods, status };
+  return { onSubmit, status, methods };
 }
 
 export default useCreatePost;

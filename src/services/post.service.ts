@@ -1,4 +1,8 @@
-import type { IDataCreatePost, IPost } from "@/interfaces/interfaces";
+import type {
+  IDataCreatePost,
+  IDataUpdatePost,
+  IPost,
+} from "@/interfaces/interfaces";
 import { Api } from "@/providers/Api";
 
 export default class PostService {
@@ -45,6 +49,45 @@ export default class PostService {
           "Content-Type": "multipart/form-data",
         },
       });
+
+      return response;
+    } catch (error) {
+      console.log("Erro ao enviar o post:", error);
+      throw new Error(
+        "Ocorreu um erro ao tentar publicar o post. Tente novamente.",
+      );
+    }
+  }
+
+  public static async updatePost({
+    data,
+    authorizationToken,
+    authorId,
+    postId,
+  }: IDataUpdatePost) {
+    try {
+      let response;
+      const formData = new FormData();
+      if (data.file) {
+        formData.append("file", data.file);
+      }
+
+      if (data.postData) {
+        formData.append(
+          "postData",
+          JSON.stringify({
+            ...JSON.parse(data.postData),
+            authorId,
+          }),
+        );
+
+        response = await Api.put(`/post/${postId}`, formData, {
+          headers: {
+            Authorization: `Bearer ${authorizationToken}`,
+            "Content-Type": "multipart/form-data",
+          },
+        });
+      }
 
       return response;
     } catch (error) {

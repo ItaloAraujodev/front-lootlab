@@ -1,11 +1,12 @@
 "use client";
-import useCurrentPost from "@/hooks/useCurrentPost";
+
+import usePostStore from "@/stores/post.store";
 import CardInfo from "../CardInfo";
 import MarketInfo from "../MarketInfo";
 import { formatCurrency } from "@/tools/formatCurrency";
 
 function MarketInfoGrid() {
-  const { post } = useCurrentPost();
+  const { post } = usePostStore();
   const launchInfo = post?.launchInfo;
 
   return (

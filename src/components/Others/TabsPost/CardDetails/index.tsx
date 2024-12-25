@@ -9,7 +9,13 @@ import ButtonPrevTab from "../Buttons/ButtonTab/buttonPrevTab";
 import PublicButton from "../Buttons/PublicButton";
 import DeatilsContent from "./DeatilsContent";
 
-function DetailsCard({ status }: { status: boolean }) {
+function DetailsCard({
+  status,
+  action,
+}: {
+  status: boolean;
+  action: "Publicar" | "Salvar";
+}) {
   return (
     <LayoutCard>
       <CardHeader>
@@ -21,7 +27,7 @@ function DetailsCard({ status }: { status: boolean }) {
       <DeatilsContent />
       <CardFooter className="flex w-full justify-between">
         <ButtonPrevTab />
-        <PublicButton disabled={status} title="Publicar" />
+        <PublicButton disabled={status} title={action} />
       </CardFooter>
     </LayoutCard>
   );
