@@ -36,7 +36,7 @@ function useUpdatePost(): UseUpdatePostReturn {
     mutationFn: PostService.updatePost,
     onSuccess(data, variables) {
       if (data?.status === 200) {
-        Toast.success("Post criado com sucesso", 2000);
+        Toast.success("Post editado com sucesso", 2000);
         methods.reset();
       }
 

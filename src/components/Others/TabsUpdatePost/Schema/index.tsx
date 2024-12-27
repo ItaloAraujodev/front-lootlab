@@ -3,6 +3,7 @@ import { z } from "zod";
 
 // Esquema para validação de um Link
 const LinkSchema = z.object({
+  id: z.string(),
   url: z
     .string()
     .url("URL inválida")
@@ -16,6 +17,7 @@ const LinkSchema = z.object({
 
 // Esquema para validação de ProjectFeatures
 const ProjectFeatureSchema = z.object({
+  id: z.string(),
   title: z.string().min(1, "O título da feature é obrigatório").optional(),
   isFeature: z.boolean().optional(),
 });
@@ -50,11 +52,13 @@ const LaunchInfoSchema = z.object({
 
 // Esquema para validação de Genero
 const Genre = z.object({
+  id: z.string(),
   name: z.string().optional(),
 });
 
 // Esquema para validação de Partnership
 const PartnershipSchema = z.object({
+  id: z.string(),
   // name: z.string().min(1, "O nome da parceria é obrigatório").optional(),
   // type: z.string().min(1, "O tipo da parceria é obrigatório").optional(),
   link_url: z

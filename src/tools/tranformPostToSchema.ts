@@ -33,6 +33,7 @@ export function transformPostToSchema(post: IPost): FormDataToUpdate {
       publicSale: post.launchInfo.publicSale,
     },
     genres: post.genres.map((genre) => ({
+      id: genre.id,
       name: genre.name,
     })),
     partnerships: post.partnerships.map((partner) => ({

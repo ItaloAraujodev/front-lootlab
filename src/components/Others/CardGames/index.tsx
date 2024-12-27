@@ -10,7 +10,6 @@ interface IProps {
 export default function CardGames({ post, className }: IProps) {
   const sizeGenres = post.genres.length;
   const remainingGenresCount = post.genres.slice(2, sizeGenres);
-  console.log(post.genres.slice(1, sizeGenres - 1).length);
   return (
     <div className={classNames(className, "embla__slide flex-[0_0_auto] py-4")}>
       <Link
