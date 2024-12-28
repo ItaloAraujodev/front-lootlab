@@ -26,13 +26,13 @@ function LinksContent() {
       <Form.Label>
         <AccordionManager
           titleTrigger="Parcerias"
-          error={errors?.partnership?.message}
+          error={errors?.partnerships?.message}
         >
           <AccordionContent>
             <FieldListPartnership />
           </AccordionContent>
         </AccordionManager>
-        <Form.ErrorMessage error={errors?.partnership?.message} />
+        <Form.ErrorMessage error={errors?.partnerships?.message} />
       </Form.Label>
       <Form.Label>
         <AccordionManager

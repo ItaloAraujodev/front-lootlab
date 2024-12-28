@@ -18,7 +18,7 @@ function MarketInfoGrid() {
           </span>
         </MarketInfo>
         <MarketInfo title="SUPPLY ATUAL">
-          {String(launchInfo?.totalSupply) || ""}
+          {String(launchInfo?.currentSupply) || ""}
         </MarketInfo>
         <MarketInfo title="MARKET CAP">{formatCurrency(100)}</MarketInfo>
         <MarketInfo title="SUPPLY TOTAL">

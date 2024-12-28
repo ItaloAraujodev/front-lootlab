@@ -12,7 +12,6 @@ export function transformPostToSchema(post: IPost): FormDataToUpdate {
     network: post.network || "",
     token: post.token || "",
     comment_author: post.comment_author || "",
-    file: new DataTransfer().files, // Simula uma FileList vazia
     Image: [{ id: post.Image[0].id }],
     links: post.links.map((link) => ({
       id: link.id,

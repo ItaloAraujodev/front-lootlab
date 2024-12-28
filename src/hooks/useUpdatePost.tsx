@@ -35,11 +35,6 @@ function useUpdatePost(): UseUpdatePostReturn {
   const { mutateAsync: updatePostFn, status } = useMutation({
     mutationFn: PostService.updatePost,
     onSuccess(data, variables) {
-      if (data?.status === 200) {
-        Toast.success("Post editado com sucesso", 2000);
-        methods.reset();
-      }
-
       // seta o novo post no cache para nao precisar buscar novamente no banco
       queryClient.setQueryData(["getPosts"], (oldData: IPost[]) => {
         const newPost = {
@@ -55,8 +50,16 @@ function useUpdatePost(): UseUpdatePostReturn {
             JSON.parse(variables.data.postData || "{ title: '' }").title,
           ),
         };
-        return [newPost, ...(oldData || [])];
+        return [
+          newPost,
+          ...(oldData.filter(({ id }) => id !== postToUpdate?.id) || []),
+        ];
       });
+
+      if (data?.status === 200) {
+        methods.reset();
+        return Toast.success("Post editado com sucesso", 2000);
+      }
     },
     onError(error) {
       console.log("Erro ao publicar o post.", error.message);

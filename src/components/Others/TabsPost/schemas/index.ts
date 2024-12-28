@@ -106,7 +106,7 @@ export const FormSchema = z.object({
     .min(1, "Você deve cadastrar pelo menos uma feature."),
   launchInfo: LaunchInfoSchema,
   genres: z.array(Genre).min(1, "Você deve adicionar pelo menos 1 gênero"),
-  partnership: z
+  partnerships: z
     .array(PartnershipSchema)
     .min(1, "Você deve cadastrar 1 link no mínimo")
     .default([]),

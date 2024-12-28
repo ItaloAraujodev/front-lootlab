@@ -10,6 +10,9 @@ interface IProps {
 export default function CardGames({ post, className }: IProps) {
   const sizeGenres = post.genres.length;
   const remainingGenresCount = post.genres.slice(2, sizeGenres);
+  console.log(
+    post.title === "ASD EDITADO" ? post.Image[0].url + " " + post.title : "",
+  );
   return (
     <div className={classNames(className, "embla__slide flex-[0_0_auto] py-4")}>
       <Link

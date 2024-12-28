@@ -19,7 +19,6 @@ export default function GameHeader() {
         <Button
           onClick={() => {
             if (post) {
-              console.log("asqui");
               setPostToUpdate(post);
               router.push(`/update-post/${post.slug}?activatedTab=basic`);
             }

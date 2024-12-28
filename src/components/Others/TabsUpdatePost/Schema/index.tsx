@@ -33,7 +33,6 @@ const LaunchInfoSchema = z.object({
   currentSupply: z
     .string()
     .min(1, { message: "O current supply é alto, médio ou baixo" })
-    .default(" ")
     .optional(),
   totalSupply: z.coerce
     .number({ message: "Digite um número válido" })
