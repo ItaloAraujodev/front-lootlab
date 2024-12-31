@@ -38,6 +38,7 @@ function useUpdatePost(): UseUpdatePostReturn {
       // seta o novo post no cache para nao precisar buscar novamente no banco
       queryClient.setQueryData(["getPosts"], (oldData: IPost[]) => {
         const newPost = {
+          id: variables.postId,
           ...JSON.parse(variables.data.postData || ""),
           Image: [
             {
@@ -50,6 +51,7 @@ function useUpdatePost(): UseUpdatePostReturn {
             JSON.parse(variables.data.postData || "{ title: '' }").title,
           ),
         };
+
         return [
           newPost,
           ...(oldData.filter(({ id }) => id !== postToUpdate?.id) || []),

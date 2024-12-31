@@ -5,10 +5,12 @@ import Commentary from "../Commentary";
 import usePostStore from "@/stores/post.store";
 import { Button } from "@/components/ui/button";
 import { FaEdit } from "react-icons/fa";
-import { useRouter } from "next/navigation";
+import { useParams, useRouter } from "next/navigation";
 import { useSession } from "next-auth/react";
 
 export default function GameHeader() {
+  const params = useParams();
+  const slug = params.postSlug;
   const { post, setPostToUpdate } = usePostStore();
   const { data: session } = useSession();
   const router = useRouter();
@@ -20,7 +22,7 @@ export default function GameHeader() {
           onClick={() => {
             if (post) {
               setPostToUpdate(post);
-              router.push(`/update-post/${post.slug}?activatedTab=basic`);
+              router.push(`/update-post/${slug}?activatedTab=basic`);
             }
           }}
           variant="ghost"
