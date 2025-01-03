@@ -3,7 +3,7 @@ import { z } from "zod";
 
 // Esquema para validação de um Link
 const LinkSchema = z.object({
-  id: z.string(),
+  id: z.string().optional(),
   url: z
     .string()
     .url("URL inválida")
@@ -18,22 +18,19 @@ const LinkSchema = z.object({
 // Esquema para validação de ProjectFeatures
 const ProjectFeatureSchema = z.object({
   id: z.string(),
-  title: z.string().min(1, "O título da feature é obrigatório").optional(),
+  title: z.string().optional(),
   isFeature: z.boolean().optional(),
 });
 
 // Esquema para validação de LaunchInfo
 const LaunchInfoSchema = z.object({
   id: z.string(),
-  launchDate: z.date({ message: "A data do Launch é obrigatória" }).optional(),
+  launchDate: z.date().optional(),
   marketCap: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor do Marekt Cap deve ser positivo")
     .optional(),
-  currentSupply: z
-    .string()
-    .min(1, { message: "O current supply é alto, médio ou baixo" })
-    .optional(),
+  currentSupply: z.string().optional(),
   totalSupply: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor do Total Supply deve ser positivo")
@@ -43,7 +40,6 @@ const LaunchInfoSchema = z.object({
     .nonnegative("O valor do Private Sale deve ser positivo")
     .optional(),
   publicSale: z.coerce
-
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor do Public Sale deve ser positivo")
     .optional(),
@@ -51,13 +47,13 @@ const LaunchInfoSchema = z.object({
 
 // Esquema para validação de Genero
 const Genre = z.object({
-  id: z.string(),
+  id: z.string().optional(),
   name: z.string().optional(),
 });
 
 // Esquema para validação de Partnership
 const PartnershipSchema = z.object({
-  id: z.string(),
+  id: z.string().optional(),
   // name: z.string().min(1, "O nome da parceria é obrigatório").optional(),
   // type: z.string().min(1, "O tipo da parceria é obrigatório").optional(),
   link_url: z
@@ -73,7 +69,7 @@ const PartnershipSchema = z.object({
 
 // Esquema principal para validação do Post
 export const FormSchemaToUpdate = z.object({
-  title: z.string().min(1, "O Nome do Jogo é obrigatório").optional(),
+  title: z.string().optional(),
   market_link: z
     .string()
     .url("URL de mercado inválida")
@@ -89,10 +85,7 @@ export const FormSchemaToUpdate = z.object({
   investment: z.string().optional(),
   network: z.string().min(1, "A rede é obrigatória").optional(),
   token: z.string().min(1, "O token é obrigatório").optional(),
-  comment_author: z
-    .string()
-    .min(1, "O comentário do autor é obrigatório")
-    .optional(),
+  comment_author: z.string().optional(),
   file: z
     .instanceof(globalThis.FileList, { message: "Escolha um arquivo valido" })
     .refine((file) => (file.length ? file[0].size <= 5 * 1024 * 1024 : true), {
@@ -111,26 +104,12 @@ export const FormSchemaToUpdate = z.object({
       },
     )
     .optional(),
-  links: z
-    .array(LinkSchema)
-    .min(1, "Você deve cadastrar 1 link no mínimo")
-    .default([])
-    .optional(),
-  projectFeatures: z
-    .array(ProjectFeatureSchema)
-    .min(1, "Você deve cadastrar pelo menos uma feature.")
-    .optional(),
+  links: z.array(LinkSchema).default([]).optional(),
+  projectFeatures: z.array(ProjectFeatureSchema).optional(),
   launchInfo: LaunchInfoSchema.optional(),
   Image: z.array(z.object({ id: z.string() })).optional(),
-  genres: z
-    .array(Genre)
-    .min(1, "Você deve adicionar pelo menos 1 gênero")
-    .optional(),
-  partnerships: z
-    .array(PartnershipSchema)
-    .min(1, "Você deve cadastrar 1 link no mínimo")
-    .default([])
-    .optional(),
+  genres: z.array(Genre).optional(),
+  partnerships: z.array(PartnershipSchema).default([]).optional(),
   postId: z.string(),
   oldImageUrl: z.string(),
 });

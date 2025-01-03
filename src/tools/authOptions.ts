@@ -1,12 +1,14 @@
 import CredentialsProvider from "next-auth/providers/credentials";
 import { NextAuthOptions } from "next-auth";
 import UserService from "@/services/user.service";
+import type { TRole } from "@/interfaces/types";
 
 declare module "next-auth" {
   interface Session {
     user: {
       id: string;
       email: string;
+      role: TRole;
     };
     accessToken: string;
   }
@@ -61,6 +63,7 @@ export const authOptions: NextAuthOptions = {
       if (user) {
         token.id = user.id;
         token.email = user.email;
+        token.role = (user as any).role;
         token.accessToken = (user as any).token; // Certifique-se de que este é o campo correto
       }
       return token;
@@ -69,6 +72,7 @@ export const authOptions: NextAuthOptions = {
       session.user = {
         id: token.id as string,
         email: token.email as string,
+        role: token.role as TRole,
       };
       session.accessToken = token.accessToken as string; // Adicione o token na sessão
       return session;

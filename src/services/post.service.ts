@@ -26,6 +26,27 @@ export default class PostService {
     }
   }
 
+  public static async deletePost({
+    id,
+    authorizationToken,
+  }: {
+    id: string;
+    authorizationToken: string;
+  }) {
+    try {
+      const response = await Api.delete(`/post/${id}`, {
+        headers: {
+          Authorization: `Bearer ${authorizationToken}`,
+        },
+      });
+      console.log(response);
+      return response;
+      // eslint-disable-next-line @typescript-eslint/no-unused-vars
+    } catch (error) {
+      console.log(error);
+    }
+  }
+
   public static async createPost({
     data,
     authorizationToken,

@@ -11,3 +11,5 @@ export type TPathKeys<T> =
     }[Extract<keyof T, string | number>];
 
 export type TCardBasic<T> = keyof T;
+
+export type TRole = "WRITER" | "ADMIN" | "USER";

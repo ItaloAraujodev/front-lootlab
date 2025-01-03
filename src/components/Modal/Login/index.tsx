@@ -28,7 +28,7 @@ export function Login() {
 
   const searchParams = useSearchParams();
   const router = useRouter();
-  const openModalLogin = searchParams.get("openModalLogin");
+  const openModalLogin = searchParams.get("openModalLogin") as "true" | "false";
 
   return (
     <Dialog

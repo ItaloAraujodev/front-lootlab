@@ -29,6 +29,8 @@ function TabsPost<T extends FieldValues>({
 }: ITabsCreate<T>) {
   const searchParams = useSearchParams();
 
+  console.log(methods.formState.errors);
+
   // Define a aba inicial com base nos parâmetros de busca ou padrão
   const activatedTab =
     (searchParams.get("activatedTab") as

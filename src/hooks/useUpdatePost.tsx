@@ -22,11 +22,11 @@ interface UseUpdatePostReturn {
 }
 
 function useUpdatePost(): UseUpdatePostReturn {
-  const { postToUpdate } = usePostStore();
+  const { post } = usePostStore();
   const methods = useForm<FormDataToUpdate>({
     resolver: zodResolver(FormSchemaToUpdate),
     defaultValues: {
-      ...(postToUpdate ? transformPostToSchema(postToUpdate) : {}),
+      ...(post ? transformPostToSchema(post) : {}),
     },
   });
   const queryClient = useQueryClient();
@@ -54,7 +54,7 @@ function useUpdatePost(): UseUpdatePostReturn {
 
         return [
           newPost,
-          ...(oldData.filter(({ id }) => id !== postToUpdate?.id) || []),
+          ...(oldData.filter(({ id }) => id !== post?.id) || []),
         ];
       });
 
