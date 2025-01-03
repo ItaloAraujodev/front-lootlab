@@ -1,4 +1,4 @@
-import LinksAndLogin from "@/components/navBar/LinksAndLogin";
+import LinksAndLogin from "@/components/navBar/LinksAndSign";
 import {
   Dialog,
   DialogContent,

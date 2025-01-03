@@ -1,6 +1,6 @@
 import Link from "next/link";
 import DialogNavBar from "../Modal/DialogNavBar";
-import LinksAndLogin from "./LinksAndLogin";
+import LinksAndLogin from "./LinksAndSign";
 
 export function NavBar() {
   return (
