@@ -4,8 +4,8 @@ import { FaDiscord, FaTelegram, FaTwitter } from "react-icons/fa6";
 
 export function LayoutFooter() {
   return (
-    <footer className="bg-lootlab-bg-main-highlight mt-auto w-full text-lootlab-font-highlight">
-      <div className="laptop:h-64 bg-lootlab-bg-main-highlight m-auto flex h-auto w-[90%] flex-col items-center justify-between py-4 md:flex-row">
+    <footer className="mt-auto w-full bg-lootlab-bg-main-highlight text-lootlab-font-highlight">
+      <div className="laptop:h-64 m-auto flex h-auto w-[90%] flex-col items-center justify-between bg-lootlab-bg-main-highlight py-4 md:flex-row">
         <div className="flex flex-col items-center gap-4 md:items-start">
           <Common.CommonLogo />
 
