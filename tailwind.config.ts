@@ -15,6 +15,7 @@ const config: Config = {
           "font-highlight": "#94a7c6",
           "font-base": "#ffffff",
           "bg-main": "#0F1421",
+          "bg-main-highlight": "#192136",
           "color-highlight": "#4A90E2",
           "hover-highlight": "#357ABD",
         },
