@@ -13,3 +13,17 @@ export type TPathKeys<T> =
 export type TCardBasic<T> = keyof T;
 
 export type TRole = "WRITER" | "ADMIN" | "USER";
+
+export type TIcon =
+  | "twitter"
+  | "x"
+  | "instagram"
+  | "discord"
+  | "telegram"
+  | "facebook"
+  | "reddit"
+  | "medium"
+  | "youtube"
+  | "whitepaper"
+  | "globe"
+  | "coinmarketcap";

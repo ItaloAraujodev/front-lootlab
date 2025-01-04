@@ -37,6 +37,8 @@ export default function InfoDetails() {
     refetchOnWindowFocus: false,
   });
 
+  console.log(PostData);
+
   if (!isLoading && PostData === undefined) {
     return (
       <div className="flex flex-col items-center justify-center text-white">

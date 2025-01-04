@@ -1,15 +1,4 @@
-type TIcon =
-  | "twitter"
-  | "x"
-  | "instagram"
-  | "discord"
-  | "telegram"
-  | "facebook"
-  | "reddit"
-  | "medium"
-  | "youtube"
-  | "whitepaper"
-  | "globe";
+import type { TIcon } from "@/interfaces/types";
 
 const platformIcons: { [key: string]: TIcon } = {
   "twitter.com": "twitter",
@@ -23,6 +12,7 @@ const platformIcons: { [key: string]: TIcon } = {
   "medium.com": "medium",
   "youtube.com": "youtube",
   whitepaper: "whitepaper",
+  "coinmarketcap.com": "coinmarketcap",
 };
 
 function getPlataformByUrl(url: string): TIcon {

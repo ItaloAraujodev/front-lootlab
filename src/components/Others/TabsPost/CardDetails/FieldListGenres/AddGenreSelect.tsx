@@ -23,6 +23,7 @@ const gameGenres = [
   "Educational",
   "Esporte",
   "Estratégia",
+  "FPS",
   "Horror de Sobrevivência",
   "Idle",
   "Luta",

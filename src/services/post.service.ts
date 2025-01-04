@@ -52,6 +52,7 @@ export default class PostService {
     authorizationToken,
     authorId,
   }: IDataCreatePost) {
+    console.log("DATA DO CREATE POST", JSON.stringify(data));
     try {
       const formData = new FormData();
       formData.append("file", data.file);

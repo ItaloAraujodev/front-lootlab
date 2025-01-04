@@ -1,3 +1,4 @@
+import type { TIcon } from "@/interfaces/types";
 import Link from "next/link";
 import {
   FaXTwitter,
@@ -11,19 +12,7 @@ import {
   FaGlobe,
   FaFileLines,
 } from "react-icons/fa6";
-
-type TIcon =
-  | "twitter"
-  | "x"
-  | "instagram"
-  | "discord"
-  | "telegram"
-  | "facebook"
-  | "reddit"
-  | "medium"
-  | "whitepaper"
-  | "youtube"
-  | "globe";
+import { SiCoinmarketcap } from "react-icons/si";
 
 interface IProps {
   link: string;
@@ -42,6 +31,7 @@ const plataformChoice = {
   x: { icon: <FaXTwitter />, label: "XTwitter" },
   globe: { icon: <FaGlobe />, label: "Site" },
   whitepaper: { icon: <FaFileLines />, label: "Whitepaper" },
+  coinmarketcap: { icon: <SiCoinmarketcap />, label: "CoinMarketCap" },
 };
 function LinkGame({ plataform, link }: IProps) {
   return (
