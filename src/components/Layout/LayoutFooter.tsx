@@ -4,7 +4,7 @@ import { FaDiscord, FaTelegram, FaTwitter } from "react-icons/fa6";
 
 export function LayoutFooter() {
   return (
-    <footer className="mt-auto w-full bg-lootlab-font-base text-lootlab-bg-main-highlight hover:text-lootlab-bg-main">
+    <footer className="mt-auto w-full bg-lootlab-font-base text-lootlab-bg-main-highlight/70">
       <div className="laptop:h-64 m-auto flex h-auto w-[90%] flex-col items-center justify-between bg-lootlab-font-base py-4 md:flex-row">
         <div className="flex flex-col items-center gap-4 md:items-start">
           <Common.CommonLogo />
@@ -29,7 +29,7 @@ export function LayoutFooter() {
             <a
               href=""
               target="_blank"
-              className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:text-lootlab-font-base"
+              className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:text-lootlab-bg-main"
               rel="noopener noreferrer"
             >
               <FaTwitter />
@@ -37,7 +37,7 @@ export function LayoutFooter() {
             <a
               href=""
               target="_blank"
-              className="flex h-10 w-10 items-center justify-center rounded-full text-lg transition-colors hover:text-lootlab-font-base"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-lg transition-colors hover:text-lootlab-bg-main"
               rel="noopener noreferrer"
             >
               <FaDiscord />
@@ -45,7 +45,7 @@ export function LayoutFooter() {
             <a
               href=""
               target="_blank"
-              className="flex h-10 w-10 items-center justify-center rounded-full text-lg transition-colors hover:text-lootlab-font-base"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-lg transition-colors hover:text-lootlab-bg-main"
               rel="noopener noreferrer"
             >
               <FaTelegram />
