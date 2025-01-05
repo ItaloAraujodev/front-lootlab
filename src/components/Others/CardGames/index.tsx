@@ -17,7 +17,7 @@ export default function CardGames({ post, className }: IProps) {
         href={`/details/${post.slug}`}
         className="group relative flex flex-col justify-center rounded-lg border-[1px] border-lootlab-font-highlight border-opacity-40 bg-inherit p-2 transition-all duration-300 ease-out md:hover:-translate-y-2"
       >
-        <div className="aspect-square h-64 w-64 overflow-hidden rounded-t-md">
+        <div className="aspect-square h-52 w-52 overflow-hidden rounded-t-md">
           <img
             src={post.Image[0].url}
             alt={`image do jogo ${post.title}`}
