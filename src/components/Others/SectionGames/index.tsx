@@ -1,12 +1,10 @@
-import { Gamepad2 } from "lucide-react";
 import GameList from "./GameList";
+import PopularGenres from "@/components/Others/PopularGenres";
 
 export default function SectionGames() {
   return (
     <div className="flex w-full flex-col gap-6 px-[5%]">
-      <h1 className="flex items-center gap-2 text-2xl font-bold text-lootlab-font-base">
-        <Gamepad2 /> Explorador de Jogos
-      </h1>
+      <PopularGenres />
       <GameList />
     </div>
   );

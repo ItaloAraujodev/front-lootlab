@@ -1,6 +1,5 @@
 import { LayoutPage } from "@/components/Layout";
 import CarouselHeader from "@/components/Others/Carousels/CarouselHeader";
-// import PopularGenres from "@/components/Others/PopularGenres";
 import SectionGames from "@/components/Others/SectionGames";
 
 export default function Home() {

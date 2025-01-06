@@ -2,8 +2,10 @@
 import PostService from "@/services/post.service";
 import { useQuery } from "@tanstack/react-query";
 import CardGames from "../../CardGames";
-import CarouselPosts from "../../Carousels/CarouselPosts";
+import CarouselPosts from "../../Carousels/Carousel";
 import SkeletonPost from "@/components/Skeletons/SkeletonPost";
+import { Gamepad2 } from "lucide-react";
+import { Common } from "@/components/Common";
 
 function GameList() {
   const { data: posts, isLoading } = useQuery({
@@ -22,17 +24,22 @@ function GameList() {
   }
 
   return (
-    <CarouselPosts>
-      {!isLoading &&
-        posts &&
-        posts.map((game, index) => (
-          <CardGames key={game.title + index} post={game} />
-        ))}
-      {isLoading &&
-        Array.from({ length: 10 }, (_, index) => index).map((index) => (
-          <SkeletonPost key={index} />
-        ))}
-    </CarouselPosts>
+    <>
+      <Common.CommonTitleSection>
+        <Gamepad2 /> Explorador de Jogos
+      </Common.CommonTitleSection>
+      <CarouselPosts>
+        {!isLoading &&
+          posts &&
+          posts.map((game, index) => (
+            <CardGames key={game.title + index} post={game} />
+          ))}
+        {isLoading &&
+          Array.from({ length: 10 }, (_, index) => index).map((index) => (
+            <SkeletonPost key={index} />
+          ))}
+      </CarouselPosts>
+    </>
   );
 }
 
