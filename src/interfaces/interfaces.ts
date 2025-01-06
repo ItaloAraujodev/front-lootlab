@@ -140,3 +140,7 @@ export interface IPost {
   genres: IGenre[];
   author: Author;
 }
+
+export interface IPostCategories {
+  category: "NFT Jogos" | "NFT Artes";
+}

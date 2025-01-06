@@ -39,7 +39,6 @@ export default class PostService {
           Authorization: `Bearer ${authorizationToken}`,
         },
       });
-      console.log(response);
       return response;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
@@ -52,7 +51,6 @@ export default class PostService {
     authorizationToken,
     authorId,
   }: IDataCreatePost) {
-    console.log("DATA DO CREATE POST", JSON.stringify(data));
     try {
       const formData = new FormData();
       formData.append("file", data.file);

@@ -1,83 +1,40 @@
-"use client";
 import { z } from "zod";
 
-// Esquema para validação de um Link
 const LinkSchema = z.object({
-  url: z
-    .string()
-    .url("URL inválida")
-    .refine(
-      (link) => link.startsWith("https"),
-      "Por segurança, o link deve iniciar com https",
-    )
-    .default(""),
+  url: z.string().url("URL inválida").optional(),
 });
 
-// Esquema para validação de ProjectFeatures
 const ProjectFeatureSchema = z.object({
-  title: z.string().min(1, "O título da feature é obrigatório"),
-  isFeature: z.boolean(),
+  title: z.string().optional(),
+  isFeature: z.boolean().optional(),
 });
 
-// Esquema para validação de LaunchInfo
 const LaunchInfoSchema = z.object({
-  launchDate: z.date({ message: "A data do Launch é obrigatória" }),
-  marketCap: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor do Marekt Cap deve ser positivo"),
-  currentSupply: z
-    .string()
-    .min(1, { message: "O current supply é alto, médio ou baixo" })
-    .default(" "),
-  totalSupply: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor do Total Supply deve ser positivo"),
-  privateSale: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor do Private Sale deve ser positivo"),
-  publicSale: z.coerce
-
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor do Public Sale deve ser positivo"),
+  launchDate: z.date({ message: "A data do Launch é obrigatória" }).optional(),
+  currentSupply: z.string().optional(),
+  marketCap: z.coerce.number().optional(),
+  totalSupply: z.coerce.number().optional(),
+  privateSale: z.coerce.number().optional(),
+  publicSale: z.coerce.number().optional(),
 });
 
-// Esquema para validação de Genero
-const Genre = z.object({
-  name: z.string(),
-});
-
-// Esquema para validação de Partnership
 const PartnershipSchema = z.object({
-  // name: z.string().min(1, "O nome da parceria é obrigatório"),
-  // type: z.string().min(1, "O tipo da parceria é obrigatório"),
-  link_url: z
-    .string()
-    .url("URL da parceria inválida")
-    .refine(
-      (link) => link.startsWith("https"),
-      "Por segurança, o link deve iniciar com https",
-    )
-    .default(""),
+  type: z.string().optional(),
+  link_url: z.string().url("URL da parceria inválida").optional(),
 });
 
-// Esquema principal para validação do Post
+const Genre = z.object({
+  name: z.string().optional(),
+});
+
 export const FormSchema = z.object({
-  title: z.string().min(1, "O Nome do Jogo é obrigatório"),
-  market_link: z
-    .string()
-    .url("URL de mercado inválida")
-    .refine(
-      (link) => link.startsWith("https"),
-      "Por segurança, o link deve iniciar com https",
-    ),
-  score: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor do Public Sale deve ser positivo")
-    .optional(),
-  investment: z.string().optional(),
-  network: z.string().min(1, "A rede é obrigatória"),
-  token: z.string().min(1, "O token é obrigatório"),
-  comment_author: z.string().min(1, "O comentário do autor é obrigatório"),
+  title: z.string().min(1, "O título é obrigatório"),
+  category: z
+    .enum(["NFT Jogos", "NFT Artes"])
+    .refine((categories) => categories.length, {
+      message: "A categoria desse post é necessária.",
+    })
+    .default("NFT Jogos"),
   file: z
     .instanceof(globalThis.FileList, { message: "Escolha um arquivo valido" })
     .refine((file) => file.length, {
@@ -97,19 +54,20 @@ export const FormSchema = z.object({
           "Apenas imagens nos formatos JPEG, PNG, GIF ou WEBP são permitidas",
       },
     ),
-  links: z
-    .array(LinkSchema)
-    .min(1, "Você deve cadastrar 1 link no mínimo")
-    .default([]),
-  projectFeatures: z
-    .array(ProjectFeatureSchema)
-    .min(1, "Você deve cadastrar pelo menos uma feature."),
-  launchInfo: LaunchInfoSchema,
-  genres: z.array(Genre).min(1, "Você deve adicionar pelo menos 1 gênero"),
-  partnerships: z
-    .array(PartnershipSchema)
-    .min(1, "Você deve cadastrar 1 link no mínimo")
-    .default([]),
+  market_link: z.string().url("URL de mercado inválida").optional(),
+  score: z.coerce.number().optional(),
+  investment: z.string().optional(),
+  token: z.string().optional(),
+  network: z.string().optional(),
+  comment_author: z.string().optional(),
+  authorId: z.string().optional(),
+
+  // Arrays e objetos opcionais
+  genres: z.array(Genre).optional(),
+  links: z.array(LinkSchema).optional(),
+  projectFeatures: z.array(ProjectFeatureSchema).optional(),
+  launchInfo: LaunchInfoSchema.optional(),
+  partnerships: z.array(PartnershipSchema).optional(),
 });
 
 export type FormData = z.infer<typeof FormSchema>;

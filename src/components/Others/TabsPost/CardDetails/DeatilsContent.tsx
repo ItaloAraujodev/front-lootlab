@@ -8,12 +8,14 @@ import type { FormData } from "../schemas";
 import FieldListGenres from "./FieldListGenres";
 import AccordionManager from "../AccordionManager";
 import { AccordionContent } from "@/components/ui/accordion";
+import CategoryRadio from "./CategoryRadio";
 
 function DeatilsContent() {
   const {
     register,
     formState: { errors },
   } = useFormContext<FormData>();
+
   return (
     <CardContent className="space-y-2">
       <Form.Label>
@@ -36,6 +38,10 @@ function DeatilsContent() {
           {...register("comment_author")}
         />
         <Form.ErrorMessage error={errors.comment_author?.message} />
+      </Form.Label>
+      <Form.Label>
+        <CategoryRadio />
+        <Form.ErrorMessage error={errors.category?.message} />
       </Form.Label>
     </CardContent>
   );
