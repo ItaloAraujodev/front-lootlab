@@ -1,6 +1,6 @@
 "use client";
 import CardGames from "../../CardGames";
-import CarouselPosts from "../../Carousels/CarouselPosts";
+import CarouselPosts from "../../Carousels/Carousel";
 import SkeletonPost from "@/components/Skeletons/SkeletonPost";
 import type { IPost } from "@/interfaces/interfaces";
 
@@ -21,17 +21,22 @@ function GameList({ posts, isLoading }: IProps) {
   }
 
   return (
-    <CarouselPosts>
-      {!isLoading &&
-        posts &&
-        posts.map((game, index) => (
-          <CardGames key={game.title + index} post={game} />
-        ))}
-      {isLoading &&
-        Array.from({ length: 10 }, (_, index) => index).map((index) => (
-          <SkeletonPost key={index} />
-        ))}
-    </CarouselPosts>
+    <>
+      <Common.CommonTitleSection>
+        <Gamepad2 /> Explorador de Jogos
+      </Common.CommonTitleSection>
+      <CarouselPosts>
+        {!isLoading &&
+          posts &&
+          posts.map((game, index) => (
+            <CardGames key={game.title + index} post={game} />
+          ))}
+        {isLoading &&
+          Array.from({ length: 10 }, (_, index) => index).map((index) => (
+            <SkeletonPost key={index} />
+          ))}
+      </CarouselPosts>
+    </>
   );
 }
 

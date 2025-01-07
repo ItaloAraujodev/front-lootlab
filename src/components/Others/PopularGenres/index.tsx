@@ -1,43 +1,26 @@
 import { Mocks } from "@/mocks";
 import CardGenre from "../CardGenres";
-import {
-  Carousel,
-  CarouselContent,
-  CarouselItem,
-  CarouselNext,
-  CarouselPrevious,
-} from "../../ui/carousel";
+import { Star } from "lucide-react";
+import { Common } from "@/components/Common";
+import Carousel from "../Carousels/Carousel";
 
 export default function PopularGenres() {
   return (
     <div className="flex flex-col gap-5">
-      <h1 className="text-xl font-bold text-lootlab-font-base">
-        Generos Populares
-      </h1>
-      <Carousel
-        opts={{
-          align: "start",
-        }}
-        className="group w-full max-w-none select-none"
-      >
-        <CarouselContent className="-ml-1">
-          {Mocks.gameCategories.map((category, index) => (
-            <CarouselItem
-              key={index}
-              className="pl-1 sm:basis-1 md:basis-1/2 lg:basis-1/3 xl:basis-1/4 2xl:basis-1/6"
-            >
-              <div className="p-1">
-                <CardGenre
-                  key={category.id}
-                  image={category.image}
-                  genre={category.genre}
-                />
-              </div>
-            </CarouselItem>
-          ))}
-        </CarouselContent>
-        <CarouselPrevious className="opacity-70 transition-opacity hover:opacity-100 disabled:opacity-10" />
-        <CarouselNext className="opacity-70 transition-opacity hover:opacity-100 disabled:opacity-10" />
+      <Common.CommonTitleSection>
+        <Star /> Generos Populares
+      </Common.CommonTitleSection>
+
+      <Carousel>
+        {Mocks.gameCategories.map((category, index) => (
+          <div className="p-1" key={category.id + index}>
+            <CardGenre
+              key={category.id}
+              image={category.image}
+              genre={category.genre}
+            />
+          </div>
+        ))}
       </Carousel>
     </div>
   );
