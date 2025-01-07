@@ -19,12 +19,8 @@ function NavLinks({ orientation = "horizontal" }: IProps) {
       >
         Home
       </Link>
-      <Tooltip>
-        <NavLink href="/">NFT Jogos</NavLink>
-      </Tooltip>
-      <Tooltip>
-        <NavLink href="/">NTF Artes</NavLink>
-      </Tooltip>
+      <NavLink href="/nft-jogos">NFT Jogos</NavLink>
+      <NavLink href="/nft-artes">NTF Artes</NavLink>
       <Tooltip>
         <NavLink href="/">Crypto</NavLink>
       </Tooltip>

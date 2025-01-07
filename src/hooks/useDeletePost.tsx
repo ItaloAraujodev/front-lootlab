@@ -23,7 +23,7 @@ function useDeletePost() {
         return [...(oldData || []).filter(({ id }) => id !== post?.id)];
       });
       if (data) {
-        Toast.success(data.data.message);
+        Toast.success((data as any).data.message);
       }
       router.push("/");
     },

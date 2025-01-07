@@ -6,9 +6,11 @@ import type {
 import { Api } from "@/providers/Api";
 
 export default class PostService {
-  public static async getPosts() {
+  public static async getPosts(category?: "NFT Jogos" | "NFT Artes") {
     try {
-      const response = await Api.get<IPost[]>(`/post`);
+      const response = await Api.get<IPost[]>(
+        `/post?${category ? `category=${category}` : ""}`,
+      );
       return response.data;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
@@ -39,11 +41,11 @@ export default class PostService {
           Authorization: `Bearer ${authorizationToken}`,
         },
       });
-      console.log(response);
       return response;
       // eslint-disable-next-line @typescript-eslint/no-unused-vars
     } catch (error) {
       console.log(error);
+      return error;
     }
   }
 
