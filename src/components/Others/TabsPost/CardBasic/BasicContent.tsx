@@ -10,6 +10,7 @@ import { AccordionContent } from "@radix-ui/react-accordion";
 
 const basicInfos: IInfosCard<FormData>[] = [
   { title: "Nome do Jogo", pathRegister: "title" },
+  { title: "Categoria", pathRegister: "category" },
   { title: "Nota", pathRegister: "score", type: "number" },
   { title: "Investimento", pathRegister: "investment" },
   { title: "Rede", pathRegister: "network" },
