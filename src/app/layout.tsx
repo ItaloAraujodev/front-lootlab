@@ -15,6 +15,9 @@ export default function RootLayout({
 }>) {
   return (
     <html lang="pt-br">
+      <head>
+        <link rel="icon" type="image/svg+xml" href="/logo.svg" />
+      </head>
       <body monica-locale="pt_BR" className="vsc-initialized">
         <LayoutQueryClient>{children}</LayoutQueryClient>
       </body>

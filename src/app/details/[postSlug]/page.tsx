@@ -3,7 +3,7 @@ import InfoDetails from "@/components/Others/InfoDetails";
 
 export default function GameDatails() {
   return (
-    <LayoutPage className="px-[5%] pt-10">
+    <LayoutPage className="pt-10">
       <InfoDetails />
     </LayoutPage>
   );
