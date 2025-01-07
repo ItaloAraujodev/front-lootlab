@@ -22,9 +22,6 @@ function GameList({ posts, isLoading }: IProps) {
 
   return (
     <>
-      <Common.CommonTitleSection>
-        <Gamepad2 /> Explorador de Jogos
-      </Common.CommonTitleSection>
       <CarouselPosts>
         {!isLoading &&
           posts &&

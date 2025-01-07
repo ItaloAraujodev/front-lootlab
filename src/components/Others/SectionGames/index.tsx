@@ -1,4 +1,3 @@
-
 "use client";
 import { Gamepad2 } from "lucide-react";
 import GameList from "./GameList";
@@ -6,6 +5,7 @@ import PostService from "@/services/post.service";
 import { useQuery } from "@tanstack/react-query";
 import { HiOutlinePaintBrush } from "react-icons/hi2";
 import Link from "next/link";
+import PopularGenres from "../PopularGenres";
 
 export default function SectionGames() {
   const { data: posts, isLoading } = useQuery({
