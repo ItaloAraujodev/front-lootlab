@@ -70,21 +70,14 @@ const PartnershipSchema = z.object({
 // Esquema principal para validação do Post
 export const FormSchemaToUpdate = z.object({
   title: z.string().optional(),
-  market_link: z
-    .string()
-    .url("URL de mercado inválida")
-    .refine(
-      (link) => link.startsWith("https"),
-      "Por segurança, o link deve iniciar com https",
-    )
-    .optional(),
+  market_link: z.string().optional(),
   score: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor do Public Sale deve ser positivo")
     .optional(),
   investment: z.string().optional(),
-  network: z.string().min(1, "A rede é obrigatória").optional(),
-  token: z.string().min(1, "O token é obrigatório").optional(),
+  network: z.string().optional(),
+  token: z.string().optional(),
   comment_author: z.string().optional(),
   file: z
     .instanceof(globalThis.FileList, { message: "Escolha um arquivo valido" })

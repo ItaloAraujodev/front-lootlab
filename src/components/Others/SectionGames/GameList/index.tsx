@@ -1,16 +1,15 @@
 "use client";
-import PostService from "@/services/post.service";
-import { useQuery } from "@tanstack/react-query";
 import CardGames from "../../CardGames";
 import CarouselPosts from "../../Carousels/CarouselPosts";
 import SkeletonPost from "@/components/Skeletons/SkeletonPost";
+import type { IPost } from "@/interfaces/interfaces";
 
-function GameList() {
-  const { data: posts, isLoading } = useQuery({
-    queryKey: ["getPosts"],
-    queryFn: PostService.getPosts,
-  });
+interface IProps {
+  posts: IPost[];
+  isLoading: boolean;
+}
 
+function GameList({ posts, isLoading }: IProps) {
   if (!posts?.length && !isLoading) {
     return (
       <div className="relative mx-auto flex h-48 w-full items-center justify-center">
