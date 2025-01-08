@@ -11,7 +11,7 @@ function AuthConditionalRender() {
   return (
     <div className="space-x-3">
       {session?.accessToken ? (
-        <div>
+        <div className="flex gap-2">
           <Button
             className="bg-[#283563] font-bold text-white transition-all hover:bg-[#283563]/60"
             onClick={() => signOut({ callbackUrl: "/" })}
@@ -19,7 +19,7 @@ function AuthConditionalRender() {
             Logout
           </Button>
           <Link
-            className="cursor-pointer select-none rounded-sm px-2 py-1 text-lootlab-font-highlight transition-all hover:bg-[#242C3A] hover:text-white"
+            className="flex h-9 cursor-pointer select-none items-center rounded-sm px-2 py-1 text-lootlab-font-highlight transition-all hover:bg-[#242C3A] hover:text-white"
             href="/create-post?activatedTab=basic"
           >
             Criar Post

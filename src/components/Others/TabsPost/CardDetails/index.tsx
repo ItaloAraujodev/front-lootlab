@@ -21,7 +21,7 @@ function DetailsCard({
       <CardHeader>
         <CardTitle className="text-lg sm:text-xl">Detalhes</CardTitle>
         <CardDescription className="text-base text-[#8d8d8d]">
-          Especifique os gêneros e deixe sua opinião sobre o jogo.
+          Detalhes essenciais sobre o jogo.
         </CardDescription>
       </CardHeader>
       <DeatilsContent />

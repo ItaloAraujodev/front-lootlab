@@ -16,7 +16,8 @@ function BasicCard() {
           Informações Básicas
         </CardTitle>
         <CardDescription className="text-base text-[#8d8d8d]">
-          Detalhes essenciais sobre o jogo.
+          Insira as informações principais para identificar e caracterizar o
+          jogo.
         </CardDescription>
       </CardHeader>
 

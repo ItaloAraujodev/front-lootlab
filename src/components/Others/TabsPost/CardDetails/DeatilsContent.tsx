@@ -1,13 +1,19 @@
 "use client";
 import { Form } from "@/components/Form";
 import { CardContent } from "@/components/ui/card";
-import { Textarea } from "@/components/ui/textarea";
-import classNames from "classnames";
 import { useFormContext } from "react-hook-form";
 import type { FormData } from "../schemas";
-import FieldListGenres from "./FieldListGenres";
 import AccordionManager from "../AccordionManager";
 import { AccordionContent } from "@/components/ui/accordion";
+import type { IInfosCard } from "@/interfaces/interfaces";
+import FieldListFeatures from "./FieldListFeatures";
+
+const detailsInfos: IInfosCard<FormData>[] = [
+  { title: "Nota", pathRegister: "score", type: "number" },
+  { title: "Investimento", pathRegister: "investment" },
+  { title: "Rede", pathRegister: "network" },
+  { title: "Token", pathRegister: "token" },
+];
 
 function DeatilsContent() {
   const {
@@ -18,25 +24,26 @@ function DeatilsContent() {
     <CardContent className="space-y-2">
       <Form.Label>
         <AccordionManager
-          titleTrigger="Gêneros"
-          error={errors?.genres?.message}
+          titleTrigger="Features"
+          error={errors.projectFeatures?.message}
         >
-          <AccordionContent>
-            <FieldListGenres />
+          <AccordionContent className="pb-3">
+            <FieldListFeatures />
           </AccordionContent>
         </AccordionManager>
-        <Form.ErrorMessage error={errors?.genres?.message} />
+        <Form.ErrorMessage error={errors.projectFeatures?.message} />
       </Form.Label>
-      <Form.Label htmlFor="comment" title="Comentário">
-        <Textarea
-          className={classNames("min-h-24", {
-            "border-red-500": errors.comment_author?.message,
-          })}
-          id="comment"
-          {...register("comment_author")}
-        />
-        <Form.ErrorMessage error={errors.comment_author?.message} />
-      </Form.Label>
+      {detailsInfos.map(({ pathRegister, title, type }) => (
+        <Form.Label title={title} htmlFor={title} key={title}>
+          <Form.Input.FormInputGeneric
+            type={type ?? "text"}
+            id={title}
+            register={register(pathRegister)}
+            error={errors?.[pathRegister]?.message}
+          />
+          <Form.ErrorMessage error={errors?.[pathRegister]?.message} />
+        </Form.Label>
+      ))}
     </CardContent>
   );
 }

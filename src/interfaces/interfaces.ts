@@ -117,6 +117,7 @@ interface Author {
 }
 
 export interface IPost {
+  category: "NFT Jogos" | "NFT Artes";
   id: string;
   title: string;
   market_link: string;

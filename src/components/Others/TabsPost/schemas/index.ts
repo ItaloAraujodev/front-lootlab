@@ -64,7 +64,7 @@ const PartnershipSchema = z.object({
 export const FormSchema = z.object({
   title: z.string().min(1, "O Nome do Jogo é obrigatório"),
   category: z.enum(["NFT Jogos", "NFT Artes"], {
-    message: "Escolha uma categoria válida (NFT Jogos ou NFT Artes)",
+    message: "Escolha uma categoria",
   }),
   market_link: z.string().optional(),
   score: z.coerce
@@ -97,7 +97,10 @@ export const FormSchema = z.object({
   links: z.array(LinkSchema).default([]),
   projectFeatures: z.array(ProjectFeatureSchema).optional(),
   launchInfo: LaunchInfoSchema,
-  genres: z.array(Genre).optional(),
+  genres: z
+    .array(Genre)
+    .min(1, { message: "É necessário cadastrar ao menos 1 gênero." })
+    .default([]),
   partnerships: z.array(PartnershipSchema).default([]),
 });
 

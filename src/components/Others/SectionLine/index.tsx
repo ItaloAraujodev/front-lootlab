@@ -1,6 +1,7 @@
 import type { IPost } from "@/interfaces/interfaces";
 import Link from "next/link";
 import GameList from "./GameList";
+import { Common } from "@/components/Common";
 
 interface ISectionLineProps {
   iconTitle: React.ReactNode;
@@ -21,19 +22,20 @@ function SectionLine({
     <div>
       <div className="flex items-center justify-between">
         <div className="flex items-end gap-4 text-white">
-          <h1 className="flex items-center gap-2 text-2xl font-bold text-lootlab-font-base">
+          <Common.CommonTitleSection>
             {iconTitle} {title}
-          </h1>
-          <span className="text-white/60">
+          </Common.CommonTitleSection>
+          <span className="hidden text-white/60 md:block">
             {posts?.length ?? 0}{" "}
             {(posts?.length ?? 0) > 1 ? "Resultados" : "Resultado"}
           </span>
         </div>
         <Link
           href={`/${href}`}
-          className="text-white/60 transition-all hover:text-white"
+          className="flex gap-1 text-white/60 transition-all hover:text-white"
         >
-          Ver mais
+          <span className="hidden md:block">Ver </span>
+          mais
         </Link>
       </div>
 

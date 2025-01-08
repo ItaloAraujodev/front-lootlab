@@ -4,17 +4,16 @@ import type { IInfosCard } from "@/interfaces/interfaces";
 import type { FormData } from "../schemas";
 import { useFormContext } from "react-hook-form";
 import { Form } from "@/components/Form";
-import FieldListFeatures from "./FieldListFeatures";
+import { Textarea } from "@/components/ui/textarea";
+import classNames from "classnames";
 import AccordionManager from "../AccordionManager";
-import { AccordionContent } from "@radix-ui/react-accordion";
+import { AccordionContent } from "@/components/ui/accordion";
+import FieldListGenres from "./FieldListGenres";
+import FinancialDateLaunch from "./FinancialDateLaunch";
+import CategoryRadio from "./CategoryRadio";
 
 const basicInfos: IInfosCard<FormData>[] = [
   { title: "Nome do Jogo", pathRegister: "title" },
-  { title: "Categoria", pathRegister: "category" },
-  { title: "Nota", pathRegister: "score", type: "number" },
-  { title: "Investimento", pathRegister: "investment" },
-  { title: "Rede", pathRegister: "network" },
-  { title: "Token", pathRegister: "token" },
 ];
 
 function BasicContent() {
@@ -27,15 +26,16 @@ function BasicContent() {
     <CardContent className="space-y-2">
       <Form.Label>
         <AccordionManager
-          titleTrigger="Features"
-          error={errors.projectFeatures?.message}
+          titleTrigger="Gêneros"
+          error={errors?.genres?.message}
         >
-          <AccordionContent className="pb-3">
-            <FieldListFeatures />
+          <AccordionContent>
+            <FieldListGenres />
           </AccordionContent>
         </AccordionManager>
-        <Form.ErrorMessage error={errors.projectFeatures?.message} />
+        <Form.ErrorMessage error={errors?.genres?.message} />
       </Form.Label>
+      <FinancialDateLaunch />
       {basicInfos.map(({ pathRegister, title, type }) => (
         <Form.Label title={title} htmlFor={title} key={title}>
           <Form.Input.FormInputGeneric
@@ -60,6 +60,17 @@ function BasicContent() {
         />
         <Form.ErrorMessage error={errors?.file?.message} />
       </Form.Label>
+      <Form.Label htmlFor="comment" title="Comentário">
+        <Textarea
+          className={classNames("min-h-24", {
+            "border-red-500": errors.comment_author?.message,
+          })}
+          id="comment"
+          {...register("comment_author")}
+        />
+        <Form.ErrorMessage error={errors.comment_author?.message} />
+      </Form.Label>
+      <CategoryRadio />
     </CardContent>
   );
 }
