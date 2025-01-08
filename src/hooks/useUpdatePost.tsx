@@ -36,7 +36,7 @@ function useUpdatePost(): UseUpdatePostReturn {
     mutationFn: PostService.updatePost,
     onSuccess(data, variables) {
       // seta o novo post no cache para nao precisar buscar novamente no banco
-      queryClient.setQueryData(["getPosts"], (oldData: IPost[]) => {
+      queryClient.setQueryData(["getPosts"], (oldData: IPost[] | undefined) => {
         const newPost = {
           id: variables.postId,
           ...JSON.parse(variables.data.postData || ""),
@@ -52,10 +52,10 @@ function useUpdatePost(): UseUpdatePostReturn {
           ),
         };
 
-        return [
-          newPost,
-          ...(oldData.filter(({ id }) => id !== post?.id) || []),
-        ];
+        // Adiciona verificação se oldData existe
+        if (!oldData) return [newPost];
+
+        return [newPost, ...oldData.filter(({ id }) => id !== post?.id)];
       });
 
       if (data?.status === 200) {
