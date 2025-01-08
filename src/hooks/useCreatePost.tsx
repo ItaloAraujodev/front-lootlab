@@ -23,11 +23,11 @@ function useCreatePost() {
   const { mutateAsync: createPostFn, status } = useMutation({
     mutationFn: PostService.createPost,
     onSuccess(data, variables) {
-      if (data?.status === 201) {
+      if ((data as any)?.status === 201) {
         Toast.success("Post criado com sucesso", 2000);
         methods.reset();
       }
-
+      console.log("AQUII DATRA", data);
       // seta o novo post no cache para nao precisar buscar novamente no banco
       queryClient.setQueryData(["getPosts"], (oldData: IPost[]) => {
         const newPost = {
@@ -39,8 +39,9 @@ function useCreatePost() {
       });
     },
     onError(error) {
-      console.log("Erro ao publicar o post.", error);
-      Toast.error("Erro ao publicar o post.", 2000);
+      const errorMessage =
+        (error as any)?.response?.data?.message || "Erro ao publicar o post.";
+      Toast.error(errorMessage);
     },
   });
 
