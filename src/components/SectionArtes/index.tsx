@@ -5,8 +5,8 @@ import SectionLine from "../Others/SectionLine";
 import { IoBrushOutline } from "react-icons/io5";
 
 function SectionArtes() {
-  const { data: posts_artes, isLoading: isLoadingArtes } = useQuery({
-    queryKey: ["getPosts", { category: "NFT Artes" }],
+  const { data: postsArtes, isLoading: isLoadingArtes } = useQuery({
+    queryKey: ["getPostsArtes", { category: "NFT Artes" }],
     queryFn: async () => await PostService.getPosts("NFT Artes"),
   });
 
@@ -16,7 +16,7 @@ function SectionArtes() {
       iconTitle={<IoBrushOutline />}
       isLoading={isLoadingArtes}
       title="NFT Artes"
-      posts={posts_artes}
+      posts={postsArtes}
     />
   );
 }

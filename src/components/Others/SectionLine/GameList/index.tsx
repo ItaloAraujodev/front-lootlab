@@ -1,8 +1,10 @@
 "use client";
+import { Common } from "@/components/Common";
 import CardGames from "../../CardGames";
 import CarouselPosts from "../../Carousels/Carousel";
 import SkeletonPost from "@/components/Skeletons/SkeletonPost";
 import type { IPost } from "@/interfaces/interfaces";
+import { Gamepad2 } from "lucide-react";
 
 interface IProps {
   posts: IPost[];

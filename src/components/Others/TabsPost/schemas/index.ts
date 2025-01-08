@@ -11,28 +11,11 @@ const ProjectFeatureSchema = z.object({
 
 const LaunchInfoSchema = z.object({
   launchDate: z.date({ message: "A data do Launch é obrigatória" }),
-  marketCap: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor do Marekt Cap deve ser positivo"),
-  currentSupply: z
-    .string()
-    .min(1, { message: "O current supply é alto, médio ou baixo" })
-    .default(" "),
-  totalSupply: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor do Total Supply deve ser positivo"),
-  privateSale: z.coerce
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor do Private Sale deve ser positivo"),
-  publicSale: z.coerce
-
-    .number({ message: "Digite um número válido" })
-    .nonnegative("O valor do Public Sale deve ser positivo"),
-});
-
-// Esquema para validação de Genero
-const Genre = z.object({
-  name: z.string(),
+  currentSupply: z.string().optional(),
+  marketCap: z.coerce.number().optional(),
+  totalSupply: z.coerce.number().optional(),
+  privateSale: z.coerce.number().optional(),
+  publicSale: z.coerce.number().optional(),
 });
 
 const PartnershipSchema = z.object({
@@ -40,22 +23,22 @@ const PartnershipSchema = z.object({
   link_url: z.string().url("URL da parceria inválida").optional(),
 });
 
+const Genre = z.object({
+  name: z.string().optional(),
+});
+
 export const FormSchema = z.object({
   title: z.string().min(1, "O Nome do Jogo é obrigatório"),
-  market_link: z
-    .string()
-    .url("URL de mercado inválida")
-    .refine(
-      (link) => link.startsWith("https"),
-      "Por segurança, o link deve iniciar com https",
-    ),
+  category: z.enum(["NFT Jogos", "NFT Artes"], {
+    message: "Escolha uma categoria",
+  }),
   score: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor do Public Sale deve ser positivo")
     .optional(),
   investment: z.string().optional(),
-  network: z.string().min(1, "A rede é obrigatória"),
-  token: z.string().min(1, "O token é obrigatório"),
+  network: z.string().optional(),
+  token: z.string().optional(),
   comment_author: z.string().min(1, "O comentário do autor é obrigatório"),
   file: z
     .instanceof(globalThis.FileList, { message: "Escolha um arquivo valido" })
@@ -76,19 +59,15 @@ export const FormSchema = z.object({
           "Apenas imagens nos formatos JPEG, PNG, GIF ou WEBP são permitidas",
       },
     ),
-  links: z
-    .array(LinkSchema)
-    .min(1, "Você deve cadastrar 1 link no mínimo")
-    .default([]),
-  projectFeatures: z
-    .array(ProjectFeatureSchema)
-    .min(1, "Você deve cadastrar pelo menos uma feature."),
-  launchInfo: LaunchInfoSchema,
-  genres: z.array(Genre).min(1, "Você deve adicionar pelo menos 1 gênero"),
-  partnerships: z
-    .array(PartnershipSchema)
-    .min(1, "Você deve cadastrar 1 link no mínimo")
-    .default([]),
+  market_link: z.string().url("URL de mercado inválida").optional(),
+  authorId: z.string().optional(),
+
+  // Arrays e objetos opcionais
+  genres: z.array(Genre).optional(),
+  links: z.array(LinkSchema).optional(),
+  projectFeatures: z.array(ProjectFeatureSchema).optional(),
+  launchInfo: LaunchInfoSchema.optional(),
+  partnerships: z.array(PartnershipSchema).optional(),
 });
 
 export type FormData = z.infer<typeof FormSchema>;

@@ -50,7 +50,7 @@ const gameGenres = [
 
 interface IAddGenreSelectProps {
   append: UseFieldArrayAppend<any, any>;
-  fields: { name: string; id: string }[];
+  fields: { name?: string; id: string }[];
 }
 
 function AddGenreSelect({ append, fields }: IAddGenreSelectProps) {

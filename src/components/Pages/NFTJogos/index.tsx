@@ -9,12 +9,12 @@ import { isToday } from "date-fns";
 
 export function NFTJogosComponent() {
   const { search, filter } = usePostStore();
-  const { data: posts, isLoading } = useQuery({
-    queryKey: ["getPosts", { category: "NFT Jogos" }],
+  const { data: postsGames, isLoading } = useQuery({
+    queryKey: ["getPostsGames", { category: "NFT Jogos" }],
     queryFn: async () => await PostService.getPosts("NFT Jogos"),
   });
 
-  const filteredPosts = posts?.filter(({ title, createdAt }) => {
+  const filteredPosts = postsGames?.filter(({ title, createdAt }) => {
     const searchFilter = title.toLowerCase().includes(search.toLowerCase());
     const filterOptions = {
       recent: isToday(createdAt),
@@ -32,16 +32,16 @@ export function NFTJogosComponent() {
   const filterPostsByOrder =
     filter === "order" ? filterByOrder() : filteredPosts;
 
-  // eslint-disable-next-line no-unneeded-ternary
-  console.log(filterPostsByOrder ? filterPostsByOrder : posts);
-
   return (
     <div className="flex h-full w-full flex-col items-start gap-4 px-[5%]">
       <NFTHeaderFilter
         iconTitle={<IoGameControllerOutline />}
         title="NFT Jogos"
       />
-      <NFTPostList isLoading={isLoading} posts={filterPostsByOrder || posts} />
+      <NFTPostList
+        isLoading={isLoading}
+        posts={filterPostsByOrder || postsGames}
+      />
     </div>
   );
 }

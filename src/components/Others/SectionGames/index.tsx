@@ -5,8 +5,8 @@ import { IoGameControllerOutline } from "react-icons/io5";
 import SectionLine from "../SectionLine";
 
 export default function SectionGames() {
-  const { data: posts, isLoading } = useQuery({
-    queryKey: ["getPosts", { category: "NFT Jogos" }],
+  const { data: postsGames, isLoading } = useQuery({
+    queryKey: ["getPostsGames", { category: "NFT Jogos" }],
     queryFn: async () => await PostService.getPosts("NFT Jogos"),
   });
 
@@ -15,7 +15,7 @@ export default function SectionGames() {
       href="nft-jogos"
       iconTitle={<IoGameControllerOutline />}
       isLoading={isLoading}
-      posts={posts}
+      posts={postsGames}
       title="NFT Jogos"
     />
   );
