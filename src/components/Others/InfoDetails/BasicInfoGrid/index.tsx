@@ -12,7 +12,9 @@ export default function BasicInfoGrid() {
         <BasicInfo title="NOTA" info={String(post?.score) || ""} />
         <BasicInfo title="REDE" info={post?.network || ""} />
         <BasicInfo title="INVESTIMENTO" info={post?.investment || ""} />
-        <BasicInfo title="TOKEN" info={post?.token || ""} />
+        {post?.category === "NFT Jogos" && (
+          <BasicInfo title="TOKEN" info={post?.token || ""} />
+        )}
       </div>
     </div>
   );

@@ -20,12 +20,16 @@ function MarketInfoGrid() {
         <MarketInfo title="SUPPLY ATUAL">
           {String(launchInfo?.currentSupply) || ""}
         </MarketInfo>
-        <MarketInfo title="MARKET CAP">
-          {formatCurrency(launchInfo?.marketCap || 0)}
-        </MarketInfo>
-        <MarketInfo title="SUPPLY TOTAL">
-          {formatCurrency(Number(launchInfo?.totalSupply) || 0)}
-        </MarketInfo>
+        {post?.category === "NFT Jogos" && (
+          <>
+            <MarketInfo title="MARKET CAP">
+              {formatCurrency(launchInfo?.marketCap || 0)}
+            </MarketInfo>
+            <MarketInfo title="SUPPLY TOTAL">
+              {formatCurrency(Number(launchInfo?.totalSupply) || 0)}
+            </MarketInfo>
+          </>
+        )}
       </CardInfo>
 
       <CardInfo title="INFORMAÇÕES DE VENDA">
