@@ -4,10 +4,8 @@ import { FaDiscord, FaTelegram, FaTwitter } from "react-icons/fa6";
 
 export function LayoutFooter() {
   return (
-    <footer className="relative mt-auto w-full text-lootlab-bg-main-highlight/70 text-white">
-      <hr className="absolute -top-2 left-0 h-[1px] w-full border-0 bg-lootlab-font-highlight opacity-40" />
-
-      <div className="laptop:h-64 m-auto flex h-auto w-[90%] flex-col items-center justify-between py-4 md:flex-row">
+    <footer className="mt-auto w-full bg-lootlab-bg-main-highlight text-lootlab-font-base">
+      <div className="laptop:h-64 m-auto flex h-auto w-[90%] flex-col items-center justify-between bg-lootlab-bg-main-highlight py-4 md:flex-row">
         <div className="flex flex-col items-center gap-4 md:items-start">
           <Common.CommonLogo />
 
@@ -27,11 +25,11 @@ export function LayoutFooter() {
               Termos de Uso
             </Link>
           </nav> */}
-          <nav className="flex gap-4">
+          <nav className="flex gap-4 text-lootlab-font-base/70">
             <a
               href=""
               target="_blank"
-              className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:text-lootlab-bg-main"
+              className="flex h-10 w-10 items-center justify-center rounded-full transition-colors hover:text-lootlab-font-base"
               rel="noopener noreferrer"
             >
               <FaTwitter />
@@ -39,7 +37,7 @@ export function LayoutFooter() {
             <a
               href=""
               target="_blank"
-              className="flex h-10 w-10 items-center justify-center rounded-full text-lg transition-colors hover:text-lootlab-bg-main"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-lg transition-colors hover:text-lootlab-font-base"
               rel="noopener noreferrer"
             >
               <FaDiscord />
@@ -47,7 +45,7 @@ export function LayoutFooter() {
             <a
               href=""
               target="_blank"
-              className="flex h-10 w-10 items-center justify-center rounded-full text-lg transition-colors hover:text-lootlab-bg-main"
+              className="flex h-10 w-10 items-center justify-center rounded-full text-lg transition-colors hover:text-lootlab-font-base"
               rel="noopener noreferrer"
             >
               <FaTelegram />

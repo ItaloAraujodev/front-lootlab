@@ -117,6 +117,7 @@ interface Author {
 }
 
 export interface IPost {
+  category: "NFT Jogos" | "NFT Artes";
   id: string;
   title: string;
   market_link: string;
@@ -139,4 +140,8 @@ export interface IPost {
   Image: IImage[];
   genres: IGenre[];
   author: Author;
+}
+
+export interface IPostCategories {
+  category: "NFT Jogos" | "NFT Artes";
 }

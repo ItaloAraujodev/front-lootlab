@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 export default function NftJogos() {
   return (
-    <LayoutPage className="px-6 pt-10">
+    <LayoutPage className="pt-10">
       <Suspense>
         <NFTJogosComponent />
       </Suspense>

@@ -4,7 +4,7 @@ import { Suspense } from "react";
 
 export default function NftArtes() {
   return (
-    <LayoutPage className="px-6 pt-10">
+    <LayoutPage className="pt-10">
       <Suspense>
         <NFTArtesComponent />
       </Suspense>

@@ -12,11 +12,16 @@ interface IProps {
 function GameList({ posts, isLoading }: IProps) {
   if (!posts?.length && !isLoading) {
     return (
-      <div className="relative mx-auto flex h-48 w-full items-center justify-center">
-        <h1 className="text-3xl font-thin text-lootlab-font-highlight">
-          Nenhum jogo encontrado.
-        </h1>
-      </div>
+      <>
+        <Common.CommonTitleSection>
+          <Gamepad2 /> Explorador de Jogos
+        </Common.CommonTitleSection>
+        <div className="relative mx-auto flex h-48 w-full items-center justify-center">
+          <h1 className="text-3xl font-thin text-lootlab-font-highlight">
+            Nenhum jogo encontrado.
+          </h1>
+        </div>
+      </>
     );
   }
 

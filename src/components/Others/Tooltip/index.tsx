@@ -2,7 +2,7 @@ import type React from "react";
 
 function Tooltip({ children }: { children: React.ReactNode }) {
   return (
-    <div className="relative z-10">
+    <div className="relative z-50">
       <span className="peer">{children}</span>
       <div className="absolute -bottom-10 left-1/2 hidden peer-hover:block">
         <div className="relative w-fit text-nowrap rounded-lg bg-slate-600 px-2 py-[2px]">

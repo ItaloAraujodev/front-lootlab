@@ -71,6 +71,9 @@ const PartnershipSchema = z.object({
 export const FormSchemaToUpdate = z.object({
   title: z.string().optional(),
   market_link: z.string().optional(),
+  category: z.enum(["NFT Jogos", "NFT Artes"], {
+    message: "Escolha uma categoria",
+  }),
   score: z.coerce
     .number({ message: "Digite um número válido" })
     .nonnegative("O valor do Public Sale deve ser positivo")

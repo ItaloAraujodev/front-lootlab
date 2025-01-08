@@ -2,7 +2,7 @@
 import { TabsList, TabsTrigger } from "@/components/ui/tabs";
 import URLQuery from "@/tools/urlQuery";
 import { useRouter } from "next/navigation";
-import { formFields } from "../schemas/formFields";
+import { basicInfosMandatory } from "../schemas/formFields";
 import classNames from "classnames";
 import { useFormContext } from "react-hook-form";
 import type { FormData } from "../schemas";
@@ -36,9 +36,9 @@ function TabsTriggers() {
   return (
     <TabsList className="grid w-full grid-cols-4 bg-[#172944]">
       {triggers.map(({ value, text }) => {
-        const IsErrorInCard = formFields[value].some(
-          (field) => field in errors,
-        );
+        const IsErrorInCard =
+          value === "basic" &&
+          basicInfosMandatory.some((field) => field in errors);
         return (
           <TabsTrigger
             onClick={() =>
