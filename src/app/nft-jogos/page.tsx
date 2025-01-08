@@ -1,4 +1,3 @@
-"use client";
 import { LayoutPage } from "@/components/Layout";
 import { NFTJogosComponent } from "@/components/Pages/NFTJogos";
 import { Suspense } from "react";

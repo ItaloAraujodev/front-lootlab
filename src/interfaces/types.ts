@@ -27,3 +27,5 @@ export type TIcon =
   | "whitepaper"
   | "globe"
   | "coinmarketcap";
+
+export type filters = "recent" | "oldest" | "order" | "all";

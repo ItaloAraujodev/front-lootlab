@@ -34,18 +34,19 @@ function CarouselHeader() {
   }, [currIndex]);
 
   return (
-    <div className="h-full w-full">
+    <div className="h-[40vw] max-h-[800px] min-h-[400px] w-full">
       <SectionHeader
         sectionDescriptionTitle={banners[currIndex].descriptionTitle}
         sectionDescription={banners[currIndex].description}
         sectionTitle={banners[currIndex].logo}
       />
-      <div className="absolute inset-0 -z-20 h-full w-full overflow-hidden opacity-100">
+      <div className="absolute inset-0 -z-20 h-full w-full opacity-100">
         <Image
           src={banners[currIndex].banner}
           key={currIndex}
           alt="Banner Illuvium"
           className="h-full w-full object-cover object-top opacity-85"
+          priority
         />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-t from-lootlab-bg-main via-transparent" />
         <div className="pointer-events-none absolute inset-0 bg-gradient-to-r from-lootlab-bg-main via-transparent" />

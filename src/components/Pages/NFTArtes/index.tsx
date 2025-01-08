@@ -1,5 +1,5 @@
 "use client";
-import GameList from "@/components/Others/SectionGames/GameList";
+import GameList from "@/components/Others/SectionLine/GameList";
 import PostService from "@/services/post.service";
 import { useQuery } from "@tanstack/react-query";
 

@@ -13,7 +13,7 @@ import FinancialDateLaunch from "./FinancialDateLaunch";
 import CategoryRadio from "./CategoryRadio";
 
 const basicInfos: IInfosCard<FormData>[] = [
-  { title: "Nome do Jogo", pathRegister: "title" },
+  { title: "Nome do Projeto", pathRegister: "title" },
 ];
 
 function BasicContent() {
