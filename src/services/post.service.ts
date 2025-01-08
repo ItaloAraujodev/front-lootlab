@@ -76,9 +76,7 @@ export default class PostService {
       return response;
     } catch (error) {
       console.log("Erro ao enviar o post:", error);
-      throw new Error(
-        "Ocorreu um erro ao tentar publicar o post. Tente novamente.",
-      );
+      throw error;
     }
   }
 
@@ -115,9 +113,7 @@ export default class PostService {
       return response;
     } catch (error) {
       console.log("Erro ao enviar o post:", error);
-      throw new Error(
-        "Ocorreu um erro ao tentar publicar o post. Tente novamente.",
-      );
+      throw error;
     }
   }
 }
