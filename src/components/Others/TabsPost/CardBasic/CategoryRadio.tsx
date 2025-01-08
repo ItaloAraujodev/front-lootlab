@@ -21,6 +21,7 @@ function CategoryRadio() {
   const {
     control,
     formState: { errors },
+    setValue,
   } = useFormContext<FormData>();
   return (
     <FormField
@@ -33,7 +34,10 @@ function CategoryRadio() {
           </FormLabel>
           <FormControl>
             <RadioGroup
-              onValueChange={field.onChange}
+              onValueChange={(value) => {
+                field.onChange(value);
+                setValue("genres", []);
+              }}
               defaultValue="NFT Jogos"
               className="flex flex-col justify-center gap-2"
             >

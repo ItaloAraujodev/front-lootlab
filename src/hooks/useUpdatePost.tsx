@@ -27,6 +27,7 @@ function useUpdatePost(): UseUpdatePostReturn {
     resolver: zodResolver(FormSchemaToUpdate),
     defaultValues: {
       ...(post ? transformPostToSchema(post) : {}),
+      category: "NFT Jogos",
     },
   });
   const queryClient = useQueryClient();

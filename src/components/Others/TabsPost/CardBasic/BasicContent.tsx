@@ -24,17 +24,19 @@ function BasicContent() {
   } = useFormContext<FormData>();
   return (
     <CardContent className="space-y-2">
-      <Form.Label>
-        <AccordionManager
-          titleTrigger="Gêneros"
-          error={errors?.genres?.message}
-        >
-          <AccordionContent>
-            <FieldListGenres />
-          </AccordionContent>
-        </AccordionManager>
-        <Form.ErrorMessage error={errors?.genres?.message} />
-      </Form.Label>
+      {watch("category") === "NFT Jogos" && (
+        <Form.Label>
+          <AccordionManager
+            titleTrigger="Gêneros"
+            error={errors?.genres?.message}
+          >
+            <AccordionContent>
+              <FieldListGenres />
+            </AccordionContent>
+          </AccordionManager>
+          <Form.ErrorMessage error={errors?.genres?.message} />
+        </Form.Label>
+      )}
       <FinancialDateLaunch />
       {basicInfos.map(({ pathRegister, title, type }) => (
         <Form.Label title={title} htmlFor={title} key={title}>
