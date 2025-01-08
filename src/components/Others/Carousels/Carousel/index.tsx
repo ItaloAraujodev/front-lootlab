@@ -5,7 +5,7 @@ import useEmblaCarousel from "embla-carousel-react";
 import { ChevronLeft, ChevronRight } from "lucide-react";
 import { Button } from "@/components/ui/button";
 
-function CarouselPosts({ children }: { children: React.ReactNode }) {
+function Carousel({ children }: { children: React.ReactNode }) {
   const [emblaRef, emblaApi] = useEmblaCarousel({
     align: "start",
     skipSnaps: false,
@@ -64,4 +64,4 @@ function CarouselPosts({ children }: { children: React.ReactNode }) {
   );
 }
 
-export default CarouselPosts;
+export default Carousel;
