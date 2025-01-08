@@ -20,6 +20,7 @@ function DeatilsContent() {
     register,
     formState: { errors },
   } = useFormContext<FormData>();
+
   return (
     <CardContent className="space-y-2">
       <Form.Label>
