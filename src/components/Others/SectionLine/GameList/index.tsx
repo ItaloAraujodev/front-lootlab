@@ -7,14 +7,16 @@ import type { IPost } from "@/interfaces/interfaces";
 interface IProps {
   posts: IPost[];
   isLoading: boolean;
+  category: "nft-jogos" | "nft-artes";
 }
 
-function GameList({ posts, isLoading }: IProps) {
+function GameList({ category, posts, isLoading }: IProps) {
   if (!posts?.length && !isLoading) {
     return (
       <div className="relative mx-auto flex h-48 w-full items-center justify-center">
         <h1 className="text-3xl font-thin text-lootlab-font-highlight">
-          Nenhum jogo encontrado.
+          {category === "nft-artes" && "Nenhuma Arte Encontrada."}
+          {category === "nft-jogos" && "Nenhum jogo encontrado."}
         </h1>
       </div>
     );

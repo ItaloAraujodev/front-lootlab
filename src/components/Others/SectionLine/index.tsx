@@ -39,7 +39,7 @@ function SectionLine({
         </Link>
       </div>
 
-      <GameList posts={posts || []} isLoading={isLoading} />
+      <GameList category={href} posts={posts || []} isLoading={isLoading} />
     </div>
   );
 }
