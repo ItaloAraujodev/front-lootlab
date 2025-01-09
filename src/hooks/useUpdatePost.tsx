@@ -36,28 +36,36 @@ function useUpdatePost(): UseUpdatePostReturn {
   const { mutateAsync: updatePostFn, status } = useMutation({
     mutationFn: PostService.updatePost,
     onSuccess(data, variables) {
+      const queryKey =
+        JSON.parse(variables.data.postData || "{category: ''}").category ===
+        "NFT Jogos"
+          ? "getPostsGames"
+          : "getPostArtes";
       // seta o novo post no cache para nao precisar buscar novamente no banco
-      queryClient.setQueryData(["getPosts"], (oldData: IPost[] | undefined) => {
-        const newPost = {
-          id: variables.postId,
-          ...JSON.parse(variables.data.postData || ""),
-          Image: [
-            {
-              url: variables.data.file
-                ? URL.createObjectURL(variables.data.file)
-                : variables.imageUrl,
-            },
-          ],
-          slug: generateSlug(
-            JSON.parse(variables.data.postData || "{ title: '' }").title,
-          ),
-        };
+      queryClient.setQueryData(
+        [queryKey, { category: post?.category }],
+        (oldData: IPost[] | undefined) => {
+          const newPost = {
+            id: variables.postId,
+            ...JSON.parse(variables.data.postData || ""),
+            Image: [
+              {
+                url: variables.data.file
+                  ? URL.createObjectURL(variables.data.file)
+                  : variables.imageUrl,
+              },
+            ],
+            slug: generateSlug(
+              JSON.parse(variables.data.postData || "{ title: '' }").title,
+            ),
+          };
 
-        // Adiciona verificação se oldData existe
-        if (!oldData) return [newPost];
+          // Adiciona verificação se oldData existe
+          if (!oldData) return [newPost];
 
-        return [newPost, ...oldData.filter(({ id }) => id !== post?.id)];
-      });
+          return [newPost, ...oldData.filter(({ id }) => id !== post?.id)];
+        },
+      );
 
       if (data?.status === 200) {
         methods.reset();

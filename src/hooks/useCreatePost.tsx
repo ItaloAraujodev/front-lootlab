@@ -30,16 +30,28 @@ function useCreatePost() {
         Toast.success("Post criado com sucesso", 2000);
         methods.reset();
       }
-      console.log("AQUII DATRA", data);
+      const queryKey =
+        JSON.parse(variables.data.postData).category === "NFT Jogos"
+          ? "getPostsGames"
+          : "getPostArtes";
       // seta o novo post no cache para nao precisar buscar novamente no banco
-      queryClient.setQueryData(["getPosts"], (oldData: IPost[]) => {
-        const newPost = {
-          ...JSON.parse(variables.data.postData),
-          Image: [{ url: URL.createObjectURL(variables.data.file) }],
-          slug: generateSlug(JSON.parse(variables.data.postData).title),
-        };
-        return [newPost, ...(oldData || [])];
-      });
+      queryClient.setQueryData(
+        [
+          queryKey,
+          {
+            category: JSON.parse(variables.data.postData || "{ category: '' }")
+              .category,
+          },
+        ],
+        (oldData: IPost[]) => {
+          const newPost = {
+            ...JSON.parse(variables.data.postData),
+            Image: [{ url: URL.createObjectURL(variables.data.file) }],
+            slug: generateSlug(JSON.parse(variables.data.postData).title),
+          };
+          return [newPost, ...(oldData || [])];
+        },
+      );
     },
     onError(error) {
       const errorMessage =

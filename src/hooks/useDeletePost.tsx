@@ -18,10 +18,16 @@ function useDeletePost() {
   const { mutateAsync: deletePostFn, status } = useMutation({
     mutationFn: PostService.deletePost,
     onSuccess(data) {
+      const queryKey =
+        post?.category === "NFT Jogos" ? "getPostsGames" : "getPostArtes";
+      console.log(queryKey);
       // deleta o post no cache para nao precisar buscar novamente no banco os posts antigos.
-      queryClient.setQueryData(["getPosts"], (oldData: IPost[]) => {
-        return [...(oldData || []).filter(({ id }) => id !== post?.id)];
-      });
+      queryClient.setQueryData(
+        [queryKey, { category: post?.category }],
+        (oldData: IPost[]) => {
+          return [...(oldData || []).filter(({ id }) => id !== post?.id)];
+        },
+      );
       if (data) {
         Toast.success((data as any).data.message);
       }

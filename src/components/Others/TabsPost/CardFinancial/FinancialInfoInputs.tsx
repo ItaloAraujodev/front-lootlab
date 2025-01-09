@@ -29,31 +29,39 @@ function FinancialInfoInputs() {
         <Form.ErrorMessage error={errors.launchInfo?.currentSupply?.message} />
       </Form.Label>
 
-      {financialInfos.map(({ pathRegister, title }) => (
-        <Form.Label key={title} htmlFor={title} title={title}>
-          <NumericFormat
-            value={watch(`launchInfo.${pathRegister}`) as number}
-            onValueChange={(value) =>
-              setValue(
-                `launchInfo.${pathRegister}`,
-                (value.floatValue as string | number) || 0,
-              )
-            }
-            decimalSeparator=","
-            thousandSeparator="."
-            decimalScale={2}
-            className={classNames(
-              "h-9 w-full rounded-md border-[1px] border-lootlab-font-highlight bg-inherit px-3 py-1 text-base md:text-sm",
-              {
-                "border-red-500": errors.launchInfo?.[pathRegister]?.message,
-              },
-            )}
-          />
-          <Form.ErrorMessage
-            error={errors.launchInfo?.[pathRegister]?.message}
-          />
-        </Form.Label>
-      ))}
+      {financialInfos.map(({ pathRegister, title }) => {
+        if (
+          (pathRegister === "marketCap" || pathRegister === "totalSupply") &&
+          watch("category") === "NFT Artes"
+        ) {
+          return null;
+        }
+        return (
+          <Form.Label key={title} htmlFor={title} title={title}>
+            <NumericFormat
+              value={watch(`launchInfo.${pathRegister}`) as number}
+              onValueChange={(value) =>
+                setValue(
+                  `launchInfo.${pathRegister}`,
+                  (value.floatValue as string | number) || 0,
+                )
+              }
+              decimalSeparator=","
+              thousandSeparator="."
+              decimalScale={2}
+              className={classNames(
+                "h-9 w-full rounded-md border-[1px] border-lootlab-font-highlight bg-inherit px-3 py-1 text-base md:text-sm",
+                {
+                  "border-red-500": errors.launchInfo?.[pathRegister]?.message,
+                },
+              )}
+            />
+            <Form.ErrorMessage
+              error={errors.launchInfo?.[pathRegister]?.message}
+            />
+          </Form.Label>
+        );
+      })}
     </>
   );
 }
