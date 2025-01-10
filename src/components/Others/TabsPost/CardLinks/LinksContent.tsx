@@ -12,6 +12,7 @@ import AccordionManager from "../AccordionManager";
 function LinksContent() {
   const {
     formState: { errors },
+    watch,
   } = useFormContext<FormData>();
   return (
     <CardContent className="space-y-2">
@@ -34,17 +35,19 @@ function LinksContent() {
         </AccordionManager>
         <Form.ErrorMessage error={errors?.partnerships?.message} />
       </Form.Label>
-      <Form.Label>
-        <AccordionManager
-          titleTrigger="MarketCap Adress"
-          error={errors?.market_link?.message}
-        >
-          <AccordionContent>
-            <MarketCapAddresForm />
-          </AccordionContent>
-        </AccordionManager>
-        <Form.ErrorMessage error={errors?.market_link?.message} />
-      </Form.Label>
+      {watch("category") === "NFT Jogos" && (
+        <Form.Label>
+          <AccordionManager
+            titleTrigger="MarketCap Adress"
+            error={errors?.market_link?.message}
+          >
+            <AccordionContent>
+              <MarketCapAddresForm />
+            </AccordionContent>
+          </AccordionManager>
+          <Form.ErrorMessage error={errors?.market_link?.message} />
+        </Form.Label>
+      )}
     </CardContent>
   );
 }

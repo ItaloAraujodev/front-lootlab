@@ -16,9 +16,6 @@ import { zodResolver } from "@hookform/resolvers/zod";
 function useCreatePost() {
   const methods = useForm<FormData>({
     resolver: zodResolver(FormSchema),
-    defaultValues: {
-      category: "NFT Jogos",
-    },
   });
   const queryClient = useQueryClient();
   const { data: session } = useSession();
@@ -35,23 +32,15 @@ function useCreatePost() {
           ? "getPostsGames"
           : "getPostArtes";
       // seta o novo post no cache para nao precisar buscar novamente no banco
-      queryClient.setQueryData(
-        [
-          queryKey,
-          {
-            category: JSON.parse(variables.data.postData || "{ category: '' }")
-              .category,
-          },
-        ],
-        (oldData: IPost[]) => {
-          const newPost = {
-            ...JSON.parse(variables.data.postData),
-            Image: [{ url: URL.createObjectURL(variables.data.file) }],
-            slug: generateSlug(JSON.parse(variables.data.postData).title),
-          };
-          return [newPost, ...(oldData || [])];
-        },
-      );
+      queryClient.setQueryData([queryKey], (oldData: IPost[]) => {
+        const newPost = {
+          ...JSON.parse(variables.data.postData),
+          Image: [{ url: URL.createObjectURL(variables.data.file) }],
+          slug: generateSlug(JSON.parse(variables.data.postData).title),
+        };
+        console.log("NEWPOST", newPost);
+        return [newPost, ...(oldData || [])];
+      });
     },
     onError(error) {
       const errorMessage =

@@ -1,5 +1,5 @@
 import type { IPost } from "@/interfaces/interfaces";
-import CardGames from "../CardGames";
+import CardGames from "../CardPost";
 import SkeletonPost from "@/components/Skeletons/SkeletonPost";
 
 interface INFTPostListProps {

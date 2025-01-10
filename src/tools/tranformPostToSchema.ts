@@ -4,7 +4,7 @@ import type { IPost } from "@/interfaces/interfaces";
 export function transformPostToSchema(post: IPost): FormDataToUpdate {
   return {
     category: post.category,
-    oldImageUrl: post.Image[0].url,
+    oldImageUrl: post.Image[0].url || "",
     postId: post.id,
     title: post.title || "",
     market_link: post.market_link || "",

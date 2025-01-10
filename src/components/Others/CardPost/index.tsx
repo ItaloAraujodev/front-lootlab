@@ -1,13 +1,14 @@
 import type { IPost } from "@/interfaces/interfaces";
 import classNames from "classnames";
 import Link from "next/link";
+import Tooltip from "../Tooltip";
 
 interface IProps {
   post: IPost;
   className?: string;
 }
 
-export default function CardGames({ post, className }: IProps) {
+export default function CardPost({ post, className }: IProps) {
   const sizeGenres = post.genres.length;
   const remainingGenresCount = post.genres.slice(2, sizeGenres);
 
@@ -24,11 +25,13 @@ export default function CardGames({ post, className }: IProps) {
             className="h-full w-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:rounded-lg"
           />
         </div>
-        <div className="flex max-w-64 flex-col items-center gap-3 rounded-b-lg bg-inherit p-4">
-          <h3 className="mb-2 truncate text-lg font-semibold capitalize text-white">
-            {post.title}
-          </h3>
-          <div className="flex items-center gap-2">
+        <div className="flex max-w-64 flex-col items-start gap-3 rounded-b-lg bg-inherit py-4">
+          <Tooltip title={post.title}>
+            <h3 className="mb-2 w-52 truncate text-center text-lg font-semibold capitalize text-white">
+              {post.title}
+            </h3>
+          </Tooltip>
+          <div className="flex h-5 items-center gap-2 self-center">
             {post.genres.map(
               (category, index) =>
                 index < 2 && (

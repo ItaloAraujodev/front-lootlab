@@ -48,7 +48,7 @@ export interface IDataUpdatePost {
     file?: File; // O arquivo a ser enviado
   };
   authorizationToken: string;
-  imageUrl: string;
+  imageUrl?: string;
   authorId: string;
   postId: string;
 }

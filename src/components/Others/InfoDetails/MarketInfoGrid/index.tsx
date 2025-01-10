@@ -23,10 +23,10 @@ function MarketInfoGrid() {
         {post?.category === "NFT Jogos" && (
           <>
             <MarketInfo title="MARKET CAP">
-              {formatCurrency(launchInfo?.marketCap || 0)}
+              {formatCurrency(launchInfo?.marketCap)}
             </MarketInfo>
             <MarketInfo title="SUPPLY TOTAL">
-              {formatCurrency(Number(launchInfo?.totalSupply) || 0)}
+              {formatCurrency(Number(launchInfo?.totalSupply))}
             </MarketInfo>
           </>
         )}
@@ -34,10 +34,10 @@ function MarketInfoGrid() {
 
       <CardInfo title="INFORMAÇÕES DE VENDA">
         <MarketInfo title="PRIVATE SALE">
-          {formatCurrency(launchInfo?.privateSale || 0)}
+          {formatCurrency(launchInfo?.privateSale)}
         </MarketInfo>
         <MarketInfo title="PUBLIC SALE">
-          {formatCurrency(launchInfo?.publicSale || 0)}
+          {formatCurrency(launchInfo?.publicSale)}
         </MarketInfo>
       </CardInfo>
     </div>

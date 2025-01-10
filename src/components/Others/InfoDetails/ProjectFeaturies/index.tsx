@@ -36,15 +36,17 @@ function ProjectFeaturies() {
       </CardInfo>
 
       <CardInfo title="PARCERIAS">
-        {post?.partnerships.map((partner) => (
-          <Link
-            key={partner.id}
-            href={partner.link_url}
-            className="text-[#94a7c6] hover:text-[#ffffff]"
-          >
-            {partner.link_url}
-          </Link>
-        ))}
+        <div className="flex flex-col gap-2">
+          {post?.partnerships.map((partner) => (
+            <Link
+              key={partner.id}
+              href={partner.link_url}
+              className="text-[#94a7c6] hover:text-[#ffffff]"
+            >
+              {partner.link_url}
+            </Link>
+          ))}
+        </div>
       </CardInfo>
     </div>
   );

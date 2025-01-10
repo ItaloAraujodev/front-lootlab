@@ -27,9 +27,9 @@ function useUpdatePost(): UseUpdatePostReturn {
     resolver: zodResolver(FormSchemaToUpdate),
     defaultValues: {
       ...(post ? transformPostToSchema(post) : {}),
-      category: "NFT Jogos",
     },
   });
+  console.log(methods.formState.errors);
   const queryClient = useQueryClient();
   const { data: session } = useSession();
 
@@ -41,31 +41,29 @@ function useUpdatePost(): UseUpdatePostReturn {
         "NFT Jogos"
           ? "getPostsGames"
           : "getPostArtes";
+
       // seta o novo post no cache para nao precisar buscar novamente no banco
-      queryClient.setQueryData(
-        [queryKey, { category: post?.category }],
-        (oldData: IPost[] | undefined) => {
-          const newPost = {
-            id: variables.postId,
-            ...JSON.parse(variables.data.postData || ""),
-            Image: [
-              {
-                url: variables.data.file
-                  ? URL.createObjectURL(variables.data.file)
-                  : variables.imageUrl,
-              },
-            ],
-            slug: generateSlug(
-              JSON.parse(variables.data.postData || "{ title: '' }").title,
-            ),
-          };
+      queryClient.setQueryData([queryKey], (oldData: IPost[] | undefined) => {
+        const newPost = {
+          id: variables.postId,
+          ...JSON.parse(variables.data.postData || ""),
+          Image: [
+            {
+              url: variables.data.file
+                ? URL.createObjectURL(variables.data.file)
+                : variables.imageUrl,
+            },
+          ],
+          slug: generateSlug(
+            JSON.parse(variables.data.postData || "{ title: '' }").title,
+          ),
+        };
 
-          // Adiciona verificação se oldData existe
-          if (!oldData) return [newPost];
+        // Adiciona verificação se oldData existe
+        if (!oldData) return [newPost];
 
-          return [newPost, ...oldData.filter(({ id }) => id !== post?.id)];
-        },
-      );
+        return [newPost, ...oldData.filter(({ id }) => id !== post?.id)];
+      });
 
       if (data?.status === 200) {
         methods.reset();
@@ -86,6 +84,17 @@ function useUpdatePost(): UseUpdatePostReturn {
 
     // Remove file de data antes para enviar separadamente para a API.
     const { file, oldImageUrl, postId, ...postData } = data;
+
+    console.log({
+      data: {
+        postData: JSON.stringify(postData),
+        file: file ? file[0] : new DataTransfer().files[0],
+      },
+      imageUrl: oldImageUrl,
+      postId,
+      authorId: session?.user.id,
+      authorizationToken: session?.accessToken,
+    });
 
     await updatePostFn({
       data: {

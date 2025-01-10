@@ -11,6 +11,7 @@ import { AccordionContent } from "@/components/ui/accordion";
 import FieldListGenres from "./FieldListGenres";
 import FinancialDateLaunch from "./FinancialDateLaunch";
 import CategoryRadio from "./CategoryRadio";
+// import { useEffect } from "react";
 
 const basicInfos: IInfosCard<FormData>[] = [
   { title: "Nome do Projeto", pathRegister: "title" },
@@ -21,7 +22,10 @@ function BasicContent() {
     register,
     formState: { errors },
     watch,
+    // setValue,
+    // getValues,
   } = useFormContext<FormData>();
+
   return (
     <CardContent className="space-y-2">
       {watch("category") === "NFT Jogos" && (

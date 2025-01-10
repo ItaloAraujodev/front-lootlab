@@ -86,6 +86,7 @@ export default class PostService {
     authorId,
     postId,
   }: IDataUpdatePost) {
+    console.log("DENTRO DA FUNCAO UPDATEPOST: ", data);
     try {
       let response;
       const formData = new FormData();

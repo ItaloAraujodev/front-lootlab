@@ -1,5 +1,5 @@
 "use client";
-import CardGames from "../../CardGames";
+import CardGames from "../../CardPost";
 import CarouselPosts from "../../Carousels/Carousel";
 import SkeletonPost from "@/components/Skeletons/SkeletonPost";
 import type { IPost } from "@/interfaces/interfaces";

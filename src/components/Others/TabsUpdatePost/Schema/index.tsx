@@ -107,7 +107,7 @@ export const FormSchemaToUpdate = z.object({
   genres: z.array(Genre).optional(),
   partnerships: z.array(PartnershipSchema).default([]).optional(),
   postId: z.string(),
-  oldImageUrl: z.string(),
+  oldImageUrl: z.string().optional(),
 });
 
 export type FormDataToUpdate = z.infer<typeof FormSchemaToUpdate>;
