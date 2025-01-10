@@ -34,7 +34,6 @@ function NFTHeaderFilter({ iconTitle, title }: INFTHeaderFilterProps) {
   });
 
   const isEmpty = !search && !(filter !== "all");
-  console.log(isEmpty);
 
   const handleCleanFilters = () => {
     setValue("search", "");

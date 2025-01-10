@@ -6,7 +6,7 @@ import { IoBrushOutline } from "react-icons/io5";
 
 function SectionArtes() {
   const { data: postsArtes, isLoading: isLoadingArtes } = useQuery({
-    queryKey: ["getPostsGames"],
+    queryKey: ["postsArtes"],
     queryFn: async () => await PostService.getPosts("NFT Artes"),
   });
 

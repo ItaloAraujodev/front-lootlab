@@ -6,7 +6,7 @@ import SectionLine from "../SectionLine";
 
 export default function SectionGames() {
   const { data: postsGames, isLoading } = useQuery({
-    queryKey: ["getPostsGames"],
+    queryKey: ["postsGames"],
     queryFn: async () => await PostService.getPosts("NFT Jogos"),
   });
 

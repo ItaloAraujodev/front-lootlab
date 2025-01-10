@@ -39,8 +39,8 @@ function useUpdatePost(): UseUpdatePostReturn {
       const queryKey =
         JSON.parse(variables.data.postData || "{category: ''}").category ===
         "NFT Jogos"
-          ? "getPostsGames"
-          : "getPostArtes";
+          ? "postsGames"
+          : "postArtes";
 
       // seta o novo post no cache para nao precisar buscar novamente no banco
       queryClient.setQueryData([queryKey], (oldData: IPost[] | undefined) => {
@@ -84,17 +84,6 @@ function useUpdatePost(): UseUpdatePostReturn {
 
     // Remove file de data antes para enviar separadamente para a API.
     const { file, oldImageUrl, postId, ...postData } = data;
-
-    console.log({
-      data: {
-        postData: JSON.stringify(postData),
-        file: file ? file[0] : new DataTransfer().files[0],
-      },
-      imageUrl: oldImageUrl,
-      postId,
-      authorId: session?.user.id,
-      authorizationToken: session?.accessToken,
-    });
 
     await updatePostFn({
       data: {

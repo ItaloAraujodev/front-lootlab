@@ -29,8 +29,8 @@ function useCreatePost() {
       }
       const queryKey =
         JSON.parse(variables.data.postData).category === "NFT Jogos"
-          ? "getPostsGames"
-          : "getPostArtes";
+          ? "postsGames"
+          : "postsArtes";
       // seta o novo post no cache para nao precisar buscar novamente no banco
       queryClient.setQueryData([queryKey], (oldData: IPost[]) => {
         const newPost = {
@@ -38,7 +38,7 @@ function useCreatePost() {
           Image: [{ url: URL.createObjectURL(variables.data.file) }],
           slug: generateSlug(JSON.parse(variables.data.postData).title),
         };
-        console.log("NEWPOST", newPost);
+
         return [newPost, ...(oldData || [])];
       });
     },
