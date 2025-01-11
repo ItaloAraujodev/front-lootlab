@@ -15,7 +15,7 @@ function GameList({ category, posts, isLoading }: IProps) {
     return (
       <div className="relative mx-auto flex h-48 w-full items-center justify-center">
         <h1 className="text-3xl font-thin text-lootlab-font-highlight">
-          {category === "nft-artes" && "Nenhuma Arte Encontrada."}
+          {category === "nft-artes" && "Nenhuma arte encontrada."}
           {category === "nft-jogos" && "Nenhum jogo encontrado."}
         </h1>
       </div>

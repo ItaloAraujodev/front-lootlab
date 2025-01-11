@@ -1,4 +1,8 @@
-export function formatCurrency(value?: number): string {
+export function formatCurrency(
+  value?: number,
+  category?: string,
+  isView?: true,
+): string {
   if (typeof value === "undefined") return "TBA";
 
   const units = ["", "K", "M", "B", "T"];
@@ -14,6 +18,11 @@ export function formatCurrency(value?: number): string {
 
   const formattedNumber = Number.isInteger(number)
     ? number.toString()
-    : number.toFixed(2).replace(".", ",");
+    : parseFloat(number.toFixed(3)).toString().replace(".", ",");
+
+  if (category === "NFT Artes" && isView) {
+    return `${formattedNumber}${units[unitIndex]} - NFTs`;
+  }
+
   return `US$ ${formattedNumber}${units[unitIndex]}`;
 }

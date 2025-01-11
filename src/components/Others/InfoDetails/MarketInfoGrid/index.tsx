@@ -12,33 +12,47 @@ function MarketInfoGrid() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <CardInfo title="INFORMAÇÕES DE MERCADO">
-        <MarketInfo title="LAUNCH">
-          <span>
-            {String(new Date(launchInfo?.launchDate || "").getFullYear()) || ""}
-          </span>
-        </MarketInfo>
-        <MarketInfo title="SUPPLY ATUAL">
-          {String(launchInfo?.currentSupply) || ""}
-        </MarketInfo>
-        {post?.category === "NFT Jogos" && (
-          <>
-            <MarketInfo title="MARKET CAP">
-              {formatCurrency(launchInfo?.marketCap)}
-            </MarketInfo>
-            <MarketInfo title="SUPPLY TOTAL">
-              {formatCurrency(Number(launchInfo?.totalSupply))}
-            </MarketInfo>
-          </>
-        )}
+        <div className="space-y-1">
+          <MarketInfo title="Launch">
+            <span>
+              {String(new Date(launchInfo?.launchDate || "").getFullYear()) ||
+                ""}
+            </span>
+          </MarketInfo>
+          <MarketInfo title="Supply Atual">
+            {post?.category === "NFT Artes"
+              ? formatCurrency(
+                  Number(launchInfo?.currentSupply),
+                  post?.category,
+                  true,
+                )
+              : String(launchInfo?.currentSupply) || ""}
+          </MarketInfo>
+          {post?.category === "NFT Jogos" && (
+            <>
+              <MarketInfo title="Market Cap">
+                {formatCurrency(launchInfo?.marketCap, post?.category)}
+              </MarketInfo>
+              <MarketInfo title="Supply Total">
+                {formatCurrency(
+                  Number(launchInfo?.totalSupply),
+                  post?.category,
+                )}
+              </MarketInfo>
+            </>
+          )}
+        </div>
       </CardInfo>
 
       <CardInfo title="INFORMAÇÕES DE VENDA">
-        <MarketInfo title="PRIVATE SALE">
-          {formatCurrency(launchInfo?.privateSale)}
-        </MarketInfo>
-        <MarketInfo title="PUBLIC SALE">
-          {formatCurrency(launchInfo?.publicSale)}
-        </MarketInfo>
+        <div className="space-y-1">
+          <MarketInfo title="Private Sale">
+            {formatCurrency(launchInfo?.privateSale, post?.category, true)}
+          </MarketInfo>
+          <MarketInfo title="Public Sale">
+            {formatCurrency(launchInfo?.publicSale, post?.category, true)}
+          </MarketInfo>
+        </div>
       </CardInfo>
     </div>
   );

@@ -71,8 +71,14 @@ function useUpdatePost(): UseUpdatePostReturn {
       }
     },
     onError(error) {
-      console.log("Erro ao publicar o post.", error.message);
-      Toast.error("Erro ao publicar o post.", 2000);
+      console.log(
+        "Algo inesperado aconteceu, tente novamente mais tarde.",
+        error.message,
+      );
+      Toast.error(
+        "Algo inesperado aconteceu, tente novamente mais tarde.",
+        2000,
+      );
     },
   });
 

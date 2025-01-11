@@ -44,7 +44,8 @@ function useCreatePost() {
     },
     onError(error) {
       const errorMessage =
-        (error as any)?.response?.data?.message || "Erro ao publicar o post.";
+        (error as any)?.response?.data?.message ||
+        "Algo inesperado aconteceu, tente novamente mais tarde.";
       Toast.error(errorMessage);
     },
   });
