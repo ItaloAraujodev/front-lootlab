@@ -17,7 +17,7 @@ const LinkSchema = z.object({
 
 // Esquema para validação de ProjectFeatures
 const ProjectFeatureSchema = z.object({
-  id: z.string(),
+  id: z.string().optional(),
   title: z.string().optional(),
   isFeature: z.boolean().optional(),
 });
