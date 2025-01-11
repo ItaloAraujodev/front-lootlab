@@ -1,60 +1,96 @@
 import type { IPost } from "@/interfaces/interfaces";
-import classNames from "classnames";
+import { cn } from "@/lib/utils";
+import Image from "next/image";
 import Link from "next/link";
-import Tooltip from "../Tooltip";
+import { useState } from "react";
 
-interface IProps {
+interface CardPostProps {
   post: IPost;
   className?: string;
 }
 
-export default function CardPost({ post, className }: IProps) {
-  const sizeGenres = post.genres.length;
-  const remainingGenresCount = post.genres.slice(2, sizeGenres);
+export default function CardPost({ post, className }: CardPostProps) {
+  const [isImageLoading, setIsImageLoading] = useState(true);
+  const displayedGenres = post.genres.slice(0, 2);
+  const remainingGenres = post.genres.slice(2);
+  const hasMoreGenres = remainingGenres.length > 0;
 
   return (
-    <div className={classNames(className, "embla__slide flex-[0_0_auto] py-4")}>
+    <div className={cn("embla__slide mt-6 flex-[0_0_auto]", className)}>
       <Link
         href={`/details/${post.slug}`}
-        className="group relative flex flex-col justify-center rounded-lg border-[1px] border-lootlab-font-highlight border-opacity-40 bg-inherit p-2 transition-all duration-300 ease-out md:hover:-translate-y-2"
+        className="group relative flex h-[360px] w-[250px] flex-col overflow-hidden rounded-xl bg-slate-800/40 transition-all duration-500 ease-out hover:bg-slate-700/40 md:hover:-translate-y-2"
+        aria-label={`View details for ${post.title}`}
       >
-        <div className="aspect-square h-52 w-52 overflow-hidden rounded-t-md">
-          <img
+        {/* Overlay de brilho */}
+        <div
+          className="absolute inset-0 z-0 hidden bg-gradient-to-r from-transparent via-white/5 to-transparent opacity-0 transition-opacity duration-700 group-hover:opacity-100 md:block"
+          style={{
+            transform: "translateX(-100%)",
+            animation: "shine 2s infinite",
+          }}
+        />
+
+        {/* Container da imagem com gradiente */}
+        <div className="relative h-[280px] w-full overflow-hidden">
+          <div className="absolute inset-0 z-10 bg-gradient-to-b from-transparent via-transparent to-slate-800/90" />
+          <Image
             src={post.Image[0].url}
-            alt={`image do jogo ${post.title}`}
-            className="h-full w-full object-cover transition-all duration-300 group-hover:scale-110 group-hover:rounded-lg"
+            alt={`Cover image for ${post.title}`}
+            fill
+            sizes="280px"
+            className={cn(
+              "object-cover transition-all duration-700 ease-out group-hover:scale-110",
+              isImageLoading ? "blur-sm" : "blur-0",
+            )}
+            onLoadingComplete={() => setIsImageLoading(false)}
+            priority={false}
           />
-        </div>
-        <div className="flex max-w-64 flex-col items-start gap-3 rounded-b-lg bg-inherit py-4">
-          <Tooltip title={post.title}>
-            <h3 className="mb-2 w-52 truncate text-center text-lg font-semibold capitalize text-white">
+
+          {/* Título sobreposto na imagem */}
+          <div className="absolute bottom-0 z-20 w-full p-4">
+            <h3 className="w-full truncate text-lg font-bold text-white transition-colors duration-300 group-hover:text-white/90">
               {post.title}
             </h3>
-          </Tooltip>
-          <div className="flex h-5 items-center gap-2 self-center">
-            {post.genres.map(
-              (category, index) =>
-                index < 2 && (
-                  <span
-                    key={category.name}
-                    className="flex items-center rounded-full bg-white/10 px-2 py-1 text-xs text-white/80"
-                  >
-                    {category.name}
-                  </span>
-                ),
-            )}
-            {sizeGenres > 2 && (
-              <div className="peer flex h-5 w-5 items-center justify-center rounded-full bg-slate-800/70 text-xs text-white/80">
-                <span>{sizeGenres - 2}+</span>
+          </div>
+        </div>
+
+        {/* Container dos gêneros */}
+        <div className="flex h-[80px] w-full items-center gap-2 p-4">
+          <div className="flex flex-wrap gap-2">
+            {displayedGenres.map((genre) => (
+              <span
+                key={genre.name}
+                className="rounded-full bg-white/10 px-3 py-1 text-sm font-medium text-white/90 transition-all duration-300 group-hover:bg-white/15"
+              >
+                {genre.name}
+              </span>
+            ))}
+
+            {hasMoreGenres && (
+              <div className="group/tooltip relative">
+                <button
+                  type="button"
+                  className="flex h-7 items-center justify-center rounded-full bg-white/10 px-3 text-sm font-medium text-white/90 transition-all duration-300 hover:bg-white/15"
+                  aria-label={`Show ${remainingGenres.length} more genres`}
+                >
+                  +{remainingGenres.length}
+                </button>
+
+                <div className="invisible absolute bottom-full right-0 z-30 mb-2 min-w-32 translate-y-1 rounded-lg bg-slate-700 opacity-0 shadow-xl transition-all duration-300 group-hover/tooltip:visible group-hover/tooltip:translate-y-0 group-hover/tooltip:opacity-100">
+                  <div className="flex flex-col gap-1 p-2">
+                    {remainingGenres.map((genre) => (
+                      <span
+                        key={genre.name}
+                        className="whitespace-nowrap text-sm text-white/90"
+                      >
+                        {genre.name}
+                      </span>
+                    ))}
+                  </div>
+                </div>
               </div>
             )}
-            <div className="absolute bottom-14 right-6 z-20 hidden overflow-y-auto text-nowrap rounded-lg bg-slate-600 px-2 text-white peer-hover:block">
-              <div className="flex flex-col">
-                {remainingGenresCount.map(({ name }) => (
-                  <span key={name}>{name}</span>
-                ))}
-              </div>
-            </div>
           </div>
         </div>
       </Link>
