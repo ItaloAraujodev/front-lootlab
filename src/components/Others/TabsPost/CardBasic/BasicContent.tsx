@@ -68,7 +68,7 @@ function BasicContent() {
       </Form.Label>
       <Form.Label htmlFor="comment" title="Comentário">
         <Textarea
-          className={classNames("min-h-24", {
+          className={classNames("min-h-24 overflow-hidden border", {
             "border-red-500": errors.comment_author?.message,
           })}
           id="comment"

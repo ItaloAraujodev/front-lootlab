@@ -1,12 +1,32 @@
-interface IProps {
+import { cva, type VariantProps } from "class-variance-authority";
+
+const cardVariants = cva(
+  "rounded-lg border border-[#1c2f4a] bg-[#132238] p-6 flex flex-col",
+  {
+    variants: {
+      size: {
+        sm: "basis-40",
+        default: "basis-auto",
+      },
+    },
+    defaultVariants: {
+      size: "default",
+    },
+  },
+);
+
+interface IProps extends VariantProps<typeof cardVariants> {
   title: string;
-  info: string;
+  info: string | number;
 }
-export default function BasicInfo({ info, title }: IProps) {
+
+export default function BasicInfo({ info, title, size }: IProps) {
   return (
-    <div className="rounded-lg border-[#1c2f4a] bg-[#132238] p-6">
-      <h2 className="mb-4 text-base font-semibold lg:text-lg">{title}</h2>
-      <div className="mb-4 text-xl capitalize md:text-2xl">{info}</div>
+    <div className={cardVariants({ size })}>
+      <h2 className="text-sm font-medium uppercase tracking-wider text-white/70">
+        {title}
+      </h2>
+      <div className="mt-2 text-3xl font-semibold text-white">{info}</div>
     </div>
   );
 }
