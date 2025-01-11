@@ -1,5 +1,3 @@
-"use client";
-
 import usePostStore from "@/stores/post.store";
 import CardInfo from "../CardInfo";
 import MarketInfo from "../MarketInfo";
@@ -9,34 +7,52 @@ function MarketInfoGrid() {
   const { post } = usePostStore();
   const launchInfo = post?.launchInfo;
 
+  // Função auxiliar para converter valores com segurança
+  const safeNumber = (value: any) => {
+    if (value === undefined || value === null || value === "") return 0;
+    const num = Number(value);
+    return isNaN(num) ? 0 : num;
+  };
+
+  // Função para formatar o supply atual com base na categoria
+  const formatSupply = (value: any, category: string) => {
+    const supply = safeNumber(value);
+    if (supply === 0) return "";
+
+    return category === "NFT Artes"
+      ? formatCurrency(supply, category, true)
+      : String(supply);
+  };
+
   return (
     <div className="grid gap-6 md:grid-cols-2">
       <CardInfo title="INFORMAÇÕES DE MERCADO">
         <div className="space-y-1">
           <MarketInfo title="Launch">
             <span>
-              {String(new Date(launchInfo?.launchDate || "").getFullYear()) ||
-                ""}
+              {launchInfo?.launchDate
+                ? String(new Date(launchInfo.launchDate).getFullYear())
+                : ""}
             </span>
           </MarketInfo>
+
           <MarketInfo title="Supply Atual">
-            {post?.category === "NFT Artes"
-              ? formatCurrency(
-                  Number(launchInfo?.currentSupply),
-                  post?.category,
-                  true,
-                )
-              : String(launchInfo?.currentSupply) || ""}
+            {formatSupply(launchInfo?.currentSupply, post?.category || "")}
           </MarketInfo>
+
           {post?.category === "NFT Jogos" && (
             <>
               <MarketInfo title="Market Cap">
-                {formatCurrency(launchInfo?.marketCap, post?.category)}
+                {formatCurrency(
+                  safeNumber(launchInfo?.marketCap),
+                  post.category,
+                )}
               </MarketInfo>
+
               <MarketInfo title="Supply Total">
                 {formatCurrency(
-                  Number(launchInfo?.totalSupply),
-                  post?.category,
+                  safeNumber(launchInfo?.totalSupply),
+                  post.category,
                 )}
               </MarketInfo>
             </>
@@ -47,10 +63,19 @@ function MarketInfoGrid() {
       <CardInfo title="INFORMAÇÕES DE VENDA">
         <div className="space-y-1">
           <MarketInfo title="Private Sale">
-            {formatCurrency(launchInfo?.privateSale, post?.category, true)}
+            {formatCurrency(
+              safeNumber(launchInfo?.privateSale),
+              post?.category || "",
+              true,
+            )}
           </MarketInfo>
+
           <MarketInfo title="Public Sale">
-            {formatCurrency(launchInfo?.publicSale, post?.category, true)}
+            {formatCurrency(
+              safeNumber(launchInfo?.publicSale),
+              post?.category || "",
+              true,
+            )}
           </MarketInfo>
         </div>
       </CardInfo>
