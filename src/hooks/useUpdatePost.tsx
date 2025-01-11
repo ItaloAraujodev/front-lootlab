@@ -29,7 +29,7 @@ function useUpdatePost(): UseUpdatePostReturn {
       ...(post ? transformPostToSchema(post) : {}),
     },
   });
-  console.log(methods.formState.errors);
+
   const queryClient = useQueryClient();
   const { data: session } = useSession();
 

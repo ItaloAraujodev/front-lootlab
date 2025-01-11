@@ -37,7 +37,7 @@ function CategoryRadio() {
                 field.onChange(value);
                 setValue("genres", []);
               }}
-              defaultValue="NFT Jogos"
+              value={field.value}
               className="flex flex-col justify-center gap-2"
             >
               <div className="flex gap-4">
