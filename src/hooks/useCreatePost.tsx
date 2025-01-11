@@ -16,6 +16,9 @@ import { zodResolver } from "@hookform/resolvers/zod";
 function useCreatePost() {
   const methods = useForm<FormData>({
     resolver: zodResolver(FormSchema),
+    defaultValues: {
+      category: "NFT Jogos",
+    },
   });
   const queryClient = useQueryClient();
   const { data: session } = useSession();
