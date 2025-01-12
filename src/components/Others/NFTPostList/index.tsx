@@ -9,7 +9,7 @@ interface INFTPostListProps {
 
 function NFTPostList({ isLoading, posts }: INFTPostListProps) {
   return (
-    <div className="flex h-full w-full flex-wrap items-start gap-4">
+    <div className="flex h-full w-full flex-wrap justify-center gap-4 md:justify-start">
       {!isLoading &&
         posts?.map((post) => <CardGames key={post.title} post={post} />)}
       {isLoading &&

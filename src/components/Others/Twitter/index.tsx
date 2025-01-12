@@ -54,14 +54,14 @@ function TwitterFeed({ twitterUrl }: TwitterFeedProps) {
   const twitterNamePage = normalizedUrl.split("/")[3];
 
   return (
-    <div>
-      <h1 className="mb-4 text-xl text-white">
+    <div className="w-full">
+      <h1 className="mb-4 text-base text-white">
         Feed da página {twitterNamePage}
       </h1>
       <a
-        className="twitter-timeline text-xl text-white"
+        className="twitter-timeline data-width:w-full text-xl text-white"
         href={normalizedUrl} // URL normalizada para twitter.com
-        data-width="600"
+        // data-width="600"
         data-height="250"
         data-chrome="noheader nofooter noborders"
       >

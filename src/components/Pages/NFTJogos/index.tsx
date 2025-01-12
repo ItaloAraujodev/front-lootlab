@@ -1,16 +1,12 @@
 "use client";
 import NFTHeaderFilter from "@/components/Others/NFTHeaderFilter";
 import NFTPostList from "@/components/Others/NFTPostList";
-import PostService from "@/services/post.service";
 import { IoGameControllerOutline } from "react-icons/io5";
-import { useQuery } from "@tanstack/react-query";
 import useFilterPosts from "@/hooks/useFilterPosts";
+import useGetNFTPosts from "@/hooks/useGetNFTPosts";
 
 export function NFTJogosComponent() {
-  const { data: postsGames, isLoading } = useQuery({
-    queryKey: ["getPostsGames"],
-    queryFn: async () => await PostService.getPosts("NFT Jogos"),
-  });
+  const { isLoading, posts: postsGames } = useGetNFTPosts("getPostsGames");
 
   const filteredPosts = useFilterPosts(postsGames);
 

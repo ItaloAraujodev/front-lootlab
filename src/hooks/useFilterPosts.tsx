@@ -6,7 +6,6 @@ function useFilterPosts(posts?: IPost[]) {
   const filteredPosts = posts?.filter(({ title }) =>
     title.toLowerCase().includes(search.toLowerCase()),
   );
-  console.log(search, filter);
 
   const sortedPostByFilter = {
     recent: () =>
