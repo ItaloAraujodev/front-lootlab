@@ -44,7 +44,6 @@ function NFTHeaderFilter({ iconTitle, title }: INFTHeaderFilterProps) {
 
   const handleSetFilters = () => {
     setSearch(watch("search"));
-    setFilter(watch("filter"));
   };
 
   return (
@@ -58,7 +57,13 @@ function NFTHeaderFilter({ iconTitle, title }: INFTHeaderFilterProps) {
           control={control}
           name="filter"
           render={({ field }) => (
-            <Select onValueChange={field.onChange} value={field.value}>
+            <Select
+              onValueChange={(value) => {
+                field.onChange(value);
+                setFilter(watch("filter"));
+              }}
+              value={field.value}
+            >
               <SelectTrigger className="w-[265px] text-lootlab-font-base">
                 <SelectValue placeholder="Selecione um Filtro" />
               </SelectTrigger>
