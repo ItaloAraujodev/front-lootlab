@@ -1,39 +1,71 @@
 import { useEffect } from "react";
 
-interface ITwitterFeedProps {
-  twitterUrl: string;
+interface TwitterFeedProps {
+  twitterUrl: string; // O link do perfil do Twitter ou X
 }
-function TwitterFeed({ twitterUrl }: ITwitterFeedProps) {
-  const twitterDomains = ["twitter.com", "/x.com"];
+
+function TwitterFeed({ twitterUrl }: TwitterFeedProps) {
   useEffect(() => {
-    const script = document.createElement("script");
-    script.src = "https://platform.twitter.com/widgets.js";
-    script.async = true;
-    document.body.appendChild(script);
+    // Adiciona o script do Twitter na página, se ainda não foi adicionado
+    const twitterScript = document.getElementById("twitter-wjs");
+    if (!twitterScript) {
+      const script = document.createElement("script");
+      script.id = "twitter-wjs";
+      script.src = "https://platform.twitter.com/widgets.js";
+      script.async = true;
+      script.onload = () => {
+        // Força o carregamento do widget após o script ser carregado
+        setTimeout(() => {
+          (window as any).twttr?.widgets?.load();
+        }, 1000); // Espera 1 segundo antes de tentar carregar novamente
+      };
+      document.body.appendChild(script);
+    } else {
+      // Recarrega os widgets do Twitter, caso o script já exista
+      setTimeout(() => {
+        (window as any).twttr?.widgets?.load();
+      }, 1000); // Espera 1 segundo antes de tentar carregar novamente
+    }
+  }, [twitterUrl]); // Atualiza sempre que a URL mudar
 
-    return () => {
-      document.body.removeChild(script);
-    };
-  }, []);
+  // Corrige URLs de x.com para twitter.com
+  const normalizeUrl = (url: string): string => {
+    if (url.includes("x.com")) {
+      return url.replace("x.com", "twitter.com");
+    }
+    return url;
+  };
 
-  if (!twitterDomains.some((domain) => twitterUrl.includes(domain))) {
-    return <h1 className="text-xl text-white">URL inválida para o Twitter.</h1>;
+  const normalizedUrl = normalizeUrl(twitterUrl);
+
+  // Valida o URL do Twitter
+  const isValidTwitterUrl = (url: string): boolean => {
+    return /^https?:\/\/(www\.)?twitter\.com\/[a-zA-Z0-9_]+\/?$/.test(url);
+  };
+
+  if (!isValidTwitterUrl(normalizedUrl)) {
+    return (
+      <h1 className="text-xl text-white">
+        URL inválida. Insira um link válido de perfil do Twitter.
+      </h1>
+    );
   }
 
-  const urlParts = twitterUrl.split("/");
-  const site = urlParts[urlParts.length - 1];
+  const twitterNamePage = normalizedUrl.split("/")[3];
 
   return (
     <div>
-      <h1>Feed do Twitter Incorporado</h1>
+      <h1 className="mb-4 text-xl text-white">
+        Feed da página {twitterNamePage}
+      </h1>
       <a
-        className="twitter-timeline"
-        href={`https://twitter.com/${site}`}
+        className="twitter-timeline text-xl text-white"
+        href={normalizedUrl} // URL normalizada para twitter.com
         data-width="600"
-        data-height="400"
+        data-height="250"
         data-chrome="noheader nofooter noborders"
       >
-        Tweets by TNT Sports
+        Carregando feed do {twitterNamePage}...
       </a>
     </div>
   );
