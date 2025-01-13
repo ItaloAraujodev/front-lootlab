@@ -1,13 +1,13 @@
 import type { IPost } from "@/interfaces/interfaces";
-import type { filters } from "@/interfaces/types";
+import type { TFilters } from "@/interfaces/types";
 import { create } from "zustand";
 
 interface IPostStore {
   setPost: (post: IPost) => void;
   setSearch: (search: string) => void;
-  setFilter: (filter: filters) => void;
+  setFilter: (filter: TFilters) => void;
   post: IPost | undefined;
-  filter: filters;
+  filter: TFilters;
   search: string;
 }
 

@@ -62,6 +62,8 @@ function useUpdatePost(): UseUpdatePostReturn {
         // Adiciona verificação se oldData existe
         if (!oldData) return [newPost];
 
+        console.log("oldDataUpdate", oldData);
+
         return [newPost, ...oldData.filter(({ id }) => id !== post?.id)];
       });
 

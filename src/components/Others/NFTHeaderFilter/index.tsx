@@ -44,21 +44,26 @@ function NFTHeaderFilter({ iconTitle, title }: INFTHeaderFilterProps) {
 
   const handleSetFilters = () => {
     setSearch(watch("search"));
-    setFilter(watch("filter"));
   };
 
   return (
-    <div className="flex w-full flex-col justify-between md:flex-row">
+    <div className="flex w-full flex-col justify-between gap-4 md:flex-row md:gap-0">
       <Common.CommonTitleSection>
         {iconTitle} {title}
       </Common.CommonTitleSection>
 
-      <div className="flex flex-col items-center justify-center gap-2 md:flex-row">
+      <div className="flex items-center justify-center gap-2 md:flex-row">
         <Controller
           control={control}
           name="filter"
           render={({ field }) => (
-            <Select onValueChange={field.onChange} value={field.value}>
+            <Select
+              onValueChange={(value) => {
+                field.onChange(value);
+                setFilter(watch("filter"));
+              }}
+              value={field.value}
+            >
               <SelectTrigger className="w-[265px] text-lootlab-font-base">
                 <SelectValue placeholder="Selecione um Filtro" />
               </SelectTrigger>

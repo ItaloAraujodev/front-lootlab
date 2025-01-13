@@ -28,4 +28,4 @@ export type TIcon =
   | "globe"
   | "coinmarketcap";
 
-export type filters = "recent" | "oldest" | "order" | "all";
+export type TFilters = "recent" | "oldest" | "order" | "all";
